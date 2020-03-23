@@ -64,6 +64,8 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
+  const password = req.body.password;
+
   User.findOne({ where: { email: req.body.email }})
     .then(user => {
       if (!user) {
@@ -90,5 +92,5 @@ router.post("/login", (req, res) => {
       console.log(err);
     });
 });
-
+  
 module.exports = router;
