@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     category: DataTypes.STRING,
-    price: DataTypes.FLOAT
+    price: DataTypes.DECIMAL(10, 2)
   }, {});
   Item.associate = function(models) {
     Item.belongsTo(models.User, {
