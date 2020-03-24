@@ -34,11 +34,49 @@ router.put("/update/:id", authentication, (req, res) => {
         category: req.body.category,
         price: req.body.price
       })
-      res.json(item);
+      res.staus(200).json(item);
     })
     .catch(err => {
       console.log(err);
     });
 });
+
+
+// GET all items 
+router.get("/all", (req, res) => {
+  Item.findAll({ order: [[ "createdAt", "ASC"]]})
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
+// GET by item's id
+router.get("/get/:id", (req, res) => {
+  Item.findOne({ where: { id: req.params.id }})
+    .then(item => {
+      res.status(200).json(item);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
+// DELETE an item by item's id
+router.delete("/delete/:id", authentication, (req, res) => {
+  Item.findOne({ where: { id: req.params.id }})
+    .then(item => {
+      item.destroy();
+      return res.json({ message: "Successfully deleted"});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 
 module.exports = router;
