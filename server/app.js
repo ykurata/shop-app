@@ -24,6 +24,9 @@ require("./config/passport")(passport);
 app.use("/user", user);
 app.use("/item", item);
 
+// Set up cors
+app.use(cors());
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
 
