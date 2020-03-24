@@ -7,7 +7,8 @@ const passport = require("passport");
 
 const app = express();
 
-const users = require("./routes/user");
+const user = require("./routes/user");
+const item = require("./routes/item");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,8 +21,8 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/user", users);
-
+app.use("/user", user);
+app.use("/item", item);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
