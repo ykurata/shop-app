@@ -20,7 +20,7 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item dropdown">
-                  <button class="btn btn-info my-2 my-sm-0" type="submit">Post Item</button>
+                  <button className="btn btn-info my-2 my-sm-0" type="submit">Post Item</button>
                 </li>  
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +35,7 @@ class Navbar extends Component {
 
                 {/* Search form  */}
                 <form className="form-inline">
-                  <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" />
+                  <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" />
                   <div className="input-group-append">
                     <button className="btn btn-secondary" type="submit">
                       <i className="fa fa-search"></i>

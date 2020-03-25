@@ -26,11 +26,7 @@ html, body {
   max-height: 200px;
 }
 
-h5 {
-  margin-bottom: .8rem;
-}
-
-p {
+h5, p {
   margin-bottom: .8rem;
 }
 
@@ -46,3 +42,52 @@ p {
   font-size: .9rem;
   color: grey;
 }
+
+/* @media (max-width: 300px) {
+  .item-list {
+    width: 100%;
+  }
+  .col-lg-2 {
+    max-width: 50px;
+  }
+  .col-lg-10 {
+    max-width: 100px;
+  }
+} */
+
+@media (max-width: 568px) {
+  .item-list {
+    width: 100%;
+  }
+  .col-lg-2 {
+    width: 100px;
+  } 
+  .col-lg-10 {
+    width: 200px;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+  .date {
+    font-size: .8rem;
+  }
+  .description {
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 568px) {
+  .item-list {
+    width: 100%;
+  }
+  .card {
+    max-height: 150px;
+  }
+  .col-lg-2 {
+    width: 80px;
+  } 
+  .col-lg-10 {
+    width: 280px;
+  }
+}
+
