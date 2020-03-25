@@ -6,8 +6,8 @@ import Navbar from "./Navbar";
 
 const ListStyles = theme => ({
   avatar: {
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     textDecoration: "none",
     [theme.breakpoints.up('md')]: {
       height: 100,
