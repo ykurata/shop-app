@@ -22,3 +22,27 @@ html, body {
   align-items: center;
 }
 
+.card {
+  max-height: 200px;
+}
+
+h5 {
+  margin-bottom: .8rem;
+}
+
+p {
+  margin-bottom: .8rem;
+}
+
+.description{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.date {
+  font-size: .9rem;
+  color: grey;
+}
