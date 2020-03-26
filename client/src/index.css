@@ -22,6 +22,8 @@ html, body {
   align-items: center;
 }
 
+
+/* List Items styles */
 .card {
   max-height: 200px;
 }
@@ -41,6 +43,12 @@ h5, p {
 .date {
   font-size: .9rem;
   color: grey;
+}
+
+.list-item-img {
+  width: 150px;
+  height: 150px;
+  border: 1px solid#dcdee0;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){

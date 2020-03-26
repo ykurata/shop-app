@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import { withStyles } from '@material-ui/core/styles';
+import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
 
-const ListStyles = theme => ({
-  avatar: {
-    height: 70,
-    width: 70,
-    textDecoration: "none",
-    [theme.breakpoints.up('md')]: {
-      height: 100,
-      width: 100
-    },
-    [theme.breakpoints.up('lg')]: {
-      height: 150,
-      width: 150
-    },
-  }
-  
-});
 
 class List extends Component {
   constructor(props) {
@@ -30,7 +13,6 @@ class List extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Navbar></Navbar>
@@ -39,7 +21,7 @@ class List extends Component {
           <div className="card">
             <div className="card-body row">
               <div className="col-lg-2 col-md-2">
-                <Avatar className={classes.avatar} variant='square'></Avatar>
+                <img src={phone2} alt="..." className="rounded list-item-img" />
               </div>
               <div className="title col-lg-10 col-md-10">
                 <h5>Item's Title</h5>
@@ -55,4 +37,4 @@ class List extends Component {
   }
 }
 
-export default withStyles(ListStyles)(List);
+export default List;
