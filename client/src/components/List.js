@@ -33,7 +33,7 @@ class List extends Component {
             </div>
           </div>
         </div>
-
+        
       </div>
     );
   }
