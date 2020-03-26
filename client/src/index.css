@@ -24,8 +24,13 @@ html, body {
 
 
 /* List Items styles */
+.list-group {
+  margin-bottom: 5rem;
+}
+
 .card {
   max-height: 220px;
+  padding: .5rem;
 }
 
 h5, p {
