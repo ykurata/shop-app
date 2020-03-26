@@ -24,17 +24,18 @@ html, body {
 
 
 /* List Items styles */
+.list-group {
+  margin-bottom: 5rem;
+}
+
 .card {
-  max-height: 200px;
+  max-height: 220px;
+  padding: .5rem;
 }
 
 h5, p {
   margin-bottom: .8rem;
 }
-
-/* .item-title {
-  float: left;
-} */
 
 .item-price {
   float: right;
@@ -56,14 +57,14 @@ h5, p {
 }
 
 .list-item-img {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border: 1px solid#dcdee0;
 }
 
 .no-image {
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   border: 1px solid #dcdee0;
   border-radius: 5px;
 }
@@ -74,6 +75,12 @@ h5, p {
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){
+  .card {
+    padding: .5rem;
+  }
+  .card-body {
+    padding: .3rem;
+  }
   h5, .description, .date {
     font-size: .9rem;
   }
@@ -84,7 +91,7 @@ h5, p {
     width: 90px;
   }
   .col-lg-10 {
-    width: 180px;
+    width: 220px;
     padding-left: .2rem;
     padding-right: .2rem;
   }
@@ -99,6 +106,9 @@ h5, p {
 }
 
 @media screen and (min-width: 361px) and (max-width: 375px){
+  .card-body {
+    padding: .5rem;
+  }
   h5, .description, .date {
     font-size: .9rem;
   }
@@ -106,7 +116,8 @@ h5, p {
     width: 100%;
   }
   .col-lg-2 {
-    width: 90px;
+    width: 70px;
+    padding: 0;
   }
   .col-lg-10 {
     width: 240px;
@@ -125,6 +136,15 @@ h5, p {
 }
 
 @media screen and (min-width: 376px) and (max-width: 650px){
+  .card {
+    padding: .5rem;
+  }
+  .card-body {
+    padding: .3rem;
+  }
+  h5, .description, .date {
+    font-size: .9rem;
+  }
   .item-list {
     width: 100%;
   }
@@ -153,11 +173,12 @@ h5, p {
   }
   .col-lg-2 {
     width: 100px;
+    padding: 0;
   }
   .col-lg-10 {
     width: 300px;
-    padding-left: .2rem;
-    padding-right: .2rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
   }
   .list-item-img, .no-image {
     width: 90px;
