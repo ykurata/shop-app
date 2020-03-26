@@ -32,6 +32,16 @@ h5, p {
   margin-bottom: .8rem;
 }
 
+/* .item-title {
+  float: left;
+} */
+
+.item-price {
+  float: right;
+  font-weight: bold;
+  color: #00cc66;
+}
+
 .description{
   overflow: hidden;
   text-overflow: ellipsis;
