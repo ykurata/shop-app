@@ -30,11 +30,11 @@ class List extends Component {
                 <p className="description">Bacon ipsum dolor amet kevin short loin buffalo drumstick fatback venison ground round spare ribs swine rump kielbasa shankle capicola alcatra leberkas. Bresaola alcatra short ribs, pig tail biltong tenderloin venison beef ribs capicola meatloaf chicken. Chislic ham salami filet mignon spare ribs prosciutto. Biltong drumstick turkey ham spare ribs, picanha pig meatball pancetta shankle chuck kielbasa filet mignon tri-tip landjaeger. Burgdoggen meatloaf prosciutto shank boudin chuck, ribeye pork chop. Tenderloin andouille beef buffalo sausage pork loin doner.</p>
               </div>
             </div>
-
           </div>
         </div>
+
       </div>
-    )
+    );
   }
 }
 
