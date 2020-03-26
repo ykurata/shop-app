@@ -51,6 +51,18 @@ h5, p {
   border: 1px solid#dcdee0;
 }
 
+.no-image {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #dcdee0;
+  border-radius: 5px;
+}
+
+i {
+  margin-top: 35px;
+  color: #dcdee0;
+}
+
 @media screen and (min-width: 300px) and (max-width: 360px){
   h5, .description, .date {
     font-size: .9rem;

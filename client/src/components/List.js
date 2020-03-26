@@ -21,7 +21,8 @@ class List extends Component {
           <div className="card">
             <div className="card-body row">
               <div className="col-lg-2 col-md-2">
-                <img src={phone2} alt="..." className="rounded list-item-img" />
+                {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
+                <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
               </div>
               <div className="title col-lg-10 col-md-10">
                 <h5>Item's Title</h5>
