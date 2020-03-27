@@ -1,11 +1,12 @@
 import React from 'react';
 
-import List from "./components/List";
+//import List from "./components/List";
+import Detail from "./components/Detail";
 
 function App() {
   return (
     <div>
-      <List></List>
+      <Detail></Detail>
     </div>
   );
 }
