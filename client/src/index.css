@@ -100,10 +100,6 @@ h5, p {
   border: 1px solid#dcdee0;
 }
 
-/* .thumbnail-container {
-  padding-top: 1rem;
-} */
-
 .thumbnail {
   width: 150px;
   height: 120px;
@@ -119,6 +115,14 @@ h5, p {
 
 .detail-description {
   padding-top: 3rem;
+}
+
+.user-info {
+  width: 300px;
+  height: 250px;
+  border: 1px solid #dcdee0;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+  margin-top: 3.5rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){

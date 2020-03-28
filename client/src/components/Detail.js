@@ -16,9 +16,9 @@ class Detail extends Component {
       <div>
         <Navbar></Navbar>
 
-        <div className="container-fluid main-detail">
+        <div className="container main-detail">
           <div className="row detatil-row">
-            <div className="col-lg-8">
+            <div className="col-lg-9">
               <h3 className="title">Item's Title and Images</h3>
               <h5 className="detail-price">$100.00</h5>
 
@@ -46,8 +46,11 @@ class Detail extends Component {
                 <p>Bacon ipsum dolor amet alcatra capicola ground round, short ribs swine tenderloin sirloin pork loin buffalo jerky biltong landjaeger shoulder flank. Short loin cupim biltong pork, salami chislic chicken frankfurter capicola strip steak. Pig sausage short loin doner, pork loin ribeye tri-tip landjaeger turducken buffalo. Sirloin andouille corned beef, pancetta sausage landjaeger ham. Biltong frankfurter pig bresaola ham hock hamburger. Ham hock boudin rump jowl, bresaola brisket chuck tail pancetta doner. Turkey leberkas corned beef cow pork loin chicken.</p>
               </div>
             </div>
-            <div className="col-lg-4">
-              <h3>User's info comes here...</h3>
+            <div className="col-lg-3">
+              <h6>Posted 2020/03/28</h6>
+              <div className="user-info-container">
+                <div className="user-info"></div>
+              </div>
             </div>
           </div>
         </div>
