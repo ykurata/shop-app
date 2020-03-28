@@ -67,13 +67,7 @@ h5, p {
 
 /* Item Detail Styles  */
 .main-detail {
-  padding: 3rem 2.5rem 2.5rem 3rem;
-}
-
-.item-img {
-  max-width: 400px;
-  max-height: 400px;
-  border: 1px solid#dcdee0;
+  padding: 3rem 2.5rem 3rem 2.5rem;
 }
 
 .title {
@@ -100,15 +94,31 @@ h5, p {
     display:inline-block;
 }
 
-.side-img {
+.item-img {
+  max-width: 400px;
+  max-height: 400px;
+  border: 1px solid#dcdee0;
+}
+
+/* .thumbnail-container {
+  padding-top: 1rem;
+} */
+
+.thumbnail {
   width: 150px;
-  height: 150px;
+  height: 120px;
   border: 1px solid #dcdee0;
-  float: left;
+}
+
+.thumbnail-margin-top {
+  width: 150px;
+  height: 120px;
+  border: 1px solid #dcdee0;
+  margin-top: 1rem;
 }
 
 .detail-description {
-  padding-top: 6rem;
+  padding-top: 3rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){
