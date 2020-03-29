@@ -26,7 +26,7 @@ class List extends Component {
                   {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
                   <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                 </div>
-                <div className="title col-lg-10 col-md-10">
+                <div className="col-lg-10 col-md-10">
                   <h5 className="item-price">$100.00</h5>
                   <h5 className="item-title">Item's Title</h5>
                   <p className="date">25/03/2020</p>
