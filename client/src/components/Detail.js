@@ -23,8 +23,8 @@ class Detail extends Component {
               <h5 className="detail-price">$100.00</h5>
 
               {/* Image container */}
-              <div className="row">
-                <div className="col-lg-8 img-containe">
+              <div className="row image-row">
+                <div className="col-lg-8 col-md-9 img-container">
                   <div className="img-outer-element">
                     <div className="img-inner-element">
                       <img src={phone2} alt="..." className="rounded item-img" />
@@ -32,7 +32,7 @@ class Detail extends Component {
                   </div>
                 </div>
                 {/* Side thumbnails */}
-                <div className="col-lg-4">
+                <div className="col-lg-4 col-md-3">
                   <div className="thumbnail-container row">
                     <div className="thumbnail"></div>
                     <div className="thumbnail-margin-top "></div>
