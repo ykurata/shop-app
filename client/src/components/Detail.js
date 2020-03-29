@@ -46,9 +46,9 @@ class Detail extends Component {
                 <p>Bacon ipsum dolor amet alcatra capicola ground round, short ribs swine tenderloin sirloin pork loin buffalo jerky biltong landjaeger shoulder flank. Short loin cupim biltong pork, salami chislic chicken frankfurter capicola strip steak. Pig sausage short loin doner, pork loin ribeye tri-tip landjaeger turducken buffalo. Sirloin andouille corned beef, pancetta sausage landjaeger ham. Biltong frankfurter pig bresaola ham hock hamburger. Ham hock boudin rump jowl, bresaola brisket chuck tail pancetta doner. Turkey leberkas corned beef cow pork loin chicken.</p>
               </div>
             </div>
-            <div className="col-lg-3">
-              <h6>Posted 2020/03/28</h6>
-              <div className="user-info-container">
+            <div className="col-lg-3 align-items-center">
+              <h6 className="posted-date">Posted 2020/03/28</h6>
+              <div className="user-info-container ">
                 <div className="user-info text-center">
                   <div className="user-icon">
                     <i className="fas fa-user-circle fa-5x"></i>
@@ -57,11 +57,11 @@ class Detail extends Component {
                     <h5>Yasuko Kurata</h5>
                   </div>
                   <div>
-                    <p>View 5 Items</p>
+                    <a href="/">View 5 Other Items</a>
                   </div>
-                  
                 </div>
               </div>
+              <button type="button" className="btn btn-primary btn-lg btn-block message-button">Send Message</button>
             </div>
           </div>
         </div>
