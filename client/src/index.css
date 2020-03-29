@@ -122,7 +122,16 @@ h5, p {
   height: 250px;
   border: 1px solid #dcdee0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.1);
-  margin-top: 3.5rem;
+  margin-top: 3.8rem;
+}
+
+.user-name {
+  margin-top: 1rem;
+}
+
+.user-icon {
+  color: grey;
+  margin-top: 1.5rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){

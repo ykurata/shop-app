@@ -49,7 +49,18 @@ class Detail extends Component {
             <div className="col-lg-3">
               <h6>Posted 2020/03/28</h6>
               <div className="user-info-container">
-                <div className="user-info"></div>
+                <div className="user-info text-center">
+                  <div className="user-icon">
+                    <i className="fas fa-user-circle fa-5x"></i>
+                  </div>
+                  <div className="user-name">
+                    <h5>Yasuko Kurata</h5>
+                  </div>
+                  <div>
+                    <p>View 5 Items</p>
+                  </div>
+                  
+                </div>
               </div>
             </div>
           </div>
