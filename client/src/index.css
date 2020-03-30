@@ -119,6 +119,13 @@ h5, p {
   margin-bottom: 5rem;
 }
 
+/* Item Form Styles */
+.item-form {
+  width: 50%;
+  margin: auto;
+  margin-top: 4rem;
+}
+
 @media screen and (min-width: 300px) and (max-width: 360px){
   /* List Items Style */
   .card {
