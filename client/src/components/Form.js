@@ -16,7 +16,7 @@ class Form extends Component {
       <div>
         <Navbar></Navbar>
 
-        <div className="item-form">
+        <div className="form">
           <form>
             <div className="form-group">
               <label>Title</label>

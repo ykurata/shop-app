@@ -119,11 +119,11 @@ h5, p {
   margin-bottom: 5rem;
 }
 
-/* Item Form Styles */
-.item-form {
+/* Form Styles */
+.form {
   width: 50%;
   margin: auto;
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){
@@ -278,8 +278,8 @@ h5, p {
     margin: auto;
   } 
 
-  /* Item Form Styles */
-  .item-form {
+  /* Form Styles */
+  .form {
     width: 90%;
   }
 }
@@ -358,8 +358,8 @@ h5, p {
     margin: auto;
   } 
 
-  /* Item Form Styles */
-  .item-form {
+  /* Form Styles */
+  .form {
     width: 90%;
   }
 }
@@ -430,8 +430,8 @@ h5, p {
     margin: auto;
   } 
 
-  /* Item Form Styles */
-  .item-form {
+  /* Form Styles */
+  .form {
     width: 80%;
   }
 }
@@ -463,8 +463,8 @@ h5, p {
     padding-top: 3rem;
   }
 
-  /* Item Form Styles */
-  .item-form {
+  /* Form Styles */
+  .form {
     width: 70%;
   }
 
