@@ -20,7 +20,7 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item dropdown">
-                  <button className="btn btn-primary my-2 my-sm-0" type="submit">Post Item</button>
+                  <a className="btn btn-large btn-primary my-2 my-sm-0" href="/create">Post Item</a>
                 </li>  
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,10 +44,10 @@ class Navbar extends Component {
                 </form>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Log In</a>
+                  <a className="nav-link" href="/login">Log In</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Sign Up</a>
+                  <a className="nav-link" href="/signup">Sign Up</a>
                 </li>
               </ul>
               

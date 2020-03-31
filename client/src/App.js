@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <PrivateRoute path="/form" component={Form} /> 
+        <PrivateRoute path="/create" component={Form} /> 
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
