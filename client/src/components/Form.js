@@ -33,11 +33,16 @@ class Form extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label>Price $</label>               
-              <input type="number" id="price" className="form-control" aria-label="Amount (to the nearest dollar)" />
+              <label>Price</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">$</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1" />
+              </div>
             </div>
             <div className="form-group">
-              <label>Description</label>
+              
               <textarea className="form-control" id="description" rows="5"></textarea>
             </div>
           
