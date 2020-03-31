@@ -42,10 +42,9 @@ class Form extends Component {
               </div>
             </div>
             <div className="form-group">
-              
+              <label>Description</label>
               <textarea className="form-control" id="description" rows="5"></textarea>
             </div>
-          
             <button type="button" className="btn btn-primary btn-lg btn-block">Submit</button>
           </form>
         </div>
