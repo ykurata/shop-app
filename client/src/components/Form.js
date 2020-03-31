@@ -34,11 +34,14 @@ class Form extends Component {
             </div>
             <div className="form-group">
               <label>Price</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">$</span>
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">$</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1" />
+                <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+                <div className="input-group-append">
+                  <span className="input-group-text">.00</span>
+                </div>
               </div>
             </div>
             <div className="form-group">
