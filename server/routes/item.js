@@ -4,10 +4,18 @@ const router = express.Router();
 const authentication = require("./middleware/auth");
 
 const Item = require('../models').Item;
+const validateItemInput = require("../validation/item");
 
 
 // Post a new item 
 router.post("/", authentication, (req, res) => {
+  // form validation 
+  const { errors, isValid } = validateItemInput(req.body);
+  // check validation 
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Item.create({
     userId: req.user,
     name: req.body.name,
@@ -26,6 +34,13 @@ router.post("/", authentication, (req, res) => {
 
 // Upadate a posted item
 router.put("/update/:id", authentication, (req, res) => {
+  // form validation 
+  const { errors, isValid } = validateItemInput(req.body);
+  // check validation 
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Item.findOne({ where: { id: req.params.id }})
     .then(item => {
       item.update({
