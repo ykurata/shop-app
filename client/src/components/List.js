@@ -1,18 +1,57 @@
 import React, { Component } from 'react';
-import phone2 from "../images/phone.jpg"
+import axios from 'axios';
+import Moment from 'react-moment';
+// import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
-
 
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      items: [],
+      loading: false
     };
   };
 
+  componentDidMount() {
+    this.getItems();
+  }
+
+  getItems() {
+    axios.get("/item/all") 
+      .then(res => {
+        this.setState({
+          items: res.data,
+          loading: true
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
+    console.log(this.state.items);
+    let items;
+
+    items = this.state.items.map((item, i) => (
+      <div className="card list-group-item" key={i}>
+        <div className="card-body row">
+          <div className="col-lg-2 col-md-2">
+            {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
+            <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+          </div>
+          <div className="col-lg-10 col-md-10">
+            <h5 className="item-price">{item.price}</h5>
+            <h5 className="item-title">{item.name}</h5>
+            <Moment format="MM/DD/YYYY"><p className="date">{item.createdAt}</p></Moment>
+            <p className="description">{item.description}</p>
+          </div>
+        </div>
+      </div>
+    ));
+
     return (
       <div>
         <Navbar></Navbar>
@@ -20,70 +59,18 @@ class List extends Component {
         <div className="container item-list">
 
           <div className="list-group">
-            <div className="card list-group-item">
-              <div className="card-body row">
-                <div className="col-lg-2 col-md-2">
-                  {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
-                  <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                </div>
-                <div className="col-lg-10 col-md-10">
-                  <h5 className="item-price">$100.00</h5>
-                  <h5 className="item-title">Item's Title</h5>
-                  <p className="date">25/03/2020</p>
-                  <p className="description">Bacon ipsum dolor amet kevin short loin buffalo drumstick fatback venison ground round spare ribs swine rump kielbasa shankle capicola alcatra leberkas. Bresaola alcatra short ribs, pig tail biltong tenderloin venison beef ribs capicola meatloaf chicken. Chislic ham salami filet mignon spare ribs prosciutto. Biltong drumstick turkey ham spare ribs, picanha pig meatball pancetta shankle chuck kielbasa filet mignon tri-tip landjaeger. Burgdoggen meatloaf prosciutto shank boudin chuck, ribeye pork chop. Tenderloin andouille beef buffalo sausage pork loin doner.</p>
-                </div>
+            {/* display message if there is no items  */}
+            {this.state.items.length === 0 ? (
+              <div className="text-center mt-5">
+                <h5>No Items</h5>
               </div>
-            </div>
+            ) : (
+              null
+            )}
 
-            <div className="card list-group-item">
-              <div className="card-body row">
-                <div className="col-lg-2 col-md-2">
-                  {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
-                  <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                </div>
-                <div className="title col-lg-10 col-md-10">
-                  <h5 className="item-price">$100.00</h5>
-                  <h5 className="item-title">Item's Title</h5>
-                  <p className="date">25/03/2020</p>
-                  <p className="description">Bacon ipsum dolor amet kevin short loin buffalo drumstick fatback venison ground round spare ribs swine rump kielbasa shankle capicola alcatra leberkas. Bresaola alcatra short ribs, pig tail biltong tenderloin venison beef ribs capicola meatloaf chicken. Chislic ham salami filet mignon spare ribs prosciutto. Biltong drumstick turkey ham spare ribs, picanha pig meatball pancetta shankle chuck kielbasa filet mignon tri-tip landjaeger. Burgdoggen meatloaf prosciutto shank boudin chuck, ribeye pork chop. Tenderloin andouille beef buffalo sausage pork loin doner.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card list-group-item">
-              <div className="card-body row">
-                <div className="col-lg-2 col-md-2">
-                  {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
-                  <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                </div>
-                <div className="title col-lg-10 col-md-10">
-                  <h5 className="item-price">$100.00</h5>
-                  <h5 className="item-title">Item's Title</h5>
-                  <p className="date">25/03/2020</p>
-                  <p className="description">Bacon ipsum dolor amet kevin short loin buffalo drumstick fatback venison ground round spare ribs swine rump kielbasa shankle capicola alcatra leberkas. Bresaola alcatra short ribs, pig tail biltong tenderloin venison beef ribs capicola meatloaf chicken. Chislic ham salami filet mignon spare ribs prosciutto. Biltong drumstick turkey ham spare ribs, picanha pig meatball pancetta shankle chuck kielbasa filet mignon tri-tip landjaeger. Burgdoggen meatloaf prosciutto shank boudin chuck, ribeye pork chop. Tenderloin andouille beef buffalo sausage pork loin doner.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="card list-group-item">
-              <div className="card-body row">
-                <div className="col-lg-2 col-md-2">
-                  {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
-                  <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                </div>
-                <div className="title col-lg-10 col-md-10">
-                  <h5 className="item-price">$100.00</h5>
-                  <h5 className="item-title">Item's Title</h5>
-                  <p className="date">25/03/2020</p>
-                  <p className="description">Bacon ipsum dolor amet kevin short loin buffalo drumstick fatback venison ground round spare ribs swine rump kielbasa shankle capicola alcatra leberkas. Bresaola alcatra short ribs, pig tail biltong tenderloin venison beef ribs capicola meatloaf chicken. Chislic ham salami filet mignon spare ribs prosciutto. Biltong drumstick turkey ham spare ribs, picanha pig meatball pancetta shankle chuck kielbasa filet mignon tri-tip landjaeger. Burgdoggen meatloaf prosciutto shank boudin chuck, ribeye pork chop. Tenderloin andouille beef buffalo sausage pork loin doner.</p>
-                </div>
-              </div>
-            </div>
-            
-
+            {items}
           </div>
         </div>
-
       </div>
     );
   }
