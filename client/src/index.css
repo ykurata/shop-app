@@ -6,10 +6,12 @@ html, body {
   overflow-x: hidden;
   font-family: 'Lato', sans-serif;
 }
-
 .error {
   color: red;
   text-align: left;
+}
+textarea {
+  white-space: pre-wrap;
 }
 
 /* List Item styles  */
@@ -24,6 +26,17 @@ html, body {
 .card {
   max-height: 220px;
   padding: .5rem;
+}
+.card:hover {
+  background-color: #f7f7f7;
+}
+.card-link {
+  text-decoration: none;
+  color:inherit;
+}
+.card-link:hover {
+  text-decoration: none;
+  color:inherit;
 }
 h5, p {
   margin-bottom: .8rem;

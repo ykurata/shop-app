@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import phone2 from "../images/phone.jpg"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+//import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
-import Axios from 'axios';
 
 class Form extends Component {
   constructor(props) {
@@ -35,6 +36,10 @@ class Form extends Component {
     axios.post("/item", newItem, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         console.log(res);
+        toast("Successfully Submitted!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+        });
       })
       .catch(err => {
         this.setState({
@@ -92,6 +97,7 @@ class Form extends Component {
               : null}
               <textarea className="form-control"  onChange={this.onChange} id="description" name="description" rows="5"></textarea>
             </div>
+            <ToastContainer autoClose={2000} />
             <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
           </form>
         </div>
