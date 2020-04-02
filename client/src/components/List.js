@@ -37,8 +37,8 @@ class List extends Component {
     let items;
 
     items = this.state.items.map((item, i) => (
-      <div className="card list-group-item" key={i} id={item.id}>
-        <Link to={'/detail'} className="card-link">
+      <div className="card list-group-item" key={i}>
+        <Link to={`/detail/${item.id}`} className="card-link">
           <div className="card-body row">
             <div className="col-lg-2 col-md-2">
               {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}

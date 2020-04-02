@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
@@ -7,11 +8,29 @@ class Detail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      item: ""
     };
   };
 
+  componentDidMount() {
+    this.getItem();
+  }
+
+  getItem() {
+    axios.get(`/item/get/${this.props.match.params.id}`) 
+      .then(res => {
+        this.setState({
+          item: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
+    const { item } = this.state;
+
     return (
       <div>
         <Navbar></Navbar>
@@ -19,8 +38,8 @@ class Detail extends Component {
         <div className="container main-detail">
           <div className="row detatil-row">
             <div className="col-lg-9">
-              <h3 className="title">Item's Title and Images</h3>
-              <h5 className="detail-price">$100.00</h5>
+              <h3 className="title">{item.name}</h3>
+              <h5 className="detail-price">${item.price}</h5>
 
               {/* Image container */}
               <div className="row image-row">
@@ -43,11 +62,11 @@ class Detail extends Component {
 
               <div className="detail-description">
                 <h4>Description</h4>
-                <p>Bacon ipsum dolor amet alcatra capicola ground round, short ribs swine tenderloin sirloin pork loin buffalo jerky biltong landjaeger shoulder flank. Short loin cupim biltong pork, salami chislic chicken frankfurter capicola strip steak. Pig sausage short loin doner, pork loin ribeye tri-tip landjaeger turducken buffalo. Sirloin andouille corned beef, pancetta sausage landjaeger ham. Biltong frankfurter pig bresaola ham hock hamburger. Ham hock boudin rump jowl, bresaola brisket chuck tail pancetta doner. Turkey leberkas corned beef cow pork loin chicken.</p>
+                <p>{item.description}</p>
               </div>
             </div>
             <div className="col-lg-3 align-items-center">
-              <h6 className="posted-date">Posted 2020/03/28</h6>
+              <h6 className="posted-date">Posted {item.createdAt}</h6>
               <div className="user-info-container ">
                 <div className="user-info text-center">
                   <div className="user-icon">

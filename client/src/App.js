@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import List from "./components/List";
 import Detail from "./components/Detail";
 import Form from "./components/Form";
+import Photo from "./components/Photo";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -13,10 +14,11 @@ function App() {
     <BrowserRouter>
       <Switch>
         <PrivateRoute path="/create" component={Form} /> 
+        <PrivateRoute path="/photo" component={Photo} /> 
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/detail" component={Detail} /> 
+        <Route path="/detail/:id" component={Detail} /> 
       </Switch>
     </BrowserRouter>
   );
