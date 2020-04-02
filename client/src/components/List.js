@@ -57,8 +57,13 @@ class List extends Component {
     return (
       <div>
         <Navbar></Navbar>
-        
+        {/* display number of items */}
         <div className="container item-list">
+          {this.state.items.length > 1 ? (
+            <p>Showing {this.state.items.length} items</p>
+          ) : (
+            <p>Showing {this.state.items.length} item</p>
+          )} 
 
           <div className="list-group">
             {/* display message if there is no items  */}
