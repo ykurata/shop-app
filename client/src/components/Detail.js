@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Moment from 'react-moment';
 import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
@@ -66,7 +67,7 @@ class Detail extends Component {
               </div>
             </div>
             <div className="col-lg-3 align-items-center">
-              <h6 className="posted-date">Posted {item.createdAt}</h6>
+              <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment></h6>
               <div className="user-info-container ">
                 <div className="user-info text-center">
                   <div className="user-icon">

@@ -73,6 +73,7 @@ class Form extends Component {
                 <option>Books</option>
                 <option>Furniture</option>
                 <option>Music</option>
+                <option>Camera</option>
               </select>
             </div>
             <div className="form-group">

@@ -11,7 +11,7 @@ html, body {
   text-align: left;
 }
 textarea {
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 
 /* List Item styles  */
@@ -123,6 +123,9 @@ h5, p {
 }
 .detail-description {
   padding-top: 3rem;
+}
+p {
+  white-space: pre-line;
 }
 .user-info {
   width: 242px;
