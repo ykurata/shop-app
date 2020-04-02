@@ -41,6 +41,12 @@ textarea {
 h5, p {
   margin-bottom: .8rem;
 }
+.item-title {
+  color: #31257d;
+}
+.item-title:hover {
+  text-decoration: underline;
+}
 .item-price {
   float: right;
   font-weight: bold;
