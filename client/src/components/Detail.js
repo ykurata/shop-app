@@ -9,7 +9,8 @@ class Detail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: ""
+      item: "",
+      username: localStorage.getItem("name")
     };
   };
 
@@ -74,7 +75,7 @@ class Detail extends Component {
                     <i className="fas fa-user-circle fa-5x"></i>
                   </div>
                   <div className="user-name">
-                    <h5>Yasuko Kurata</h5>
+                    <h5>{this.state.username}</h5>
                   </div>
                   <div>
                     <a href="/">View 5 Other Items</a>
