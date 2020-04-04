@@ -41,7 +41,8 @@ class Photo extends Component {
             </div>
             <div className="row photo-row"> 
               <div className="col-lg-4 col-md-6 upload-img-container text-center">
-                <span>
+                {this.state.file.length !== 0 ? (
+                  <span>
                   <div className="upload-img-outer-element">
                     <div className="upload-img-inner-element">
                       <img src={this.state.file[0]} alt="..." className="rounded upload-img" />
@@ -56,45 +57,95 @@ class Photo extends Component {
                       hidden
                     />
                   </label>
-                </span>
+                  </span>
+                ) : (
+                  <div className="upload-img-outer-element">
+                    <div className="upload-img-inner-element">
+                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                      <label className="btn btn-info mt-4">
+                        Select Image
+                        <input
+                          type="file"
+                          name="file"
+                          onChange={this.imageChange}
+                          hidden
+                        />
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="col-lg-4 col-md-6 upload-img-container text-center">
-                <span>
-                  <div className="upload-img-outer-element">
-                    <div className="upload-img-inner-element">
-                      <img src={this.state.file[1]} alt="..." className="rounded upload-img" />
+                {this.state.file.length > 1 ? (
+                    <span>
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <img src={this.state.file[1]} alt="..." className="rounded upload-img" />
+                      </div>
                     </div>
-                  </div>
-                  <label className="btn btn-info mt-4">
-                    Select Image
-                    <input
-                      type="file"
-                      name="file"
-                      onChange={this.imageChange}
-                      hidden
-                    />
-                  </label>
-                </span>
+                    <label className="btn btn-info mt-4">
+                      Select Image
+                      <input
+                        type="file"
+                        name="file"
+                        onChange={this.imageChange}
+                        hidden
+                      />
+                    </label>
+                    </span>
+                  ) : (
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <label className="btn btn-info mt-4">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  )}
               </div>
 
               <div className="col-lg-4 col-md-6 upload-img-container text-center">
-                <span>
-                  <div className="upload-img-outer-element">
-                    <div className="upload-img-inner-element">
-                      <img src={this.state.file[2]} alt="..." className="rounded upload-img" />
+                {this.state.file.length > 2 ? (
+                    <span>
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <img src={this.state.file[2]} alt="..." className="rounded upload-img" />
+                      </div>
                     </div>
-                  </div>
-                  <label className="btn btn-info mt-4">
-                    Select Image
-                    <input
-                      type="file"
-                      name="file"
-                      onChange={this.imageChange}
-                      hidden
-                    />
-                  </label>
-                </span>
+                    <label className="btn btn-info mt-4">
+                      Select Image
+                      <input
+                        type="file"
+                        name="file"
+                        onChange={this.imageChange}
+                        hidden
+                      />
+                    </label>
+                    </span>
+                  ) : (
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <label className="btn btn-info mt-4">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  )}
               </div>
               <button type="button" className="btn btn-danger btn-block" onClick={this.uploadFiles}>Upload</button>
 
