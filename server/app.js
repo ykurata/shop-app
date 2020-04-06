@@ -9,6 +9,7 @@ const app = express();
 
 const user = require("./routes/user");
 const item = require("./routes/item");
+const photo = require("./routes/photo");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +24,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/user", user);
 app.use("/item", item);
+app.use("/photo", photo);
 
 // Set up cors
 app.use(cors());
