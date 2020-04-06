@@ -10,21 +10,21 @@ aws.config.update({
 const s3 = new aws.S3();
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "image/jpeg" || "file.mimetype" === "image/png") {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
     cb(null, true);
   } else {
-    return cb(new Error('Wrong file type'));
+    cb(new Error("Invalid Mime Type, only JPEG and PNG"), false);
   }
 };
 
 const upload = multer({
   fileFilter,
-  storage: multers3({
-    s3, 
-    bucket: "yasuko-my-recipes",
+  storage: multerS3({
+    s3,
+    bucket: "yasuko-my-recipes",  
     acl: "public-read",
     metadata: function(req, file, cb) {
-      cb(null, { fieldName: "TESTING_META_DATA!" })
+      cb(null, { fieldName: "TESTING_META_DATA!" });
     },
     key: function(req, file, cb) {
       cb(null, file.originalname);
