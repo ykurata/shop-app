@@ -38,18 +38,17 @@ class Navbar extends Component {
     if (this.state.token) {
       navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
                   <li className="nav-item avatar dropdown">
-                    <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                    <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
                         {this.state.user.image ? (
                           <img src={this.state.user.image} className="rounded-circle z-depth-0 navbar-img"
-                          alt="avatar image" />
+                          alt="avatar" />
                         ) : 
                           <span style={{ fontSize: "0.8rem"}}>
                             <i className="fas fa-user-circle fa-3x"></i>
                           </span> 
-                          
                         }
-                    </a>
+                    </div>
                     <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                       aria-labelledby="navbarDropdownMenuLink-55">
                       <a className="dropdown-item" href="/profile-image">Profile Image</a>
@@ -84,9 +83,9 @@ class Navbar extends Component {
               </a>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+              <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">Category
-              </a>
+              </div>
               <div className="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
                 <a className="dropdown-item" href="/">Action</a>
                 <a className="dropdown-item" href="/">Another action</a>

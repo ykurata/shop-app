@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
 

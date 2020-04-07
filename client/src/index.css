@@ -38,6 +38,7 @@ nav {
   height: 40px;
   border-radius: 50%;
   border: 1px solid white;
+  object-fit: cover;
 }
 
 /* List Item styles  */
@@ -221,6 +222,7 @@ p {
 .preview-avatar {
   width: 350px;
   height: 350px;
+  object-fit: cover;
   margin-top: 2rem;
 }
 
