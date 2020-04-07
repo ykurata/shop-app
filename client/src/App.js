@@ -16,6 +16,7 @@ function App() {
       <Switch>
         <PrivateRoute path="/create" component={Form} /> 
         <PrivateRoute path="/profile-image" component={Avatar} /> 
+        <PrivateRoute path="/photo" component={Photo} /> 
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
