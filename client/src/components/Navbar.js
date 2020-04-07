@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import phone2 from "../images/phone.jpg"
 
 class Navbar extends Component {
   constructor(props) {
@@ -45,11 +44,15 @@ class Navbar extends Component {
                           <img src={this.state.user.image} className="rounded-circle z-depth-0 navbar-img"
                           alt="avatar image" />
                         ) : 
-                          <i className="fas fa-user-circle fa-3x"></i>
+                          <span style={{ fontSize: "0.8rem"}}>
+                            <i className="fas fa-user-circle fa-3x"></i>
+                          </span> 
+                          
                         }
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                       aria-labelledby="navbarDropdownMenuLink-55">
+                      <a className="dropdown-item" href="/profile-image">Profile Image</a>
                       <a className="dropdown-item" onClick={this.logOut} href="/logout">Log Out</a>
                     </div>
                   </li>
@@ -67,8 +70,8 @@ class Navbar extends Component {
     
     return (
      <div>
-      <nav className="navbar navbar-expand-md navbar-light bg-light">
-        <a className="navbar-brand" href="#">Navbar</a>
+      <nav className="navbar navbar-expand-md navbar-dark">
+        <a className="navbar-brand" href="/">Yajiji</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
           aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
