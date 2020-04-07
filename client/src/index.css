@@ -14,6 +14,12 @@ textarea {
   white-space: pre-line;
 }
 
+/* Navbar Styles */
+.navbar-img {
+  width: 45px;
+  height: 45px;
+}
+
 /* List Item styles  */
 .item-list {
   width: 80%;
