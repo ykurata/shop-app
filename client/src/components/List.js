@@ -62,7 +62,7 @@ class List extends Component {
           {this.state.items.length > 1 ? (
             <p>Showing {this.state.items.length} items</p>
           ) : (
-            <p>Showing {this.state.items.length} item</p>
+            null
           )} 
 
           <div className="list-group">

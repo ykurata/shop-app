@@ -14,6 +14,33 @@ textarea {
   white-space: pre-line;
 }
 
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #31257d !important;
+}
+
+.btn-primary:hover {
+  background-color: #4B4096 !important;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+}
+
+/* Navbar Styles */
+nav {
+  background-color: #31257d;
+}
+.navbar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+  object-fit: cover;
+}
+
 /* List Item styles  */
 .item-list {
   width: 80%;
@@ -178,6 +205,25 @@ p {
   max-width: 250px;
   max-height: 250px;
   border: 1px solid#dcdee0;
+}
+
+
+/* Avatar Page Styles */
+.main-avatar {
+  background-color: #dcdee0;
+  height: 100vh;
+}
+.outer-avatar {
+  width: 500px;
+  height: 550px;
+  background-color: white;
+  margin: auto;
+}
+.preview-avatar {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  margin-top: 2rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){
