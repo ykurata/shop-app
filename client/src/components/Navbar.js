@@ -16,6 +16,32 @@ class Navbar extends Component {
   }
 
   render() {
+    let navlist;
+
+    if (this.state.token) {
+      navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
+                  <li className="nav-item avatar dropdown">
+                    <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0 navbar-img"
+                        alt="avatar image" />
+                    </a>
+                    <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                      aria-labelledby="navbarDropdownMenuLink-55">
+                      <a className="dropdown-item" onClick={this.logOut} href="/logout">Log Out</a>
+                    </div>
+                  </li>
+                </ul>
+    } else {
+      navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
+                  <li className="nav-item">
+                    <a className="nav-link" href="/login">Log In</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/signup">Sign Up</a>
+                  </li>
+                </ul>
+    }
     
     return (
      <div>
@@ -48,23 +74,8 @@ class Navbar extends Component {
                 <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
               </div>
             </form>
-
           </ul>
-          <ul className="navbar-nav ml-auto nav-flex-icons">
-            <li className="nav-item avatar dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0 navbar-img"
-                  alt="avatar image" />
-              </a>
-              <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-                aria-labelledby="navbarDropdownMenuLink-55">
-                <a className="dropdown-item" href="/">Action</a>
-                <a className="dropdown-item" href="/">Another action</a>
-                <a className="dropdown-item" href="/">Something else here</a>
-              </div>
-            </li>
-          </ul>
+          {navlist}
         </div>
       </nav>
     </div>  
