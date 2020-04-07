@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import phone2 from "../images/phone.jpg"
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: "",
       token: localStorage.getItem("jwtToken")
     };
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  getUser() {
+    axios("/user/get", { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({ 
+          user: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   logOut = e => {
@@ -23,8 +41,12 @@ class Navbar extends Component {
                   <li className="nav-item avatar dropdown">
                     <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" className="rounded-circle z-depth-0 navbar-img"
-                        alt="avatar image" />
+                        {this.state.user.image ? (
+                          <img src={this.state.user.image} className="rounded-circle z-depth-0 navbar-img"
+                          alt="avatar image" />
+                        ) : 
+                          <i className="fas fa-user-circle fa-3x"></i>
+                        }
                     </a>
                     <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                       aria-labelledby="navbarDropdownMenuLink-55">

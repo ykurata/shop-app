@@ -114,4 +114,15 @@ router.post("/image", upload.single("image"), authentication, (req, res, next) =
     });
 });
   
+// Get a current logged in user 
+router.get("/get", authentication, (req, res, next) => {
+  User.findOne({ where: { id: req.user }})
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
 module.exports = router;
