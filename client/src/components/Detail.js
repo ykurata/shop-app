@@ -48,16 +48,34 @@ class Detail extends Component {
                 <div className="col-lg-8 col-md-9 img-container">
                   <div className="img-outer-element">
                     <div className="img-inner-element">
-                      <img src={phone2} alt="..." className="rounded item-img" />
+                      {item.image ? (
+                        <img src={item.image[0]} alt="..." className="rounded item-img" />
+                      ) : (
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                      )}
                     </div>
                   </div>
                 </div>
                 {/* Side thumbnails */}
                 <div className="col-lg-4 col-md-3">
                   <div className="thumbnail-container row">
-                    <div className="thumbnail"></div>
-                    <div className="thumbnail-margin-top "></div>
-                    <div className="thumbnail-margin-top"></div>
+                    {item.image ? (
+                      <img className="thumbnail" src={item.image[1]}></img>
+                    ) : (
+                      <div className="thumbnail"></div>
+                    )}
+
+                    {item.image ? (
+                      <img className="thumbnail-margin-top" src={item.image[2]}></img>
+                    ) : (
+                      <div className="thumbnail-margin-top "></div>
+                    )}
+
+                    {item.image ? (
+                      <img className="thumbnail-margin-top" src={item.image[3]}></img>
+                    ) : (
+                      <div className="thumbnail-margin-top "></div>
+                    )}
                   </div>
                 </div>
               </div>

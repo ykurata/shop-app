@@ -9,10 +9,14 @@ const app = express();
 
 const user = require("./routes/user");
 const item = require("./routes/item");
+const image = require("./routes/image");
+
 
 app.use(logger('dev'));
+// Bodyparser middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 // Passport middleware
 app.use(passport.initialize());
@@ -23,6 +27,8 @@ require("./config/passport")(passport);
 // Routes
 app.use("/user", user);
 app.use("/item", item);
+app.use("/image", image);
+
 
 // Set up cors
 app.use(cors());

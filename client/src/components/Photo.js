@@ -29,6 +29,10 @@ class Photo extends Component {
     console.log(this.state.file)
   }
 
+  onSubmit = e => {
+    e.preventDefault();
+  }
+
   render() {
     return (
       <div>
