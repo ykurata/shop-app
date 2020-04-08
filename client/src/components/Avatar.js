@@ -58,14 +58,14 @@ class Avatar extends Component {
           <div className="row">
             <div className="col">
             </div>
-            <div className="col-6">
+            <div className="col-lg-6 col-md-12">
               <form onSubmit={this.submitAvatar}> 
                 <div style={{ height: "70px"}}></div>
                 <div className="outer-avatar text-center">
                   {this.state.image ? ( 
                     <img className="rounded-circle preview-avatar" src={this.state.image} alt="avatar"></img>      
                   ) : (
-                    <span style={{fontSize: "35px", color: "grey"}}>
+                    <span className="fa-span">
                       <i className="fas fa-user-circle fa-10x preview-avatar"></i>
                     </span> 
                   )}

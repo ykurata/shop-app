@@ -219,6 +219,10 @@ p {
   background-color: white;
   margin: auto;
 }
+.fa-span {
+  font-size: 35px;
+  color: grey;
+}
 .preview-avatar {
   width: 350px;
   height: 350px;
@@ -304,6 +308,20 @@ p {
   .item-form {
     width: 90%;
   }
+  
+  /* Avatar Page Styles */
+  .outer-avatar {
+    width: 280px;
+    height: 370px;
+  }
+  .preview-avatar {
+    width: 200px;
+    height: 200px;
+  }
+  .fa-span {
+    font-size: 20px;
+    color: grey;
+  }
 }
 
 @media screen and (min-width: 361px) and (max-width: 375px){
@@ -381,6 +399,20 @@ p {
   /* Form Styles */
   .form {
     width: 90%;
+  }
+
+  /* Avatar Page Styles */
+  .outer-avatar {
+    width: 320px;
+    height: 400px;
+  }
+  .preview-avatar {
+    width: 220px;
+    height: 220px;
+  }
+  .fa-span {
+    font-size: 20px;
+    color: grey;
   }
 }
 
@@ -461,6 +493,20 @@ p {
   /* Form Styles */
   .form {
     width: 90%;
+  }
+
+  /* Avatar Page Styles */
+  .outer-avatar {
+    width: 350px;
+    height: 450px;
+  }
+  .preview-avatar {
+    width: 250px;
+    height: 250px;
+  }
+  .fa-span {
+    font-size: 25px;
+    color: grey;
   }
 }
 
