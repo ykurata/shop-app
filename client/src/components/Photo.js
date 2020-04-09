@@ -150,9 +150,8 @@ class Photo extends Component {
                       </div>
                     </div>
                   )}
-              </div>
-              <button type="button" className="btn btn-danger btn-block" onClick={this.uploadFiles}>Upload</button>
-
+            </div>
+          
             </div>
           </form>
         </div>
