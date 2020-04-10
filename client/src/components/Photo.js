@@ -83,20 +83,22 @@ class Photo extends Component {
                     </label>
                   </span>
                 ) : (
-                  <div className="upload-img-outer-element">
-                    <div className="upload-img-inner-element">
-                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                      <label className="btn btn-info mt-4">
-                        Select Image
-                        <input
-                          type="file"
-                          name="file1"
-                          onChange={this.imageChange}
-                          hidden
-                        />
-                      </label>
+                  <span>
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <label className="btn btn-info mt-3 mr-2">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file1"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 )}
               </div>
 
@@ -122,20 +124,22 @@ class Photo extends Component {
                     </label>
                   </span>
                 ) : (
-                  <div className="upload-img-outer-element">
-                    <div className="upload-img-inner-element">
-                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                      <label className="btn btn-info mt-4">
-                        Select Image
-                        <input
-                          type="file"
-                          name="file2"
-                          onChange={this.imageChange}
-                          hidden
-                        />
-                      </label>
+                  <span>
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <label className="btn btn-info mt-4">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file2"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 )}
               </div>
 
@@ -161,20 +165,22 @@ class Photo extends Component {
                     </label>
                   </span>
                 ) : (
-                  <div className="upload-img-outer-element">
-                    <div className="upload-img-inner-element">
-                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                      <label className="btn btn-info mt-4">
-                        Select Image
-                        <input
-                          type="file"
-                          name="file3"
-                          onChange={this.imageChange}
-                          hidden
-                        />
-                      </label>
+                  <span>
+                    <div className="upload-img-outer-element">
+                      <div className="upload-img-inner-element">
+                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <label className="btn btn-info mt-4">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file3"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 )}
               </div>
 
@@ -200,20 +206,22 @@ class Photo extends Component {
                       </label>
                     </span>
                   ) : (
-                    <div className="upload-img-outer-element">
-                      <div className="upload-img-inner-element">
-                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-                        <label className="btn btn-info mt-4">
-                          Select Image
-                          <input
-                            type="file"
-                            name="file4"
-                            onChange={this.imageChange}
-                            hidden
-                          />
-                        </label>
+                    <span>
+                      <div className="upload-img-outer-element">
+                        <div className="upload-img-inner-element">
+                          <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                          <label className="btn btn-info mt-4">
+                            Select Image
+                            <input
+                              type="file"
+                              name="file4"
+                              onChange={this.imageChange}
+                              hidden
+                            />
+                          </label>
+                        </div>
                       </div>
-                    </div>
+                    </span>
                   )}
               </div>
           
