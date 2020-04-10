@@ -68,19 +68,19 @@ class Photo extends Component {
                       <div className="upload-img-inner-element">
                         <img src={this.state.file1} alt="..." className="rounded upload-img" />
                       </div>
+                      <label className="btn btn-info mt-3 mr-2">
+                        Select Image
+                        <input
+                          type="file"
+                          name="file1"
+                          onChange={this.imageChange}
+                          hidden
+                        />
+                      </label>
+                      <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage1}>
+                        <i className="fas fa-times fa-2x"></i>
+                      </label>
                     </div>
-                    <label className="btn btn-info mt-3 mr-2">
-                      Select Image
-                      <input
-                        type="file"
-                        name="file1"
-                        onChange={this.imageChange}
-                        hidden
-                      />
-                    </label>
-                    <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage1}>
-                      <i className="fas fa-times fa-2x"></i>
-                    </label>
                   </span>
                 ) : (
                   <span>
@@ -109,19 +109,19 @@ class Photo extends Component {
                       <div className="upload-img-inner-element">
                         <img src={this.state.file2} alt="..." className="rounded upload-img" />
                       </div>
+                      <label className="btn btn-info mt-3 mr-2">
+                        Select Image
+                        <input
+                          type="file"
+                          name="file1"
+                          onChange={this.imageChange}
+                          hidden
+                        />
+                      </label>
+                      <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage2}>
+                        <i className="fas fa-times fa-2x"></i>
+                      </label>
                     </div>
-                    <label className="btn btn-info mt-3 mr-2">
-                      Select Image
-                      <input
-                        type="file"
-                        name="file1"
-                        onChange={this.imageChange}
-                        hidden
-                      />
-                    </label>
-                    <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage2}>
-                      <i className="fas fa-times fa-2x"></i>
-                    </label>
                   </span>
                 ) : (
                   <span>
@@ -150,19 +150,19 @@ class Photo extends Component {
                       <div className="upload-img-inner-element">
                         <img src={this.state.file3} alt="..." className="rounded upload-img" />
                       </div>
+                      <label className="btn btn-info mt-3 mr-2">
+                        Select Image
+                        <input
+                          type="file"
+                          name="file1"
+                          onChange={this.imageChange}
+                          hidden
+                        />
+                      </label>
+                      <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage3}>
+                        <i className="fas fa-times fa-2x"></i>
+                      </label>
                     </div>
-                    <label className="btn btn-info mt-3 mr-2">
-                      Select Image
-                      <input
-                        type="file"
-                        name="file1"
-                        onChange={this.imageChange}
-                        hidden
-                      />
-                    </label>
-                    <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage3}>
-                      <i className="fas fa-times fa-2x"></i>
-                    </label>
                   </span>
                 ) : (
                   <span>
@@ -191,19 +191,19 @@ class Photo extends Component {
                         <div className="upload-img-inner-element">
                           <img src={this.state.file4} alt="..." className="rounded upload-img" />
                         </div>
+                        <label className="btn btn-info mt-3 mr-2">
+                          Select Image
+                          <input
+                            type="file"
+                            name="file1"
+                            onChange={this.imageChange}
+                            hidden
+                          />
+                        </label>
+                        <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage4}>
+                          <i className="fas fa-times fa-2x"></i>
+                        </label>
                       </div>
-                      <label className="btn btn-info mt-3 mr-2">
-                        Select Image
-                        <input
-                          type="file"
-                          name="file1"
-                          onChange={this.imageChange}
-                          hidden
-                        />
-                      </label>
-                      <label className="btn btn-secondary btn-sm mt-3" onClick={this.clearImage4}>
-                        <i className="fas fa-times fa-2x"></i>
-                      </label>
                     </span>
                   ) : (
                     <span>

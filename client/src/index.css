@@ -191,8 +191,8 @@ p {
 }
 .upload-img-outer-element{
   display:table-cell;
-  width:250px;
-  height:250px;
+  width:240px;
+  height:280px;
   vertical-align:middle;
   background:#edeff2;
   text-align:center;
@@ -204,8 +204,8 @@ p {
   display:inline-block;
 }
 .upload-img {
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 240px;
+  max-height: 240px;
   border: 1px solid#dcdee0;
 }
 
