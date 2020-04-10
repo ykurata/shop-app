@@ -34,7 +34,8 @@ class Form extends Component {
 
     axios.post("/item", newItem, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
-        console.log(res);
+        console.log(res.data);
+        window.location = `/image/${res.data.id}`;
         toast("Successfully Submitted!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2000,
@@ -67,6 +68,7 @@ class Form extends Component {
                 <p className="error">{this.state.errors.category}</p>
               : null}
               <select className="form-control" id="category" name="category" onChange={this.onChange}>
+                <option>--Select--</option>
                 <option>Phone/Laptop</option>
                 <option>Clothing</option>
                 <option>Books</option>

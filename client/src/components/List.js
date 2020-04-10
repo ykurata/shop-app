@@ -33,7 +33,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.state.items);
     let items;
 
     items = this.state.items.map((item, i) => (
@@ -41,8 +40,11 @@ class List extends Component {
         <Link to={`/detail/${item.id}`} className="card-link">
           <div className="card-body row">
             <div className="col-lg-2 col-md-2">
-              {/* <img src={phone2} alt="..." className="rounded list-item-img" /> */}
-              <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+              {item.image ? (
+                <img src={item.image[0]} alt="..." className="rounded list-item-img" />
+              ) : (
+                <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+              )}
             </div>
             <div className="col-lg-10 col-md-10">
               <h5 className="item-title">{item.name}</h5>

@@ -94,6 +94,7 @@ h5, p {
   width: 140px;
   height: 140px;
   border: 1px solid#dcdee0;
+  object-fit: cover;
 }
 .no-image {
   width: 140px;
@@ -141,12 +142,14 @@ h5, p {
   width: 150px;
   height: 120px;
   border: 1px solid #dcdee0;
+  object-fit: cover;
 }
 .thumbnail-margin-top {
   width: 150px;
   height: 120px;
   border: 1px solid #dcdee0;
   margin-top: 1rem;
+  object-fit: cover;
 }
 .detail-description {
   padding-top: 3rem;
@@ -185,12 +188,12 @@ p {
   margin-top: 3rem;
 }
 .upload-img-container {
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 .upload-img-outer-element{
   display:table-cell;
-  width:300px;
-  height:250px;
+  width:240px;
+  height:280px;
   vertical-align:middle;
   background:#edeff2;
   text-align:center;
@@ -202,8 +205,8 @@ p {
   display:inline-block;
 }
 .upload-img {
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 240px;
+  max-height: 240px;
   border: 1px solid#dcdee0;
 }
 
