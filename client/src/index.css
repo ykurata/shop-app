@@ -187,11 +187,11 @@ p {
   margin-top: 3rem;
 }
 .upload-img-container {
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 .upload-img-outer-element{
   display:table-cell;
-  width:300px;
+  width:250px;
   height:250px;
   vertical-align:middle;
   background:#edeff2;

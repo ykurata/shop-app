@@ -55,7 +55,7 @@ class Photo extends Component {
       <div>
         <Navbar></Navbar>
 
-        <div className="container main-photo">
+        <div className="container main-photo text-center">
           <form>
             <div className="text-center title">
               <h4>Add photos to your add</h4>
