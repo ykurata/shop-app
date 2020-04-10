@@ -33,7 +33,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.state.items);
     let items;
 
     items = this.state.items.map((item, i) => (

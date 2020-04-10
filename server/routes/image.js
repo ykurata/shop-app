@@ -7,8 +7,8 @@ const upload = require("./service/upload");
 const authentication = require("./middleware/auth");
 const Item = require('../models').Item;
 
-// Post multiple Images
-router.post("/:id", upload.array('image', 3), authentication, (req, res) => {
+// Post multiple images
+router.post("/:id", upload.array('image', 4), authentication, (req, res) => {
   Item.findOne({ where: { id: req.params.id }})
     .then(item => {
       if (!item) {

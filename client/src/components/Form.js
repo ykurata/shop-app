@@ -34,8 +34,8 @@ class Form extends Component {
 
     axios.post("/item", newItem, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
-        console.log(res);
-        window.location = "/photo";
+        console.log(res.data);
+        window.location = `/image/${res.data.id}`;
         toast("Successfully Submitted!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2000,

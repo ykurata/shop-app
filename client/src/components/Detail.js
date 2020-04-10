@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
-import phone2 from "../images/phone.jpg"
 
 import Navbar from "./Navbar";
 
@@ -32,7 +31,6 @@ class Detail extends Component {
 
   render() {
     const { item } = this.state;
-
     return (
       <div>
         <Navbar></Navbar>
@@ -59,20 +57,20 @@ class Detail extends Component {
                 {/* Side thumbnails */}
                 <div className="col-lg-4 col-md-3">
                   <div className="thumbnail-container row">
-                    {item.image ? (
-                      <img className="thumbnail" src={item.image[1]}></img>
+                    {item.image  ? (
+                      <img className="thumbnail" alt="item" src={item.image[1]}></img>
                     ) : (
                       <div className="thumbnail"></div>
                     )}
 
                     {item.image ? (
-                      <img className="thumbnail-margin-top" src={item.image[2]}></img>
+                      <img className="thumbnail-margin-top"  alt="item" src={item.image[2]}></img>
                     ) : (
                       <div className="thumbnail-margin-top "></div>
                     )}
 
                     {item.image ? (
-                      <img className="thumbnail-margin-top" src={item.image[3]}></img>
+                      <img className="thumbnail-margin-top" alt="item" src={item.image[3]}></img>
                     ) : (
                       <div className="thumbnail-margin-top "></div>
                     )}

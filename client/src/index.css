@@ -94,6 +94,7 @@ h5, p {
   width: 140px;
   height: 140px;
   border: 1px solid#dcdee0;
+  object-fit: cover;
 }
 .no-image {
   width: 140px;
