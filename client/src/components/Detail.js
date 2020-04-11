@@ -9,7 +9,8 @@ class Detail extends Component {
     super(props);
     this.state = {
       item: "",
-      user: ""
+      user: "",
+      image: []
     };
   };
 
@@ -21,7 +22,8 @@ class Detail extends Component {
     axios.get(`/item/get/${this.props.match.params.id}`) 
       .then(res => {
         this.setState({
-          item: res.data
+          item: res.data,
+          image: res.data.image
         });
         axios.get(`/user/get/${res.data.userId}`)
           .then(res => {
@@ -55,8 +57,8 @@ class Detail extends Component {
                 <div className="col-lg-8 col-md-9 img-container">
                   <div className="img-outer-element">
                     <div className="img-inner-element">
-                      {item.image ? (
-                        <img src={item.image[0]} alt="..." className="rounded item-img" />
+                      {this.state.image && this.state.image[0] ? (
+                        <img src={this.state.image[0]} alt="..." className="rounded item-img" />
                       ) : (
                         <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                       )}
@@ -66,20 +68,20 @@ class Detail extends Component {
                 {/* Side thumbnails */}
                 <div className="col-lg-4 col-md-3">
                   <div className="thumbnail-container row">
-                    {item.image  ? (
-                      <img className="thumbnail" alt="item" src={item.image[1]}></img>
+                    {this.state.image && this.state.image[1] ? (
+                      <img className="thumbnail" alt="item" src={this.state.image[1]}></img>
                     ) : (
                       <div className="thumbnail"></div>
                     )}
 
-                    {item.image ? (
-                      <img className="thumbnail-margin-top"  alt="item" src={item.image[2]}></img>
+                    {this.state.image && this.state.image[2] ? (
+                      <img className="thumbnail-margin-top"  alt="item" src={this.state.image[2]}></img>
                     ) : (
                       <div className="thumbnail-margin-top "></div>
                     )}
 
-                    {item.image ? (
-                      <img className="thumbnail-margin-top" alt="item" src={item.image[3]}></img>
+                    {this.state.image && this.state.image[3] ? (
+                      <img className="thumbnail-margin-top" alt="item" src={this.state.image[3]}></img>
                     ) : (
                       <div className="thumbnail-margin-top "></div>
                     )}
