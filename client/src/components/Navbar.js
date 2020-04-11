@@ -6,7 +6,8 @@ class Navbar extends Component {
     super(props);
     this.state = {
       user: "",
-      token: localStorage.getItem("jwtToken")
+      token: localStorage.getItem("jwtToken"),
+      userId: localStorage.getItem("userId"),
     };
   }
 
@@ -15,7 +16,7 @@ class Navbar extends Component {
   }
 
   getUser() {
-    axios("/user/get", { headers: { Authorization: `Bearer ${this.state.token}`}})
+    axios.get(`/user/get/${this.state.userId}`)
       .then(res => {
         this.setState({ 
           user: res.data
