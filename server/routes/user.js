@@ -114,9 +114,9 @@ router.post("/image", upload.single("image"), authentication, (req, res, next) =
     });
 });
   
-// Get a current logged in user 
-router.get("/get", authentication, (req, res, next) => {
-  User.findOne({ where: { id: req.user }})
+// Get a user by userId 
+router.get("/get/:id", (req, res, next) => {
+  User.findOne({ where: { id: req.params.id }})
     .then(user => {
       res.status(200).json(user);
     })
