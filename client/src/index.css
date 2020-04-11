@@ -167,6 +167,11 @@ p {
 .user-name {
   margin-top: 1rem;
 }
+.detail-user-avatar {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
 .user-icon {
   color: grey;
   margin-top: 1.5rem;

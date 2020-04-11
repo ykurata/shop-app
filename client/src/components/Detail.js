@@ -9,20 +9,29 @@ class Detail extends Component {
     super(props);
     this.state = {
       item: "",
-      username: localStorage.getItem("name")
+      user: ""
     };
   };
 
   componentDidMount() {
-    this.getItem();
+    this.getItemAndUser();
   }
 
-  getItem() {
+  getItemAndUser() {
     axios.get(`/item/get/${this.props.match.params.id}`) 
       .then(res => {
         this.setState({
           item: res.data
         });
+        axios.get(`/user/get/${res.data.userId}`)
+          .then(res => {
+            this.setState({
+              user: res.data
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -30,7 +39,7 @@ class Detail extends Component {
   }
 
   render() {
-    const { item } = this.state;
+    const { item, user } = this.state;
     return (
       <div>
         <Navbar></Navbar>
@@ -88,10 +97,14 @@ class Detail extends Component {
               <div className="user-info-container ">
                 <div className="user-info text-center">
                   <div className="user-icon">
-                    <i className="fas fa-user-circle fa-5x"></i>
+                    {user.image ? (
+                      <img src={this.state.user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
+                    ) : (
+                      <i className="fas fa-user-circle fa-5x"></i>
+                    )}
                   </div>
                   <div className="user-name">
-                    <h5>{this.state.username}</h5>
+                    <h5>{user.username}</h5>
                   </div>
                   <div>
                     <a href="/">View 5 Other Items</a>
