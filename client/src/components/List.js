@@ -40,7 +40,7 @@ class List extends Component {
         <Link to={`/detail/${item.id}`} className="card-link">
           <div className="card-body row">
             <div className="col-lg-2 col-md-2">
-              {item.image ? (
+              {item.image.length !== 0 ? (
                 <img src={item.image[0]} alt="..." className="rounded list-item-img" />
               ) : (
                 <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>

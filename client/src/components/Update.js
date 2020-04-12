@@ -13,6 +13,7 @@ class Update extends Component {
       category: "",
       price: "",
       description: "",
+      itemId:"",
       errors: [],
       token: localStorage.getItem("jwtToken"),
     };
@@ -33,7 +34,8 @@ class Update extends Component {
           name: res.data.name,
           category: res.data.category,
           price: res.data.price,
-          description: res.data.description
+          description: res.data.description,
+          itemId: res.data.id
         });
       })
       .catch(err => {
@@ -118,7 +120,8 @@ class Update extends Component {
               <textarea className="form-control" value={this.state.description} onChange={this.onChange} id="description" name="description" rows="5"></textarea>
             </div>
             <ToastContainer autoClose={2000} />
-            <button type="submit" className="btn btn-primary btn-lg btn-block">Update</button>
+            <button type="submit" className="btn btn-primary btn-lg btn-block mb-3">Update</button>
+            <a href={`/detail/${this.state.itemId}`}>Back to Detail Page</a>
           </form>
         </div>
       </div>

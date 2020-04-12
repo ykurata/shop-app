@@ -89,8 +89,9 @@ class Detail extends Component {
                       <div className="thumbnail-margin-top "></div>
                     )}
                   </div>
+                  {/* display Update Image button only for logged in user's post */}
                   {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
-                    <a href={`/image/${item.id}`} className="btn btn-primary mt-3 ml-1 mb-2" role="button">Add Image</a>
+                    <a href={`/image/${item.id}`} className="btn btn-primary mt-3 mb-2" role="button">Update Image</a>
                   ) : (
                     null
                   )}      
@@ -100,6 +101,7 @@ class Detail extends Component {
               <div className="detail-description">
                 <h4>Description</h4>
                 <p>{item.description}</p>
+                {/* display Edit Post button only for logged in user's post */}
                 {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
                   <a href={`/update/${item.id}`} className="btn btn-primary mt-2 mb-3" role="button">Edit Post</a>
                 ) : (
@@ -126,6 +128,7 @@ class Detail extends Component {
                   </div>
                 </div>
               </div>
+              {/* hide send message button for own post */}
               {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
                 null
               ) : (

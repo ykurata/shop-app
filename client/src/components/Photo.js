@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +18,7 @@ class Photo extends Component {
      sendFile3: null,
      sendFile4: null,
      token: localStorage.getItem("jwtToken"),
+     itemId: "",
     };
   }
 
@@ -73,7 +73,27 @@ class Photo extends Component {
   clearImage4 = e => {
     this.setState({ file4: null });
   }
+
+  componentDidMount() {
+    this.getImage();
+  }
   
+  getImage() {
+    axios.get(`/item/get/${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({
+          file1: res.data.image[0],
+          file2: res.data.image[1],
+          file3: res.data.image[2],
+          file4: res.data.image[3],
+          itemId: res.data.id,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -101,8 +121,8 @@ class Photo extends Component {
       <div>
         <Navbar></Navbar>
 
-        <div className="container main-photo text-center">
-          <form onSubmit={this.onSubmit}>
+        <div className="container main-photo">
+          <form onSubmit={this.onSubmit} className="text-center">
             <div className="text-center title">
               <h4>Add photos to your add</h4>
             </div>
@@ -273,7 +293,7 @@ class Photo extends Component {
               
               <ToastContainer autoClose={2000} />
               <button style={{ marginTop: "2rem", marginBottom: "2rem" }} type="Submit" className="btn btn-primary btn-lg btn-block">Submit</button>
-             
+              <a href={`/detail/${this.state.itemId}`}>Back to Detail Page</a>
             </div>
           </form>
         </div>
