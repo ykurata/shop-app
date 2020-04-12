@@ -10,7 +10,8 @@ class Detail extends Component {
     this.state = {
       item: "",
       user: "",
-      image: []
+      image: [],
+      userId: localStorage.getItem("userId")
     };
   };
 
@@ -42,6 +43,8 @@ class Detail extends Component {
 
   render() {
     const { item, user } = this.state;
+    console.log(this.state.userId);
+    console.log(item.userId);
     return (
       <div>
         <Navbar></Navbar>
@@ -92,6 +95,12 @@ class Detail extends Component {
               <div className="detail-description">
                 <h4>Description</h4>
                 <p>{item.description}</p>
+                {this.state.userId == item.userId ? (
+                  <button className="btn btn-primary">Edit Post</button>
+                ) : (
+                  null
+                )}
+                
               </div>
             </div>
             <div className="col-lg-3 align-items-center">
