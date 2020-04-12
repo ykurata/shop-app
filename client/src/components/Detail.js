@@ -11,7 +11,8 @@ class Detail extends Component {
       item: "",
       user: "",
       image: [],
-      userId: localStorage.getItem("userId")
+      userId: localStorage.getItem("userId"),
+      itemUserId: ""
     };
   };
 
@@ -24,7 +25,8 @@ class Detail extends Component {
       .then(res => {
         this.setState({
           item: res.data,
-          image: res.data.image
+          image: res.data.image,
+          itemUserId: res.data.userId
         });
         axios.get(`/user/get/${res.data.userId}`)
           .then(res => {
@@ -43,8 +45,6 @@ class Detail extends Component {
 
   render() {
     const { item, user } = this.state;
-    console.log(this.state.userId);
-    console.log(item.userId);
     return (
       <div>
         <Navbar></Navbar>
@@ -89,18 +89,22 @@ class Detail extends Component {
                       <div className="thumbnail-margin-top "></div>
                     )}
                   </div>
+                  {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
+                    <button className="btn btn-primary mt-3 ml-1 mb-2">Add Image</button>
+                  ) : (
+                    null
+                  )}      
                 </div>
               </div>
 
               <div className="detail-description">
                 <h4>Description</h4>
                 <p>{item.description}</p>
-                {this.state.userId == item.userId ? (
-                  <button className="btn btn-primary">Edit Post</button>
+                {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
+                  <button className="btn btn-primary mb-3 mt-2">Edit Post</button>
                 ) : (
                   null
                 )}
-                
               </div>
             </div>
             <div className="col-lg-3 align-items-center">
@@ -122,7 +126,11 @@ class Detail extends Component {
                   </div>
                 </div>
               </div>
-              <button type="button" className="btn btn-primary btn-lg btn-block message-button">Send Message</button>
+              {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
+                null
+              ) : (
+                <button type="button" className="btn btn-primary btn-lg btn-block message-button">Send Message</button>
+              )}
             </div>
           </div>
         </div>
