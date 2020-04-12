@@ -69,10 +69,19 @@ class List extends Component {
 
           <div className="list-group">
             {/* display message if there is no items  */}
-            {this.state.items.length === 0 ? (
+            {this.state.items.length === 0 && this.state.loading === true ? (
               <div className="text-center mt-5">
                 <h5>No Items</h5>
               </div>
+            ) : (
+              null
+            )}
+
+            {/* Loading Message */}
+            {this.state.loading === false ? (
+              <div className="text-center mt-5">
+                <h5>Loading Items...</h5>
+              </div>  
             ) : (
               null
             )}

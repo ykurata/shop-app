@@ -54,18 +54,6 @@ class Detail extends Component {
       });
   }
 
-  // getItemsByUserId() {
-  //   axios.get(`/item/get/by-user/${this.state.itemUserId}`)
-  //     .then(res => {
-  //       this.state({
-  //         items: res.data
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
   render() {
     const { item, user } = this.state;
     
