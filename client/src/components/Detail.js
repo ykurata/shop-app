@@ -90,7 +90,7 @@ class Detail extends Component {
                     )}
                   </div>
                   {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
-                    <button className="btn btn-primary mt-3 ml-1 mb-2">Add Image</button>
+                    <a href={`/image/${item.id}`} class="btn btn-primary mt-3 ml-1 mb-2" role="button">Add Image</a>
                   ) : (
                     null
                   )}      
