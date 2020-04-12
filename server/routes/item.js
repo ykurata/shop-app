@@ -49,7 +49,7 @@ router.put("/update/:id", authentication, (req, res) => {
         category: req.body.category,
         price: req.body.price
       })
-      res.staus(200).json(item);
+      res.status(200).json(item);
     })
     .catch(err => {
       console.log(err);

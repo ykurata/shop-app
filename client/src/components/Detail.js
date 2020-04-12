@@ -90,7 +90,7 @@ class Detail extends Component {
                     )}
                   </div>
                   {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
-                    <a href={`/image/${item.id}`} class="btn btn-primary mt-3 ml-1 mb-2" role="button">Add Image</a>
+                    <a href={`/image/${item.id}`} className="btn btn-primary mt-3 ml-1 mb-2" role="button">Add Image</a>
                   ) : (
                     null
                   )}      
@@ -101,7 +101,7 @@ class Detail extends Component {
                 <h4>Description</h4>
                 <p>{item.description}</p>
                 {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
-                  <button className="btn btn-primary mb-3 mt-2">Edit Post</button>
+                  <a href={`/update/${item.id}`} className="btn btn-primary mt-2 mb-3" role="button">Edit Post</a>
                 ) : (
                   null
                 )}

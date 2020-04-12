@@ -21,22 +21,40 @@ class Update extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  componentDidMount() {
+    this.getItem();
+  }
+
+  getItem() {
+    axios.get(`/item/get/${this.props.match.params.id}`)
+      .then(res => {
+        this.setState({
+          name: res.data.name,
+          category: res.data.category,
+          price: res.data.price,
+          description: res.data.description
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   
   onSubmit = e => {
     e.preventDefault();
 
-    const newItem = {
+    const updatedItem = {
       name: this.state.name,
       category: this.state.category,
       price: this.state.price,
       description: this.state.description
     }
 
-    axios.post("/item", newItem, { headers: { Authorization: `Bearer ${this.state.token}`}})
+    axios.put(`/item/update/${this.props.match.params.id}`, updatedItem, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         console.log(res.data);
-        window.location = `/image/${res.data.id}`;
-        toast("Successfully Submitted!", {
+        toast("Successfully Updated!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2000,
         });
@@ -60,14 +78,14 @@ class Update extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.name}</p>
               : null}
-              <input type="text" onChange={this.onChange} className="form-control" name="name" id="name" placeholder="Item's Title"/>
+              <input type="text" value={this.state.name} onChange={this.onChange} className="form-control" name="name" id="name" placeholder="Item's Title"/>
             </div>
             <div className="form-group">
               <label>Category</label>
               {this.state.errors ? 
                 <p className="error">{this.state.errors.category}</p>
               : null}
-              <select className="form-control" id="category" name="category" onChange={this.onChange}>
+              <select className="form-control" id="category" name="category" value={this.state.category} onChange={this.onChange}>
                 <option>--Select--</option>
                 <option>Phone/Laptop</option>
                 <option>Clothing</option>
@@ -86,7 +104,7 @@ class Update extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text">$</span>
                 </div>
-                <input type="number" name="price" onChange={this.onChange} className="form-control" aria-label="Amount (to the nearest dollar)" />
+                <input type="number" name="price" value={this.state.price} onChange={this.onChange} className="form-control" aria-label="Amount (to the nearest dollar)" />
                 <div className="input-group-append">
                   <span className="input-group-text">.00</span>
                 </div>
@@ -97,10 +115,10 @@ class Update extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.description}</p>
               : null}
-              <textarea className="form-control"  onChange={this.onChange} id="description" name="description" rows="5"></textarea>
+              <textarea className="form-control" value={this.state.description} onChange={this.onChange} id="description" name="description" rows="5"></textarea>
             </div>
             <ToastContainer autoClose={2000} />
-            <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+            <button type="submit" className="btn btn-primary btn-lg btn-block">Update</button>
           </form>
         </div>
       </div>
