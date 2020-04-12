@@ -68,7 +68,18 @@ class Detail extends Component {
 
   render() {
     const { item, user } = this.state;
-    console.log(this.state.items);
+    
+    let aTag;
+    if (this.state.items.length === 1) {
+      aTag = null
+    } else if (this.state.items.length === 2) {
+      aTag = <a href="/">View {this.state.items.length -1} other item</a>
+    } else if (this.state.items.length > 2) {
+      aTag = <a href="/">View {this.state.items.length -1} other items</a>
+    } else {
+      aTag = null
+    }
+
     return (
       <div>
         <Navbar></Navbar>
@@ -147,13 +158,9 @@ class Detail extends Component {
                   <div className="user-name">
                     <h5>{user.username}</h5>
                   </div>
-                  {this.state.items.length > 1 ? (
-                    <div>
-                      <a href="/">View {this.state.items.length - 1} Other Items</a>
-                    </div>
-                  ) : (
-                    null
-                  )}
+                  <div>
+                    {aTag}
+                  </div>
                 </div>
               </div>
               {/* hide send message button for own post */}
