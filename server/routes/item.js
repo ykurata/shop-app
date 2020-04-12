@@ -81,6 +81,18 @@ router.get("/get/:id", (req, res) => {
 });
 
 
+// Get list of items by userId
+router.get("/get/by-user/:id", (req, res) => {
+  Item.findAll({ where: { userId: req.params.id}})
+    .then(items => {
+      res.status(200).json(items);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
 // DELETE an item by item's id
 router.delete("/delete/:id", authentication, (req, res) => {
   Item.findOne({ where: { id: req.params.id }})

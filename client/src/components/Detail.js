@@ -9,6 +9,7 @@ class Detail extends Component {
     super(props);
     this.state = {
       item: "",
+      items: [],
       user: "",
       image: [],
       userId: localStorage.getItem("userId"),
@@ -18,6 +19,7 @@ class Detail extends Component {
 
   componentDidMount() {
     this.getItemAndUser();
+    //this.getItemsByUserId();
   }
 
   getItemAndUser() {
@@ -28,6 +30,15 @@ class Detail extends Component {
           image: res.data.image,
           itemUserId: res.data.userId
         });
+        axios.get(`/item/get/by-user/${res.data.userId}`)
+          .then(res => {
+            this.setState({
+              items: res.data
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
         axios.get(`/user/get/${res.data.userId}`)
           .then(res => {
             this.setState({
@@ -43,8 +54,21 @@ class Detail extends Component {
       });
   }
 
+  // getItemsByUserId() {
+  //   axios.get(`/item/get/by-user/${this.state.itemUserId}`)
+  //     .then(res => {
+  //       this.state({
+  //         items: res.data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
   render() {
     const { item, user } = this.state;
+    console.log(this.state.items);
     return (
       <div>
         <Navbar></Navbar>
@@ -123,9 +147,13 @@ class Detail extends Component {
                   <div className="user-name">
                     <h5>{user.username}</h5>
                   </div>
-                  <div>
-                    <a href="/">View 5 Other Items</a>
-                  </div>
+                  {this.state.items.length > 1 ? (
+                    <div>
+                      <a href="/">View {this.state.items.length - 1} Other Items</a>
+                    </div>
+                  ) : (
+                    null
+                  )}
                 </div>
               </div>
               {/* hide send message button for own post */}
