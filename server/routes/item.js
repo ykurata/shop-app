@@ -59,7 +59,7 @@ router.put("/update/:id", authentication, (req, res) => {
 
 // GET all items 
 router.get("/all", (req, res) => {
-  Item.findAll({ order: [[ "createdAt", "ASC"]]})
+  Item.findAll({ order: [[ "createdAt", "DESC"]]})
     .then(items => {
       res.status(200).json(items);
     })
