@@ -50,10 +50,6 @@ nav {
 .list-group {
   margin-bottom: 5rem;
 }
-.search-form{
-  width: 60%;
-  margin: auto;
-}
 .card {
   max-height: 220px;
   padding: .5rem;
@@ -244,9 +240,6 @@ p {
 
 @media screen and (min-width: 300px) and (max-width: 360px){
   /* List Items Style */
-  .search-form{
-    width: 100%;
-  }
   .card {
     padding: .5rem;
   }
@@ -341,9 +334,6 @@ p {
 
 @media screen and (min-width: 361px) and (max-width: 375px){
   /* List Items Style */
-  .search-form{
-    width: 100%;
-  }
   .card-body {
     padding: .5rem;
   }
@@ -436,9 +426,6 @@ p {
 
 @media screen and (min-width: 376px) and (max-width: 650px){
   /* List Items Style */
-  .search-form{
-    width: 100%;
-  }
   .card {
     padding: .5rem;
   }

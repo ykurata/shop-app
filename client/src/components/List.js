@@ -38,6 +38,8 @@ class List extends Component {
   }
 
   render() {
+    console.log(this.state.search);
+
     const filteredItems = this.state.items.filter((item) => {
       const query = this.state.search.toLowerCase();
       return (
@@ -76,13 +78,26 @@ class List extends Component {
         <div className="container item-list">
 
           {/* Search form */}
-          <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
-            <div className="input-group-prepend">
-              <span className="input-group-text purple lighten-3" id="basic-text1"><i className="fas fa-search text-white"
-                  aria-hidden="true"></i></span>
+          <div className="search row"> 
+            <div className="col-lg-4">
+            <select onChange={this.onChange} name="search" className="browser-default custom-select">
+              <option value="">Search from category</option>
+              <option value="Phone/Laptop">Phone/Lap</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Books">Books</option>
+            </select>
+            </div>   
+            <div className="col-lg-8">
+              <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
+                <div className="input-group-prepend">
+                  <span className="input-group-text purple lighten-3" id="basic-text1"><i className="fas fa-search text-white"
+                      aria-hidden="true"></i></span>
+                </div>
+                <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search by category, item..." aria-label="Search" />
+              </div>
             </div>
-            <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search by category, item..." aria-label="Search" />
           </div>
+          
 
           {filteredItems.length > 0 ? (
             <p>Showing {filteredItems.length} items</p>
