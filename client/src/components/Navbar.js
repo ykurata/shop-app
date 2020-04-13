@@ -90,10 +90,10 @@ class Navbar extends Component {
               <div className="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
                 <span className="dropdown-item">Phone/Laptop</span>
                 <span className="dropdown-item">Clothing</span>
-                {/* <a className="dropdown-item">Books</a>
-                <a className="dropdown-item">Furniture</a>
-                <a className="dropdown-item">Music</a>
-                <a className="dropdown-item">Camera</a> */}
+                <span className="dropdown-item">Books</span>
+                <span className="dropdown-item">Furniture</span>
+                <span className="dropdown-item">Music</span>
+                <span className="dropdown-item">Camera</span>
               </div>
             </li>
 
