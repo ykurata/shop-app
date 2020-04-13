@@ -82,9 +82,12 @@ class List extends Component {
             <div className="col-lg-4">
             <select onChange={this.onChange} name="search" className="browser-default custom-select">
               <option value="">Search from category</option>
-              <option value="Phone/Laptop">Phone/Lap</option>
+              <option value="Phone/Laptop">Phone/Laptop</option>
               <option value="Clothing">Clothing</option>
               <option value="Books">Books</option>
+              <option value="Music">Music</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Camera">Camera</option>
             </select>
             </div>   
             <div className="col-lg-8">
