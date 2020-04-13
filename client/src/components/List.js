@@ -11,9 +11,14 @@ class List extends Component {
     super(props);
     this.state = {
       items: [],
+      search: "",
       loading: false
     };
   };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   componentDidMount() {
     this.getItems();
@@ -33,9 +38,17 @@ class List extends Component {
   }
 
   render() {
+    const filteredItems = this.state.items.filter((item) => {
+      const query = this.state.search.toLowerCase();
+      return (
+        item.name.toLowerCase().indexOf(query) >= 0 ||
+        item.category.toLowerCase().indexOf(query) >=0
+      );
+    });
+
     let items;
 
-    items = this.state.items.map((item, i) => (
+    items = filteredItems.map((item, i) => (
       <div className="card list-group-item" key={i}>
         <Link to={`/detail/${item.id}`} className="card-link">
           <div className="card-body row">
@@ -61,15 +74,25 @@ class List extends Component {
         <Navbar></Navbar>
         {/* display number of items */}
         <div className="container item-list">
-          {this.state.items.length > 1 ? (
-            <p>Showing {this.state.items.length} items</p>
+
+          {/* Search form */}
+          <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
+            <div className="input-group-prepend">
+              <span className="input-group-text purple lighten-3" id="basic-text1"><i className="fas fa-search text-white"
+                  aria-hidden="true"></i></span>
+            </div>
+            <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search by category, item..." aria-label="Search" />
+          </div>
+
+          {filteredItems.length > 0 ? (
+            <p>Showing {filteredItems.length} items</p>
           ) : (
             null
           )} 
 
           <div className="list-group">
             {/* display message if there is no items  */}
-            {this.state.items.length === 0 && this.state.loading === true ? (
+            {filteredItems.length === 0 && this.state.loading === true ? (
               <div className="text-center mt-5">
                 <h5>No Items</h5>
               </div>

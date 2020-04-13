@@ -88,9 +88,12 @@ class Navbar extends Component {
                 aria-haspopup="true" aria-expanded="false">Category
               </div>
               <div className="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                <a className="dropdown-item" href="/">Action</a>
-                <a className="dropdown-item" href="/">Another action</a>
-                <a className="dropdown-item" href="/">Something else here</a>
+                <span className="dropdown-item">Phone/Laptop</span>
+                <span className="dropdown-item">Clothing</span>
+                <span className="dropdown-item">Books</span>
+                <span className="dropdown-item">Furniture</span>
+                <span className="dropdown-item">Music</span>
+                <span className="dropdown-item">Camera</span>
               </div>
             </li>
 
