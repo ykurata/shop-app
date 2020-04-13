@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import List from "./components/List";
+import MyPost from "./components/MyPost";
 import Detail from "./components/Detail";
 import Form from "./components/Form";
 import Update from "./components/Update";
@@ -19,6 +20,7 @@ function App() {
         <PrivateRoute path="/update/:id" component={Update} /> 
         <PrivateRoute path="/profile-image" component={Avatar} /> 
         <PrivateRoute path="/image/:id" component={Photo} /> 
+        <PrivateRoute path="/post-by-user/:id" component={MyPost} /> 
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

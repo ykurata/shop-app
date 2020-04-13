@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 
 import Navbar from "./Navbar";
 
-class List extends Component {
+class MyPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,4 +134,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default MyPost;
