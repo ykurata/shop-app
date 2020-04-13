@@ -81,18 +81,18 @@ class List extends Component {
               <span className="input-group-text purple lighten-3" id="basic-text1"><i className="fas fa-search text-white"
                   aria-hidden="true"></i></span>
             </div>
-            <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
+            <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search by category, item..." aria-label="Search" />
           </div>
 
-          {this.state.items.length > 1 ? (
-            <p>Showing {this.state.items.length} items</p>
+          {filteredItems.length > 0 ? (
+            <p>Showing {filteredItems.length} items</p>
           ) : (
             null
           )} 
 
           <div className="list-group">
             {/* display message if there is no items  */}
-            {this.state.items.length === 0 && this.state.loading === true ? (
+            {filteredItems.length === 0 && this.state.loading === true ? (
               <div className="text-center mt-5">
                 <h5>No Items</h5>
               </div>
