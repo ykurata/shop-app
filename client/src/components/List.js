@@ -61,6 +61,16 @@ class List extends Component {
         <Navbar></Navbar>
         {/* display number of items */}
         <div className="container item-list">
+
+          {/* Search form */}
+          <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
+            <div className="input-group-prepend">
+              <span className="input-group-text purple lighten-3" id="basic-text1"><i className="fas fa-search text-white"
+                  aria-hidden="true"></i></span>
+            </div>
+            <input className="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" />
+          </div>
+
           {this.state.items.length > 1 ? (
             <p>Showing {this.state.items.length} items</p>
           ) : (
