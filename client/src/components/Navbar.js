@@ -36,7 +36,7 @@ class Navbar extends Component {
   render() {
     let navlist;
 
-    if (this.state.token) {
+    if (this.state.token) { 
       navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
                   <li className="nav-item avatar dropdown">
                     <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
@@ -78,30 +78,14 @@ class Navbar extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent-555">
           <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="/">Search</a>
+            </li>
             <li className="nav-item active">
               <a className="nav-link" href="/create">Post Item
                 <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Category
-              </div>
-              <div className="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
-                <span className="dropdown-item">Phone/Laptop</span>
-                <span className="dropdown-item">Clothing</span>
-                <span className="dropdown-item">Books</span>
-                <span className="dropdown-item">Furniture</span>
-                <span className="dropdown-item">Music</span>
-                <span className="dropdown-item">Camera</span>
-              </div>
-            </li>
-
-            <form className="form-inline">
-              <div className="md-form my-0">
-                <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
-              </div>
-            </form>
           </ul>
           {navlist}
         </div>
