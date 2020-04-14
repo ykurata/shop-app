@@ -87,7 +87,7 @@ class MyPost extends Component {
           <div className="row list-outer">
 
             {/* User's info */}
-            <div className="col-lg-3 col-md-3 col-sm-12">
+            <div className="col-lg-3 col-md-3">
               <div className="user-info-container ">
                 <div className="user-info text-center m-auto">
                   <div className="user-icon">
@@ -105,7 +105,7 @@ class MyPost extends Component {
               </div>
             </div>
 
-            <div className="col-lg-9 col-md-9 col-sm-12">
+            <div className="col-lg-9 col-md-9">
               <div className="list-group">
                 {/* display message if there is no items  */}
                 {items.length === 0 && this.state.loading === true ? (
