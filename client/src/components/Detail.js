@@ -134,7 +134,7 @@ class Detail extends Component {
             </div>
             <div className="col-lg-3 align-items-center">
               <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment></h6>
-              <div className="user-info-container ">
+              <div className="user-info-container mt-5 mb-2">
                 <div className="user-info text-center">
                   <div className="user-icon">
                     {user.image ? (
@@ -145,6 +145,7 @@ class Detail extends Component {
                   </div>
                   <div className="user-name">
                     <h5>{user.username}</h5>
+                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">{user.createdAt}</Moment></p>
                   </div>
                   <div>
                     {aTag}
