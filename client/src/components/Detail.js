@@ -61,9 +61,9 @@ class Detail extends Component {
     if (this.state.items.length === 1) {
       aTag = null
     } else if (this.state.items.length === 2) {
-      aTag = <a href="/">View {this.state.items.length -1} other item</a>
+      aTag = <a href={`/items-by-user/${item.userId}`}>View {this.state.items.length -1} other item</a>
     } else if (this.state.items.length > 2) {
-      aTag = <a href="/">View {this.state.items.length -1} other items</a>
+      aTag = <a href={`/items-by-user/${item.userId}`}>View {this.state.items.length -1} other items</a>
     } else {
       aTag = null
     }

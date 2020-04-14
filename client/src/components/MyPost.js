@@ -24,7 +24,7 @@ class MyPost extends Component {
   }
 
   getItems() {
-    axios.get("/item/all") 
+    axios.get(`/item/get/by-user/${this.props.match.params.id}`) 
       .then(res => {
         this.setState({
           items: res.data,
@@ -37,8 +37,6 @@ class MyPost extends Component {
   }
 
   render() {
-    console.log(this.state.search);
-
     const filteredItems = this.state.items.filter((item) => {
       const query = this.state.search.toLowerCase();
       return (

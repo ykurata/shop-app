@@ -20,7 +20,7 @@ function App() {
         <PrivateRoute path="/update/:id" component={Update} /> 
         <PrivateRoute path="/profile-image" component={Avatar} /> 
         <PrivateRoute path="/image/:id" component={Photo} /> 
-        <PrivateRoute path="/post-by-user/:id" component={MyPost} /> 
+        <PrivateRoute path="/items-by-user/:id" component={MyPost} /> 
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
