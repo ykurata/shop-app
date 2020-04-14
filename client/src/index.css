@@ -43,7 +43,6 @@ nav {
 
 /* List Item styles  */
 .item-list {
-  width: 80%;
   margin-top: 3rem;
   align-items: center;
 }
@@ -242,7 +241,7 @@ p {
   /* List Items Style */
   .card {
     padding: .5rem;
-  }
+  } 
   .card-body {
     padding: .3rem;
   }
@@ -252,11 +251,12 @@ p {
   .item-list {
     width: 100%;
   }
-  .col-lg-2 {
-    width: 90px;
+  .col-sm-2 {
+    width: 80px;
+    padding-left: .5rem;
   }
-  .col-lg-10 {
-    width: 220px;
+  .col-sm-10 {
+    width: 210px;
     padding-left: .2rem;
     padding-right: .2rem;
   }
@@ -343,11 +343,11 @@ p {
   .item-list {
     width: 100%;
   }
-  .col-lg-2 {
+  .col-sm-2 {
     width: 70px;
     padding: 0;
   }
-  .col-lg-10 {
+  .col-sm-10 {
     width: 240px;
     padding-left: .2rem;
     padding-right: .2rem;
@@ -438,10 +438,10 @@ p {
   .item-list {
     width: 100%;
   }
-  .col-lg-2 {
+  .col-sm-2 {
     width: 100px;
   }
-  .col-lg-10 {
+  .col-sm-10 {
     width: 260px;
     padding-left: .2rem;
     padding-right: .2rem;
@@ -520,9 +520,6 @@ p {
 
 @media screen and (min-width: 651px) and (max-width: 900px){
   /* List Items Style */
-  .item-list {
-    width: 100%;
-  }
   .col-lg-2 {
     width: 100px;
     padding: 0;
@@ -592,13 +589,10 @@ p {
 
 @media screen and (min-width: 901px) and (max-width: 1200px){
   /* List Items Style */
-  .item-list {
-    width: 100%;
-  }
-  .col-lg-2 {
+  .col-sm-2 {
     width: 150px;
   }
-  .col-lg-10 {
+  .col-sm-10 {
     width: 450px;
     padding-left: .5rem;
     padding-right: .5rem;
