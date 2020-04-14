@@ -75,6 +75,16 @@ class List extends Component {
         <Navbar></Navbar>
         {/* display number of items */}
         <div className="container-fluid item-list">
+          <div className="row">
+            <div className="col-lg-3"></div>
+            <div className="col-lg-9">
+              {filteredItems.length > 0 ? (
+                <p>Showing {filteredItems.length} items</p>
+              ) : (
+                null
+              )} 
+            </div>
+          </div>
           <div className="row list-outer">
             {/* Search input and select form category */}
             <div className="col-lg-3">
@@ -85,7 +95,7 @@ class List extends Component {
                 </div>
                 <input onChange={this.onChange} name="search" value={this.state.search} className="form-control my-0 py-1" type="text" placeholder="Search by category, item..." aria-label="Search" />
               </div>
-              <select onChange={this.onChange} name="search" className="browser-default custom-select mb-4">
+              <select onChange={this.onChange} name="search" className="browser-default custom-select mb-5">
                 <option value="">Search from category</option>
                 <option value="Phone/Laptop">Phone/Laptop</option>
                 <option value="Clothing">Clothing</option>
@@ -96,12 +106,6 @@ class List extends Component {
               </select>
             </div>
             <div className="col-lg-9">
-              {filteredItems.length > 0 ? (
-                <p>Showing {filteredItems.length} items</p>
-              ) : (
-                null
-              )} 
-
               <div className="list-group">
                 {/* display message if there is no items  */}
                 {filteredItems.length === 0 && this.state.loading === true ? (
