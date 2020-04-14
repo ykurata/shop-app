@@ -53,6 +53,7 @@ class Navbar extends Component {
                     <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                       aria-labelledby="navbarDropdownMenuLink-55">
                       <a className="dropdown-item" href="/profile-image">Profile Image</a>
+                      <a className="dropdown-item" href={`/items-by-user/${this.state.userId}`}>My Post</a>
                       <a className="dropdown-item" onClick={this.logOut} href="/logout">Log Out</a>
                     </div>
                   </li>
