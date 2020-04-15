@@ -13,6 +13,7 @@ class Avatar extends Component {
       image: null,
       sendImage: null,
       token: localStorage.getItem("jwtToken"),
+      userId: localStorage.getItem("userId"),
       error: ""
     }
   }
@@ -21,6 +22,22 @@ class Avatar extends Component {
     this.setState({
       image: URL.createObjectURL(e.target.files[0]),
       sendImage: e.target.files[0]
+    });
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  getUser() {
+    axios.get(`/user/get/${this.state.userId}`)
+    .then(res => {
+      this.setState({
+        image: res.data.image
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
   }
 
@@ -50,6 +67,7 @@ class Avatar extends Component {
   }
 
   render() {
+    console.log(this.state.image);
     return (
       <div className="main-avatar">
         <Navbar></Navbar>
