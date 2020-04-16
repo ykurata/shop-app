@@ -152,7 +152,7 @@ class Photo extends Component {
                   <span>
                     <div className="upload-img-outer-element">
                       <div className="upload-img-inner-element">
-                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <div className="upload-img-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                         <label className="btn btn-info mt-3 mr-2">
                           Select Image
                           <input
@@ -193,7 +193,7 @@ class Photo extends Component {
                   <span>
                     <div className="upload-img-outer-element">
                       <div className="upload-img-inner-element">
-                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <div className="upload-img-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                         <label className="btn btn-info mt-4">
                           Select Image
                           <input
@@ -234,7 +234,7 @@ class Photo extends Component {
                   <span>
                     <div className="upload-img-outer-element">
                       <div className="upload-img-inner-element">
-                        <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                        <div className="upload-img-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                         <label className="btn btn-info mt-4">
                           Select Image
                           <input
@@ -275,7 +275,7 @@ class Photo extends Component {
                     <span>
                       <div className="upload-img-outer-element">
                         <div className="upload-img-inner-element">
-                          <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                          <div className="upload-img-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                           <label className="btn btn-info mt-4">
                             Select Image
                             <input
