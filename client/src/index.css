@@ -619,5 +619,25 @@ p {
     width: 70%;
   }
 
-}
+  /* Photo Page Styles */
+  .upload-img-outer-element{
+    display:table-cell;
+    width:200px;
+    height:300px;
+    vertical-align:middle;
+    background:#edeff2;
+    text-align:center;
+    margin-bottom:15px;
+    border: 1px solid #dcdee0;
+    border-radius: 5px;
+  }
+  .upload-img-inner-element{
+    display:inline-block;
+  }
+  .upload-img {
+    max-width: 200px;
+    max-height: 240px;
+    border: 1px solid#dcdee0;
+  }
 
+}
