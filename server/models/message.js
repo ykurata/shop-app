@@ -5,10 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     text: DataTypes.STRING
   }, {});
   Message.associate = function(models) {
-    Message.belongsTo(models.conversation, {
-      onDelete: "CASCADE",
-      foreignKey: 'conversationId' 
-    });
+    
   };
   return Message;
 };
