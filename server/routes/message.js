@@ -36,7 +36,7 @@ router.post("/:id", authentication, (req, res) => {
   });
 });
 
-// Get messages 
+// Get messages by conversationId
 router.get("/get-message/:id", authentication, (req, res) => {
   Message.findAll({ where: { conversationId: req.params.id}})
     .then(messages => {
