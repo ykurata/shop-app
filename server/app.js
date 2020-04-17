@@ -10,6 +10,7 @@ const app = express();
 const user = require("./routes/user");
 const item = require("./routes/item");
 const image = require("./routes/image");
+const message = require("./routes/message");
 
 
 app.use(logger('dev'));
@@ -28,6 +29,7 @@ require("./config/passport")(passport);
 app.use("/user", user);
 app.use("/item", item);
 app.use("/image", image);
+app.use("/message", message);
 
 
 // Set up cors
