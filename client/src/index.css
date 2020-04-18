@@ -49,12 +49,10 @@ nav {
 .list-group {
   margin-bottom: 5rem;
 }
-.list-group-item {
-  max-height: 220px;
-  padding: .5rem;
-}
 .card {
   color: inherit;
+  max-height: 220px;
+  padding: .5rem;
 }
 .card:hover {
   background-color: #f7f7f7;
@@ -246,7 +244,7 @@ p {
 }
 
 /* Message Page Styles */
-.message-list-group-item {
+.message-card {
   max-height: 120px;
   padding: .5rem;
 }
