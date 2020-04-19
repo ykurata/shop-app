@@ -27,16 +27,19 @@ class Message extends Component {
               <Link to="/" className="card message-card" >
                 <div className="card-body row message-card-row">
                   <div className="col-lg-1 col-md-1 text-center">
-                    <input type="checkbox" className="form-check-input m-auto" id="exampleCheck1" />
+                    <div className="custom-control form-control-lg custom-checkbox">
+                      <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                      <label className="custom-control-label mt-2"></label>
+                    </div>
+                  </div> 
+                  <div className="col-lg-1 col-md-1 col-sm-1">
+                      <div className="no-image text-center"><i className="fas fa-image fa-3x mt-3"></i></div>
+                    {/* <img src={phone} alt="..." className="rounded message-list-item-img" /> */}
                   </div>
-                  <div className="col-lg-2 col-md-2 col-sm-2">
-                      {/* <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div> */}
-                    <img src={phone} alt="..." className="rounded message-list-item-img" />
-                  </div>
-                  <div className="col-lg-9 col-md-9 col-sm-9">
-                    <h6>iPhone 11</h6>
-                    <p className="date"><Moment format="MM/DD/YYYY">Date</Moment></p>
-                    <p className="description">Bacon ipsum dolor amet buffalo frankfurter spare ribs fjsbvjbsk nsjdvns  vjsdknlvsjdlsjdlsdblsjdlsbdvlsjb.</p>
+                  <div className="col-lg-9 col-md-9 col-sm-9 ml-4">
+                    <h6><b>iPhone 11</b></h6> 
+                    <p className="text mb-2">Is this item still available?</p>
+                    <p className="message-username">Yasuko</p>
                   </div>
                 </div>
               </Link>
