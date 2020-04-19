@@ -38,6 +38,7 @@ class Message extends Component {
               <div className="user-info-container ">
                 <div className="user-info text-center m-auto">
                   <div className="user-icon">
+                    <i className="fas fa-user-circle fa-5x"></i>
                     {/* {user.image ? (
                       <img src={user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
                     ) : (
@@ -79,9 +80,17 @@ class Message extends Component {
                       {/* <img src={phone} alt="..." className="rounded message-list-item-img" /> */}
                     </div>
                     <div className="col-lg-10 col-md-10 col-sm-10">
-                      <h6><b>iPhone 11</b></h6> 
+                      <div className="row message-inside-row">
+                        <div className="col-lg-9">
+                          <p><b>iPhone 11</b></p> 
+                        </div>
+                        <div className="col-lg-2">
+                          <p>04/19/2020</p>
+                        </div>
+                      </div>
                       <p className="text mb-2">Is this item still available?</p>
                       <p className="message-username">Yasuko</p>
+                        
                     </div>
                   </div>
                 </Link>

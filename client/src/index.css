@@ -251,6 +251,9 @@ p {
 .message-card-row {
   padding: .5rem;
 }
+.message-inside-row {
+  height: 30px;
+}
 .message-list-item-img {
   width: 80px;
   height: 80px;
