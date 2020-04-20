@@ -50,24 +50,22 @@ class List extends Component {
     let items;
 
     items = filteredItems.map((item, i) => (
-      <div className="card list-group-item" key={i}>
-        <Link to={`/detail/${item.id}`} className="card-link">
-          <div className="card-body row">
-            <div className="col-lg-3 col-md-3 col-sm-2">
-              {item.image.length !== 0 ? (
-                <img src={item.image[0]} alt="..." className="rounded list-item-img" />
-              ) : (
-                <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-              )}
-            </div>
-            <div className="col-lg-9 col-md-9 col-sm-10">
-              <h5 className="item-title">{item.name}</h5>
-              <p className="date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
-              <p className="description">{item.description}</p>
-            </div>
+      <Link to={`/detail/${item.id}`} className="card" key={i}>
+        <div className="card-body row">
+          <div className="col-lg-3 col-md-3 col-sm-2">
+            {item.image.length !== 0 ? (
+              <img src={item.image[0]} alt="..." className="rounded list-item-img" />
+            ) : (
+              <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+            )}
           </div>
-        </Link>
-      </div>
+          <div className="col-lg-9 col-md-9 col-sm-10">
+            <h5 className="item-title">{item.name}</h5>
+            <p className="date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
+            <p className="description">{item.description}</p>
+          </div>
+        </div>
+      </Link>
     ));
 
     return (
