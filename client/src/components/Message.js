@@ -75,17 +75,18 @@ class Message extends Component {
 
                 <Link to="/" className="card message-card" >
                   <div className="row message-card-row">
-                    <div className="col-lg-2 col-md-2 col-sm-2">
-                        <div className="no-image text-center"><i className="fas fa-image fa-3x mt-3"></i></div>
+                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
+                        <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
                       {/* <img src={phone} alt="..." className="rounded message-list-item-img" /> */}
                     </div>
-                    <div className="col-lg-10 col-md-10 col-sm-10">
+                    <div className="col-lg-10 col-md-10 col-md-10 col-10">
+                     
                       <div className="row message-inside-row">
-                        <div className="col-lg-9">
-                          <p><b>iPhone 11</b></p> 
+                        <div className="col-lg-9 col-md-9 col-sm-9 col-9">
+                          <p className="message-item-title"><b>iPhone 11</b></p> 
                         </div>
-                        <div className="col-lg-2">
-                          <p>04/19/2020</p>
+                        <div className="col-lg-2 col-md-2 col-sm-2 col-3">
+                          <p className="message-date">04/20/2020</p>
                         </div>
                       </div>
                       <p className="text mb-2">Is this item still available?</p>
