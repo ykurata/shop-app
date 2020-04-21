@@ -73,7 +73,7 @@ class Message extends Component {
                   null
                 )} */}
 
-                <Link to="/" className="card message-card" >
+                <Link to="/" className="card item-card message-card" >
                   <div className="row message-card-row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
                         <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>

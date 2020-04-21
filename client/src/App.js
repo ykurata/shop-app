@@ -11,6 +11,7 @@ import Update from "./components/Update";
 import Avatar from "./components/Avatar";
 import Photo from "./components/Photo";
 import Message from "./components/Message";
+import MessageDetail from "./components/MessageDetail";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <PrivateRoute path="/image/:id" component={Photo} /> 
         <PrivateRoute path="/items-by-user/:id" component={MyPost} /> 
         <PrivateRoute path="/message" component={Message} />
+        <PrivateRoute path="/message-detail" component={MessageDetail} />
         <Route exact path="/" component={List} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />

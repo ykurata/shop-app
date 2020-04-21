@@ -49,12 +49,12 @@ nav {
 .list-group {
   margin-bottom: 5rem;
 }
-.card {
+.item-card {
   color: inherit;
   max-height: 220px;
   padding: .5rem;
 }
-.card:hover {
+.item-card:hover {
   background-color: #f7f7f7;
   text-decoration: none;
   color:inherit;
@@ -284,6 +284,18 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+/* Message Detail Page Styles */
+.text-area {
+  height: 500px;
+  margin-bottom: 5rem;
+}
+.display-message {
+  height: 420px;
+}
+.text-input {
+  height: 50px;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){
