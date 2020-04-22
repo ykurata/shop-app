@@ -49,12 +49,12 @@ nav {
 .list-group {
   margin-bottom: 5rem;
 }
-.card {
+.item-card {
   color: inherit;
   max-height: 220px;
   padding: .5rem;
 }
-.card:hover {
+.item-card:hover {
   background-color: #f7f7f7;
   text-decoration: none;
   color:inherit;
@@ -284,6 +284,50 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+/* Message Detail Page Styles */
+.text-area {
+  height: 500px;
+  margin-bottom: 5rem;
+}
+.display-message {
+  height: 420px;
+  overflow: scroll;
+}
+.text-input {
+  height: 50px;
+}
+.talk-bubble-right {
+  margin: .5rem .5rem 0 .5rem;
+  padding: 1rem;
+  display: inline-block;
+  position: relative;
+	width: 250px;
+	height: auto;
+  background-color: #31257d;
+  color: white;
+  border-radius: 8px;
+  text-align: left;
+  clear: both;
+}
+.talk-bubble-left {
+  margin: .5rem .5rem 0 .5rem;
+  padding: 1rem;
+  display: inline-block;
+  position: relative;
+	width: 250px;
+	height: auto;
+  background-color: #d1d6de;
+  border-radius: 8px;
+  text-align: left;
+  clear: both;
+}
+.message-date {
+  clear: both;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: .9rem;
 }
 
 @media screen and (min-width: 300px) and (max-width: 360px){

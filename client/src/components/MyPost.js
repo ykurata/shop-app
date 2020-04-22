@@ -49,7 +49,7 @@ class MyPost extends Component {
     const { items, user } = this.state;
    
     const card = items.map((item, i) => (
-      <Link to={`/detail/${item.id}`} className="card" key={i}>
+      <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
         <div className="card-body row">
           <div className="col-lg-3 col-md-3 col-sm-2">
             {item.image.length !== 0 ? (
