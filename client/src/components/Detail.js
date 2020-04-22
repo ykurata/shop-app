@@ -156,7 +156,13 @@ class Detail extends Component {
               {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
                 null
               ) : (
-                <button type="button" className="btn btn-primary btn-lg btn-block message-button">Send Message</button>
+                <span>
+                  <textarea className="form-control mt-3" data-toggle="collapse" data-target="#collapse"  placeholder="Type a message...">
+                  </textarea>
+                  <button id="collapse" className="collapse btn btn-primary btn-lg btn-block message-button" type="button">
+                    Send Message
+                  </button>
+                </span>
               )}
             </div>
           </div>
