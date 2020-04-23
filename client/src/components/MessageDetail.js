@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
-
-import phone from '../image/phone.jpg';
+import socketIOClient from "socket.io-client";
 
 import Navbar from "./Navbar";
 
@@ -11,8 +10,12 @@ class MessageDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      response: ""
     }
+  }
+  
+  componentDidMount() {
+    this.socket = socketIOClient("http://localhost:5000");
   }
 
   render() {

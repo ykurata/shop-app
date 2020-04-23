@@ -1,20 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const cors = require("cors");
 const path = require("path");
 const passport = require("passport");
-
+const cors = require('cors');
 const app = express();
 
+// Socket setup
+const socketio = require('socket.io');
+const server = require('http').Server(app);
+const io = socketio(server);
+const socketEvents = require('./socket');
+socketEvents(io);
+
+// Import routes
 const user = require("./routes/user");
 const item = require("./routes/item");
 const image = require("./routes/image");
 const message = require("./routes/message");
 
-
 app.use(logger('dev'));
-// Bodyparser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(express.json());
@@ -53,8 +58,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));
+server.listen(port, () => console.log(`Server up and running on port ${port} !`));
 
-module.exports = app;
+module.exports = server;
