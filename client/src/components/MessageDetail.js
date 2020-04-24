@@ -97,7 +97,7 @@ class MessageDetail extends Component {
                     {/* Message input */}
                     <div className="col-md-12">
                       <div className="input-group">
-                        <input onChange={this.messageChange} type="text" name="message" className="form-control text-input" placeholder="Type a message..."/>
+                        <input onChange={this.messageChange} value={this.state.message} type="text" name="message" className="form-control text-input" placeholder="Type a message..."/>
                         <div className="input-group-append">
                           <button onClick={this.createMessage} className="btn btn-outline-secondary" type="button">Send</button>
                         </div>
