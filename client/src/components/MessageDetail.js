@@ -11,7 +11,7 @@ class MessageDetail extends Component {
     super(props);
     this.state = {
       message: "",
-      sentMessage: ""
+      sentMessage: [],
     }
   }
 
@@ -24,7 +24,7 @@ class MessageDetail extends Component {
   componentDidMount() {
     this.socket = socketIOClient("http://localhost:5000");
     this.socket.on("newMessage", msg => {
-      this.setState({ sentMessage: msg });
+      this.setState({ sentMessage: [...this.state.sentMessage, msg] });
     })
   }
 
@@ -35,13 +35,14 @@ class MessageDetail extends Component {
   }
 
   render() {
-    // console.log(this.state.message);
-    const message = <div className="message">
-                      <div className="talk-bubble-right float-right"> 
-                        <span>{this.state.sentMessage}</span>
+    const message = this.state.sentMessage.map(message => (
+                      <div className="message">
+                        <div className="talk-bubble-right float-right"> 
+                          <span>{message}</span>
+                        </div>
+                        <span className="float-right message-date">04/20/2020</span>
                       </div>
-                      <span className="float-right message-date">04/20/2020</span>
-                    </div>
+    ));  
     return (
       <div>
         <Navbar></Navbar>
@@ -74,7 +75,7 @@ class MessageDetail extends Component {
                 <div className="card text-area p-2">
                   <div className="row">
                     <div className="col-md-12 mb-2 display-message">
-                      {this.state.sentMessage? (
+                      {this.state.sentMessage.length > 0? (
                         <div>{message}</div>
                       ) : (
                         null
