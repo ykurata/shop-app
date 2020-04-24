@@ -303,7 +303,7 @@ p {
   padding: 1rem;
   display: inline-block;
   position: relative;
-	width: 250px;
+	max-width: 300px;
 	height: auto;
   background-color: #31257d;
   color: white;
@@ -316,7 +316,7 @@ p {
   padding: 1rem;
   display: inline-block;
   position: relative;
-	width: 250px;
+	max-width: 300px;
 	height: auto;
   background-color: #d1d6de;
   border-radius: 8px;

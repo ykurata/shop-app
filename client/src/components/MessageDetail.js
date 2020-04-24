@@ -10,15 +10,39 @@ class MessageDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: ""
+      message: "",
+      sentMessage: [],
     }
   }
-  
+
+  messageChange = e => {
+    this.setState({
+      message: e.target.value
+    });
+  }
+
   componentDidMount() {
     this.socket = socketIOClient("http://localhost:5000");
+    this.socket.on("newMessage", msg => {
+      this.setState({ sentMessage: [...this.state.sentMessage, msg] });
+    })
+  }
+
+  createMessage = e => {
+    e.preventDefault();
+    this.socket.emit("newMessage", this.state.message);
+    this.setState({ message: "" });
   }
 
   render() {
+    const message = this.state.sentMessage.map(message => (
+                      <div className="message">
+                        <div className="talk-bubble-right float-right"> 
+                          <span>{message}</span>
+                        </div>
+                        <span className="float-right message-date">04/20/2020</span>
+                      </div>
+    ));  
     return (
       <div>
         <Navbar></Navbar>
@@ -26,7 +50,6 @@ class MessageDetail extends Component {
         <div className="container-fluid item-list">
           <div className="row list-outer">
             <div className="col-lg-9 col-md-9">
-          
                 <div className="card message-card" >
                   <div className="row message-card-row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
@@ -52,8 +75,13 @@ class MessageDetail extends Component {
                 <div className="card text-area p-2">
                   <div className="row">
                     <div className="col-md-12 mb-2 display-message">
+                      {this.state.sentMessage.length > 0? (
+                        <div>{message}</div>
+                      ) : (
+                        null
+                      )}
                       
-                      <div className="message">
+                      {/* <div className="message">
                         <div className="talk-bubble-right float-right"> 
                           <span>Hello is this item still available?</span>
                         </div>
@@ -64,41 +92,19 @@ class MessageDetail extends Component {
                           <span>Yes it's still available kuku chan kawaii nanonano</span>
                         </div>
                         <span className="float-left message-date">04/20/2020</span>
-                      </div>
-                      <div className="message">
-                        <div className="talk-bubble-right float-right"> 
-                          <span>Hello is this item still available?</span>
-                        </div>
-                        <span className="float-right message-date">04/20/2020</span>
-                      </div>
-                      <div className="message">
-                        <div className="talk-bubble-right float-right"> 
-                          <span>Hello is this item still available?</span>
-                        </div>
-                        <span className="float-right message-date">04/20/2020</span>
-                      </div>
-                      <div className="message">
-                        <div className="talk-bubble-right float-right"> 
-                          <span>Hello is this item still available?</span>
-                        </div>
-                        <span className="float-right message-date">04/20/2020</span>
-                      </div>
-                        
-                  
-                      
+                      </div>       */}
                     </div>  
+                    {/* Message input */}
                     <div className="col-md-12">
                       <div className="input-group">
-                        <input type="text" className="form-control text-input" placeholder="Type a message..."/>
+                        <input onChange={this.messageChange} type="text" name="message" className="form-control text-input" placeholder="Type a message..."/>
                         <div className="input-group-append">
-                          <button className="btn btn-outline-secondary" type="button">Send</button>
+                          <button onClick={this.createMessage} className="btn btn-outline-secondary" type="button">Send</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
-              
             </div>
 
               {/* User's info */}
