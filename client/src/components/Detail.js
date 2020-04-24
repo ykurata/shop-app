@@ -13,13 +13,20 @@ class Detail extends Component {
       user: "",
       image: [],
       userId: localStorage.getItem("userId"),
-      itemUserId: ""
+      itemUserId: "",
+      message: ""
     };
   };
 
   componentDidMount() {
     this.getItemAndUser();
     //this.getItemsByUserId();
+  }
+  
+  changeMessage = e => {
+    this.setState({
+      message: e.target.value
+    });
   }
 
   getItemAndUser() {
@@ -30,28 +37,26 @@ class Detail extends Component {
           image: res.data.image,
           itemUserId: res.data.userId
         });
-        axios.get(`/item/get/by-user/${res.data.userId}`)
-          .then(res => {
-            this.setState({
-              items: res.data
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          })
-        axios.get(`/user/get/${res.data.userId}`)
-          .then(res => {
-            this.setState({
-              user: res.data
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        axios.all([
+          axios.get(`/item/get/by-user/${res.data.userId}`),
+          axios.get(`/user/get/${res.data.userId}`)
+        ])
+        .then(axios.spread((item, user) => {
+          this.setState({ items: item.data });
+          this.setState({ user: user.data });
+        }))
+        .catch(err => {
+          console.log(err);
+        });
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  sendMessage = e => {
+    e.preventDefault();
+
   }
 
   render() {
@@ -152,13 +157,12 @@ class Detail extends Component {
                   </div>
                 </div>
               </div>
-              {/* hide send message button for own post */}
+              {/* hide message input for own post */}
               {parseInt(this.state.userId) === parseInt(this.state.itemUserId) ? (
                 null
               ) : (
                 <span>
-                  <textarea className="form-control mt-3" data-toggle="collapse" data-target="#collapse"  placeholder="Type a message...">
-                  </textarea>
+                  <textarea name="message" value={this.state.message} className="form-control mt-3" data-toggle="collapse" data-target="#collapse"  placeholder="Type a message..." />
                   <button id="collapse" className="collapse btn btn-primary btn-lg btn-block message-button" type="button">
                     Send Message
                   </button>
