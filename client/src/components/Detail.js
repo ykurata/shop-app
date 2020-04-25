@@ -18,7 +18,7 @@ class Detail extends Component {
       token: localStorage.getItem("jwtToken"),
       itemUserId: "",
       message: "",
-      error: ""
+      validationError: "",
     };
   };
 
@@ -61,7 +61,7 @@ class Detail extends Component {
   sendMessage = e => {
     e.preventDefault();
     if (this.state.message === "") {
-      this.setState({ error: "Please enter a message" });
+      this.setState({ validationError: "Please enter a message" });
     } else {
       const newConversation = {
         receiverId: this.state.itemUserId
@@ -79,16 +79,18 @@ class Detail extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
               });
-              this.setState({ message: "" });   
             })
             .catch(err => {
               console.log(err);
-            })
+            });
         })
         .catch(err => {
-          console.log(err);
+          this.setState({ 
+            validationError: "You already sent a message. Check your message!"
+          });
         }); 
     }
+    this.setState({ message: "" });   
   }
 
   render() {
@@ -194,8 +196,8 @@ class Detail extends Component {
                 null
               ) : (
                 <span>
-                  {this.state.error? (
-                    <p className="error">{this.state.error}</p>
+                  {this.state.validationError? (
+                    <p className="error">{this.state.validationError}</p>
                   ):(
                     null
                   )}

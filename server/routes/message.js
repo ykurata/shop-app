@@ -9,17 +9,27 @@ const Message = require('../models').Message;
 
 // Create a new conversaion
 router.post("/create-conversation/:id", authentication, (req, res) => {
-  Conversation.create({
-    itemId: req.params.id,
-    senderId: req.user,
-    receiverId: req.body.receiverId
-  })
-  .then(conversation => {
-    res.status(200).json(conversation);
-  })
-  .catch(err => {
-    res.status(400).json(err);
-  });
+  Conversation.findAll({ where: { itemId: req.params.id }})
+    .then(conversations => {
+      if (conversations) {
+        res.status(400).json({ error: "You already sent a message"});
+      } else {
+        Conversation.create({
+          itemId: req.params.id,
+          senderId: req.user,
+          receiverId: req.body.receiverId
+        })
+        .then(conversation => {
+          res.status(200).json(conversation);
+        })
+        .catch(err => {
+          res.status(400).json(err);
+        });
+      }
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
 });
 
 // Create a message 

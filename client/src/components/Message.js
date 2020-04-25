@@ -11,9 +11,13 @@ class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      userId: localStorage.getItem("userId"),
+      token: localStorage.getItem("jwtToken"),
+      user: "",
     }
   }
+
+  
 
   render() {
     return (
