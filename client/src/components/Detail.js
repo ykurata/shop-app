@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "./Navbar";
 
@@ -56,7 +58,32 @@ class Detail extends Component {
 
   sendMessage = e => {
     e.preventDefault();
+    const newConversation = {
+      receiverId: this.state.itemUserId
+    }
+    const newMessage = {
+      text: this.state.message
+    }
 
+    axios.post(`/message/create-conversation/${this.props.match.params.id}`, newConversation, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${this.state.token}`}})
+          .then(res => {
+            console.log(res.data);
+            toast("Successfully sent a message!", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 2000,
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.setState({ message: "" });  
   }
 
   render() {
@@ -162,10 +189,11 @@ class Detail extends Component {
                 null
               ) : (
                 <span>
-                  <textarea name="message" value={this.state.message} className="form-control mt-3" data-toggle="collapse" data-target="#collapse"  placeholder="Type a message..." />
+                  <textarea name="message" onChange={this.changeMessage} value={this.state.message} className="form-control mt-3" data-toggle="collapse" data-target="#collapse"  placeholder="Type a message..." />
                   <button id="collapse" className="collapse btn btn-primary btn-lg btn-block message-button" type="button">
                     Send Message
                   </button>
+                  <ToastContainer autoClose={2000} />
                 </span>
               )}
             </div>
