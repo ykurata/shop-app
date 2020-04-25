@@ -86,7 +86,7 @@ class Detail extends Component {
         })
         .catch(err => {
           this.setState({ 
-            validationError: "You already sent a message. Check your message!"
+            validationError: err.response.data.error
           });
         }); 
     }
