@@ -17,7 +17,13 @@ class Message extends Component {
     }
   }
 
+  componentDidMount() {
+
+  }
+
+  getConversations() {
   
+  }
 
   render() {
     return (

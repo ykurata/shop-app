@@ -68,6 +68,17 @@ router.get("/get-conversations", (req, res) => {
     });
 });
 
+// Get conversations by userId
+router.get("/get-conversations/:id", authentication, (req, res) => {
+  Conversation.findAll({ where: { senderId: req.params.id }})
+    .then(conversations => {
+      res.status(200).json(conversations);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
 // Delete a conversation
 router.delete("/delete-conversation/:id", authentication, (req, res) => {
   Conversation.findOne({ where: { id: req.params.id }})
