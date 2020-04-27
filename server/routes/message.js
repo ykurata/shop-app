@@ -5,6 +5,7 @@ const authentication = require("./middleware/auth");
 
 const Conversation = require('../models').Conversation;
 const Message = require('../models').Message;
+const Item = require('../models').Item;
 
 
 // Create a new conversaion
@@ -68,15 +69,21 @@ router.get("/get-conversations", (req, res) => {
     });
 });
 
-// Get conversations by userId
+
+// Get conversations and items by userId 
 router.get("/get-conversations/:id", authentication, (req, res) => {
-  Conversation.findAll({ where: { senderId: req.params.id }})
-    .then(conversations => {
-      res.status(200).json(conversations);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
+  Conversation.findAll({ 
+    where: { senderId: req.params.id },
+    include: [{
+      model: Item
+    }]
+  })
+  .then(conversations => {
+    res.json(conversations)
+  })
+  .catch(err => {
+    console.log(err);
+  });
 });
 
 // Delete a conversation

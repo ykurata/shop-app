@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Conversation.associate = function(models) {
     Conversation.hasMany(models.Message, {foreignKey: 'conversationId'});
+    Conversation.belongsTo(models.Item, {
+      onDelete: "CASCADE",
+      foreignKey: 'itemId' 
+    });
   };
   return Conversation;
 };
