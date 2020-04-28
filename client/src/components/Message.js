@@ -38,7 +38,10 @@ class Message extends Component {
   getUser() {
     axios.get(`/user/get/${this.state.userId}`)
       .then(res => {
-        this.setState({ user: res.data });
+        this.setState({ 
+          user: res.data,
+          loading: true 
+        });
       })
       .catch(err => {
         console.log(err);
@@ -48,6 +51,7 @@ class Message extends Component {
   render() {
     const { user, conversations } = this.state;
     let conversationList;
+    console.log(conversations);
    
     conversationList = this.state.conversations.map(con => (
       <Link to="/" key={con.id} id={con.id} className="card item-card message-card" >
@@ -69,7 +73,12 @@ class Message extends Component {
                 <p className="message-date">{con.createdAt}</p>
               </div>
             </div>
-            <p className="text mb-2">Is this item still available?</p>
+            {con.Messages.length > 0 ? (
+              <p className="text mb-2">{con.Messages[con.Messages.length - 1].text}</p>
+            ) : (
+              null
+            )}
+           
             <p className="message-username">{con.Item.User.username}</p>
               
           </div>
