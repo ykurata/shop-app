@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import Navbar from "./Navbar";
 
@@ -13,7 +16,8 @@ class Message extends Component {
       token: localStorage.getItem("jwtToken"),
       user: "",
       conversations: [],
-      loading: false
+      loading: false,
+      conversationId: ""
     }
   }
 
@@ -48,13 +52,26 @@ class Message extends Component {
       });
   }
 
+  deleteConversation = e =>{
+    axios.delete(`/message/delete-conversation/${e.target.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        toast("Successfully Deleted!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+        });
+        window.location = '/message'
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     const { user, conversations } = this.state;
     let conversationList;
-    console.log(conversations);
-   
+    
     conversationList = this.state.conversations.map(con => (
-      <Link to="/" key={con.id} id={con.id} className="card item-card message-card" >
+      <Link to={`/message-detail/${con.id}`} key={con.id} id={con.id} className="card item-card message-card" >
         <div className="row message-card-row">
           <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
             {con.Item.image ? (
@@ -71,10 +88,13 @@ class Message extends Component {
               </div>
               <div className="col-lg-2 col-md-2 col-sm-2 col-3">
                 <p className="message-date">{con.createdAt}</p>
-                <button className="btn btn-link delete-conversation pt-4"><i className="far fa-trash-alt"></i>&nbsp;Delete</button>
-                {/* <div>
-                  <Link to="/delete" className="delete-conversation message-date mt-2 pt-4"><i className="far fa-trash-alt"></i>&nbsp;Delete</Link>
-                </div> */}
+                <ToastContainer autoClose={2000} />
+                <button 
+                  id={con.id} 
+                  className="btn btn-link delete-conversation pt-3"
+                  onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteConversation(e) } }
+                ><i className="far fa-trash-alt"></i>&nbsp;Delete
+                </button>
               </div>
             </div>
             {con.Messages.length > 0 ? (
