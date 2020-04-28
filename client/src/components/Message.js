@@ -71,6 +71,10 @@ class Message extends Component {
               </div>
               <div className="col-lg-2 col-md-2 col-sm-2 col-3">
                 <p className="message-date">{con.createdAt}</p>
+                <button className="btn btn-link delete-conversation pt-4"><i className="far fa-trash-alt"></i>&nbsp;Delete</button>
+                {/* <div>
+                  <Link to="/delete" className="delete-conversation message-date mt-2 pt-4"><i className="far fa-trash-alt"></i>&nbsp;Delete</Link>
+                </div> */}
               </div>
             </div>
             {con.Messages.length > 0 ? (
@@ -80,7 +84,6 @@ class Message extends Component {
             )}
            
             <p className="message-username">{con.Item.User.username}</p>
-              
           </div>
         </div>
       </Link>
@@ -114,7 +117,7 @@ class Message extends Component {
             <div className="col-lg-9 col-md-9">
               <div className="list-group">
                 {/* display message if there is no items  */}
-                {conversations.length === 0 && this.state.loading === false ? (
+                {conversations.length === 0 && this.state.loading === true ? (
                   <div className="text-center mt-5">
                     <h5>No Message</h5>
                   </div>
@@ -133,7 +136,6 @@ class Message extends Component {
 
                 {conversationList}
 
-                
               </div>
             </div>
           </div>
