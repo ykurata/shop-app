@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 
-import phone from '../image/phone.jpg';
-
 import Navbar from "./Navbar";
 
 class Message extends Component {
@@ -14,7 +12,7 @@ class Message extends Component {
       userId: localStorage.getItem("userId"),
       token: localStorage.getItem("jwtToken"),
       user: "",
-      conversations: "",
+      conversations: [],
       loading: false
     }
   }
@@ -31,7 +29,6 @@ class Message extends Component {
           conversations: res.data,
           loading: true
         });
-        axios.get(``)
       })
       .catch(err => {
         console.log(err);
@@ -50,31 +47,35 @@ class Message extends Component {
 
   render() {
     const { user, conversations } = this.state;
-    
-    // let Conversations = conversations.map(con => {
-    //   <Link to="/" className="card item-card message-card" >
-    //     <div className="row message-card-row">
-    //       <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
-    //           <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
-    //         {/* <img src={phone} alt="..." className="rounded message-list-item-img" /> */}
-    //       </div>
-    //       <div className="col-lg-10 col-md-10 col-md-10 col-10">
+    let conversationList;
+   
+    conversationList = this.state.conversations.map(con => (
+      <Link to="/" key={con.id} id={con.id} className="card item-card message-card" >
+        <div className="row message-card-row">
+          <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
+            {con.Item.image ? (
+              <img src={con.Item.image[0]} alt="..." className="rounded message-list-item-img" />
+            ) : (
+              <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
+            )}  
+          </div>
+          <div className="col-lg-10 col-md-10 col-md-10 col-10">
             
-    //         <div className="row message-inside-row">
-    //           <div className="col-lg-9 col-md-9 col-sm-9 col-9">
-    //             <p className="message-item-title"><b>iPhone 11</b></p> 
-    //           </div>
-    //           <div className="col-lg-2 col-md-2 col-sm-2 col-3">
-    //             <p className="message-date">04/20/2020</p>
-    //           </div>
-    //         </div>
-    //         <p className="text mb-2">Is this item still available?</p>
-    //         <p className="message-username">Yasuko</p>
+            <div className="row message-inside-row">
+              <div className="col-lg-9 col-md-9 col-sm-9 col-9">
+                <p className="message-item-title"><b>{con.Item.name}</b></p> 
+              </div>
+              <div className="col-lg-2 col-md-2 col-sm-2 col-3">
+                <p className="message-date">{con.createdAt}</p>
+              </div>
+            </div>
+            <p className="text mb-2">Is this item still available?</p>
+            <p className="message-username">{con.Item.User.username}</p>
               
-    //       </div>
-    //     </div>
-    //   </Link>
-    // })
+          </div>
+        </div>
+      </Link>
+    ));
 
     return (
       <div>
@@ -120,6 +121,8 @@ class Message extends Component {
                 ) : (
                   null
                 )}
+
+                {conversationList}
 
                 
               </div>

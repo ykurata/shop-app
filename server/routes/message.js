@@ -6,6 +6,7 @@ const authentication = require("./middleware/auth");
 const Conversation = require('../models').Conversation;
 const Message = require('../models').Message;
 const Item = require('../models').Item;
+const User = require('../models').User;
 
 
 // Create a new conversaion
@@ -74,9 +75,15 @@ router.get("/get-conversations", (req, res) => {
 router.get("/get-conversations/:id", authentication, (req, res) => {
   Conversation.findAll({ 
     where: { senderId: req.params.id },
-    include: [{
-      model: Item
-    }]
+    include: [
+      { 
+        model: Message
+      },
+      {  
+        model: Item,
+        include: [{ model: User }]
+      }
+    ]
   })
   .then(conversations => {
     res.json(conversations)
