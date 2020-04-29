@@ -11,9 +11,9 @@ const User = require('../models').User;
 
 // Create a new conversaion
 router.post("/create-conversation/:id", authentication, (req, res) => {
-  Conversation.findAll({ where: { itemId: req.params.id }})
+  Conversation.findAll({ where: { senderId: req.user, itemId: req.params.id }})
     .then(conversations => {
-      if (conversations) {
+      if (conversations.length > 0) {
         res.status(400).json({ error: "You already sent a message"});
       } else {
         Conversation.create({
@@ -34,10 +34,12 @@ router.post("/create-conversation/:id", authentication, (req, res) => {
     });
 });
 
+
 // Create a message 
 router.post("/:id", authentication, (req, res) => {
   Message.create({
     conversationId: req.params.id,
+    userId: req.user,
     text: req.body.text
   })
   .then(message => {
@@ -50,7 +52,18 @@ router.post("/:id", authentication, (req, res) => {
 
 // Get messages by conversationId
 router.get("/get-message/:id", authentication, (req, res) => {
-  Message.findAll({ where: { conversationId: req.params.id}})
+  Message.findAll({ 
+    where: { conversationId: req.params.id},
+    include: [
+      { model: Conversation,
+        include: [
+          { model: Item,
+            include: [{ model: User }]
+          }
+        ]
+      }
+    ]
+  })
     .then(messages => {
       res.status(200).json(messages);
     })

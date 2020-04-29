@@ -11,6 +11,9 @@ module.exports = {
       conversationId: {
         type: Sequelize.INTEGER
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
       text: {
         type: Sequelize.STRING
       },

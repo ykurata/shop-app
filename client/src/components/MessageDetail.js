@@ -10,7 +10,10 @@ class MessageDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: localStorage.getItem("userId"),
+      token: localStorage.getItem("jwtToken"),
       message: "",
+      messages: [],
       sentMessage: [],
     }
   }
@@ -26,6 +29,18 @@ class MessageDetail extends Component {
     this.socket.on("newMessage", msg => {
       this.setState({ sentMessage: [...this.state.sentMessage, msg] });
     })
+    this.getMessages();
+  }
+
+  getMessages() {
+    axios.get(`/message/get-message/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({ messages: res.data });
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   createMessage = e => {

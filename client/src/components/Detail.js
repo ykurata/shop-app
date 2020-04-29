@@ -24,7 +24,6 @@ class Detail extends Component {
 
   componentDidMount() {
     this.getItemAndUser();
-    //this.getItemsByUserId();
   }
   
   changeMessage = e => {
