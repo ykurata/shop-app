@@ -14,6 +14,9 @@ class MessageDetail extends Component {
       token: localStorage.getItem("jwtToken"),
       message: "",
       messages: [],
+      con: "",
+      item: "",
+      receiver: "",
       sentMessage: [],
     }
   }
@@ -30,13 +33,28 @@ class MessageDetail extends Component {
       this.setState({ sentMessage: [...this.state.sentMessage, msg] });
     })
     this.getMessages();
+    this.getConversation();
+  }
+
+  getConversation() {
+    axios.get(`/message/get-conversation/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({ 
+          con: res.data,
+          item: res.data.Item,
+          receiver: res.data.Item.User
+        });
+        console.log(res.data.Item.User);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   getMessages() {
     axios.get(`/message/get-message/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         this.setState({ messages: res.data });
-        console.log(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -50,6 +68,8 @@ class MessageDetail extends Component {
   }
 
   render() {
+    const { con, item, receiver } = this.state;
+
     const message = this.state.sentMessage.map(message => (
                       <div className="message">
                         <div className="talk-bubble-right float-right"> 
@@ -68,20 +88,23 @@ class MessageDetail extends Component {
                 <div className="card message-card" >
                   <div className="row message-card-row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
+                      {item ? (
+                        <img src={item.image[0]} alt="..." className="rounded message-list-item-img" />
+                      ) : (
                         <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
-                      {/* <img src={phone} alt="..." className="rounded message-list-item-img" /> */}
+                      )}
                     </div>
                     <div className="col-lg-10 col-md-10 col-md-10 col-10">
                      
                       <div className="row message-inside-row">
                         <div className="col-lg-9 col-md-9 col-sm-9 col-9">
-                          <p className="message-item-title"><b>iPhone 11</b></p> 
+                        <p className="message-item-title"><b>{item.name}</b></p> 
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-3 col-3">
-                          <p className="message-date">04/20/2020</p>
+                          <p className="message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
                         </div>
                       </div>
-                      <p className="message-username">Yasuko</p>
+                      <p className="message-username">$ {item.price}</p>
                         
                     </div>
                   </div>
@@ -122,21 +145,20 @@ class MessageDetail extends Component {
                 </div>
             </div>
 
-              {/* User's info */}
+            {/* Posted User's info */}
             <div className="col-lg-3 col-md-3">
               <div className="user-info-container ">
                 <div className="user-info text-center m-auto">
                   <div className="user-icon">
-                    <i className="fas fa-user-circle fa-5x"></i>
-                    {/* {user.image ? (
-                      <img src={user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
+                    {receiver.image ? (
+                      <img src={receiver.image} className="rounded-circle detail-user-avatar" alt="avatar" />
                     ) : (
                       <i className="fas fa-user-circle fa-5x"></i>
-                    )} */}
+                    )}
                   </div>
                   <div className="user-name">
-                    <h5>Yasuko</h5>
-                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">Date</Moment></p>
+                    <h5>{receiver.username}</h5>
+                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">{receiver.createdAt}</Moment></p>
                   </div>
                 </div>
               </div>

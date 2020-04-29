@@ -52,18 +52,7 @@ router.post("/:id", authentication, (req, res) => {
 
 // Get messages by conversationId
 router.get("/get-message/:id", authentication, (req, res) => {
-  Message.findAll({ 
-    where: { conversationId: req.params.id},
-    include: [
-      { model: Conversation,
-        include: [
-          { model: Item,
-            include: [{ model: User }]
-          }
-        ]
-      }
-    ]
-  })
+  Message.findAll({ where: { conversationId: req.params.id }})
     .then(messages => {
       res.status(200).json(messages);
     })
@@ -83,8 +72,7 @@ router.get("/get-conversations", (req, res) => {
     });
 });
 
-
-// Get conversations and items by userId 
+// Get a list of login user's conversations 
 router.get("/get-conversations/:id", authentication, (req, res) => {
   Conversation.findAll({ 
     where: { senderId: req.params.id },
@@ -103,6 +91,25 @@ router.get("/get-conversations/:id", authentication, (req, res) => {
   })
   .catch(err => {
     console.log(err);
+  });
+});
+
+// Get a specific conversation
+router.get("/get-conversation/:conId", authentication, (req, res) => {
+  Conversation.findOne({
+    where: { id: req.params.conId },
+    include: [
+      {
+        model: Item,
+        include: [{ model: User }]
+      }
+    ]
+  })
+  .then(conversation => {
+    res.status(200).json(conversation);
+  })
+  .catch(err => {
+    res.status(400).json(err);
   });
 });
 
