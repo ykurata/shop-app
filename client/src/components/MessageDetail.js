@@ -17,7 +17,7 @@ class MessageDetail extends Component {
       con: "",
       item: "",
       receiver: "",
-      sentMessage: [],
+      newMessage: [],
     }
   }
 
@@ -30,7 +30,7 @@ class MessageDetail extends Component {
   componentDidMount() {
     this.socket = socketIOClient("http://localhost:5000");
     this.socket.on("newMessage", msg => {
-      this.setState({ sentMessage: [...this.state.sentMessage, msg] });
+      this.setState({ newMessage: [...this.state.newMessage, msg] });
     })
     this.getMessages();
     this.getConversation();
@@ -44,7 +44,6 @@ class MessageDetail extends Component {
           item: res.data.Item,
           receiver: res.data.Item.User
         });
-        console.log(res.data.Item.User);
       })
       .catch(err => {
         console.log(err);
@@ -68,16 +67,35 @@ class MessageDetail extends Component {
   }
 
   render() {
-    const { con, item, receiver } = this.state;
+    const { con, item, receiver, messages } = this.state;
 
-    const message = this.state.sentMessage.map(message => (
-                      <div className="message">
+    const message = this.state.newMessage.map((message, i) => (
+                      <div className="message" key={i}>
                         <div className="talk-bubble-right float-right"> 
                           <span>{message}</span>
                         </div>
-                        <span className="float-right message-date">04/20/2020</span>
+                        <span className="float-right message-date"><Moment format="MM/DD/YYYY"></Moment></span>
                       </div>
     ));  
+
+    const recievedMessage = messages.map((item) => {
+      if (parseInt(item.userId) === parseInt(this.state.userId)) {
+        return  <div className="message" key={item.id}>
+                  <div className="talk-bubble-right float-right"> 
+                    <span>{item.text}</span>
+                  </div>
+                  <span className="float-right message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
+                </div>
+      } else {
+        return <div className="message" key={item.id}>
+                <div className="talk-bubble-left float-left"> 
+                  <span>{item.text}</span>
+                </div>
+                <span className="float-left message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
+              </div> 
+      }
+    })
+
     return (
       <div>
         <Navbar></Navbar>
@@ -113,24 +131,13 @@ class MessageDetail extends Component {
                 <div className="card text-area p-2">
                   <div className="row">
                     <div className="col-md-12 mb-2 display-message">
-                      {this.state.sentMessage.length > 0? (
+                      {recievedMessage}
+                     
+                      {this.state.newMessage.length > 0? (
                         <div>{message}</div>
                       ) : (
                         null
-                      )}
-                      
-                      {/* <div className="message">
-                        <div className="talk-bubble-right float-right"> 
-                          <span>Hello is this item still available?</span>
-                        </div>
-                        <span className="float-right message-date">04/20/2020</span>
-                      </div>
-                      <div className="message">
-                        <div className="talk-bubble-left float-left"> 
-                          <span>Yes it's still available kuku chan kawaii nanonano</span>
-                        </div>
-                        <span className="float-left message-date">04/20/2020</span>
-                      </div>       */}
+                      )}   
                     </div>  
                     {/* Message input */}
                     <div className="col-md-12">
