@@ -75,7 +75,7 @@ class Signup extends Component {
               <p className="error">{this.state.validationErrors.password2}</p>
             : null}
             <input onChange={this.onChange} type="password" name="password2" id="password2" className="form-control form-control-lg mb-4" placeholder="Confirm Password" />
-            <button className="btn btn-primary btn-block my-4" type="submit">Sign Up</button>
+            <button className="btn btn-primary btn-block btn-lg my-4" type="submit">Sign Up</button>
             <p>Already a member?
                 <a href="/login">Log In</a>
             </p>
