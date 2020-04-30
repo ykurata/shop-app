@@ -81,7 +81,7 @@ router.get("/get-conversations/:id", authentication, (req, res) => {
         { senderId: req.params.id },
         { receiverId: req.params.id }
       ]
-     },
+    },
     include: [
       { 
         model: Message

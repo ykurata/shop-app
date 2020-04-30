@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 import socketIOClient from "socket.io-client";
@@ -16,8 +15,10 @@ class MessageDetail extends Component {
       messages: [],
       con: "",
       item: "",
-      receiver: "",
       newMessage: [],
+      sender: "",
+      receiver: "",
+      senderId: ""
     }
   }
 
@@ -42,7 +43,18 @@ class MessageDetail extends Component {
         this.setState({ 
           con: res.data,
           item: res.data.Item,
-          receiver: res.data.Item.User
+          senderId: res.data.senderId
+        });
+        axios.all([
+          axios.get(`/user/get/${res.data.senderId}`),
+          axios.get(`/user/get/${res.data.receiverId}`)
+        ])
+        .then(axios.spread((sender, receiver) => {
+          this.setState({ sender: sender.data });
+          this.setState({ receiver: receiver.data });
+        }))
+        .catch(err => {
+          console.log(err);
         });
       })
       .catch(err => {
@@ -79,8 +91,8 @@ class MessageDetail extends Component {
   }
 
   render() {
-    const { con, item, receiver, messages } = this.state;
-
+    const { item, messages, sender, receiver } = this.state;
+  
     const message = this.state.newMessage.map((message, i) => (
                       <div className="message" key={i}>
                         <div className="talk-bubble-right float-right"> 
@@ -165,24 +177,44 @@ class MessageDetail extends Component {
             </div>
 
             {/* Posted User's info */}
-            <div className="col-lg-3 col-md-3">
-              <div className="user-info-container ">
-                <div className="user-info text-center m-auto">
-                  <div className="user-icon">
-                    {receiver.image ? (
-                      <img src={receiver.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                    ) : (
-                      <i className="fas fa-user-circle fa-5x"></i>
-                    )}
-                  </div>
-                  <div className="user-name">
-                    <h5>{receiver.username}</h5>
-                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">{receiver.createdAt}</Moment></p>
+            {parseInt(this.state.senderId) === parseInt(this.state.userId) ? (
+              <div className="col-lg-3 col-md-3">
+                <div className="user-info-container ">
+                  <div className="user-info text-center m-auto">
+                    <div className="user-icon">
+                      {receiver.image ? (
+                        <img src={receiver.image} className="rounded-circle detail-user-avatar" alt="avatar" />
+                      ) : (
+                        <i className="fas fa-user-circle fa-5x"></i>
+                      )}
+                    </div>
+                    <div className="user-name">
+                      <h5>{receiver.username}</h5>
+                      <p className="user-joined-date">Joined <Moment format="MMM YYYY">{receiver.createdAt}</Moment></p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
+            ) : (
+              <div className="col-lg-3 col-md-3">
+                <div className="user-info-container ">
+                  <div className="user-info text-center m-auto">
+                    <div className="user-icon">
+                      {sender.image ? (
+                        <img src={sender.image} className="rounded-circle detail-user-avatar" alt="avatar" />
+                      ) : (
+                        <i className="fas fa-user-circle fa-5x"></i>
+                      )}
+                    </div>
+                    <div className="user-name">
+                      <h5>{sender.username}</h5>
+                      <p className="user-joined-date">Joined <Moment format="MMM YYYY">{sender.createdAt}</Moment></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
           </div>
         </div>
       </div>
