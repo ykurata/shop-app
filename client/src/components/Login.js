@@ -59,11 +59,11 @@ class Login extends Component {
                 {this.state.validationErrors ? 
                   <p className="error">{this.state.validationErrors.email}</p>
                 : null}
-                <input onChange={this.onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control mb-4" placeholder="E-mail" />
+                <input onChange={this.onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control form-control-lg mb-4" placeholder="E-mail" />
                 {this.state.validationErrors ? 
                   <p className="error">{this.state.validationErrors.password}</p>
                 : null}
-                <input onChange={this.onChange} type="password" name="password" id="defaultLoginFormPassword" className="form-control mb-4" placeholder="Password" />
+                <input onChange={this.onChange} type="password" name="password" id="defaultLoginFormPassword" className="form-control form-control-lg mb-4" placeholder="Password" />
                 <button className="btn btn-primary btn-block my-4" type="submit">Log In</button>
                 <p>Not a member?
                     <a href="/signup">Register</a>

@@ -62,19 +62,19 @@ class Signup extends Component {
             {this.state.validationErrors ? 
               <p className="error">{this.state.validationErrors.username}</p>
             : null}
-            <input onChange={this.onChange} type="text" name="username" id="defaultRegisterFormName" className="form-control mb-4" placeholder="Name"></input>
+            <input onChange={this.onChange} type="text" name="username" id="defaultRegisterFormName" className="form-control form-control-lg mb-4" placeholder="Name"></input>
             {this.state.validationErrors ? 
               <p className="error">{this.state.validationErrors.email}</p>
             : null}
-            <input onChange={this.onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control mb-4" placeholder="E-mail" />
+            <input onChange={this.onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control form-control-lg mb-4" placeholder="E-mail" />
             {this.state.validationErrors ? 
               <p className="error">{this.state.validationErrors.password}</p>
             : null}
-            <input onChange={this.onChange} type="password" name="password" id="password" className="form-control mb-4" placeholder="Password" />
+            <input onChange={this.onChange} type="password" name="password" id="password" className="form-control form-control-lg mb-4" placeholder="Password" />
             {this.state.validationErrors ? 
               <p className="error">{this.state.validationErrors.password2}</p>
             : null}
-            <input onChange={this.onChange} type="password" name="password2" id="password2" className="form-control mb-4" placeholder="Confirm Password" />
+            <input onChange={this.onChange} type="password" name="password2" id="password2" className="form-control form-control-lg mb-4" placeholder="Confirm Password" />
             <button className="btn btn-primary btn-block my-4" type="submit">Sign Up</button>
             <p>Already a member?
                 <a href="/login">Log In</a>
