@@ -62,8 +62,20 @@ class MessageDetail extends Component {
 
   createMessage = e => {
     e.preventDefault();
+    const newMsg = {
+      conversationId: this.props.match.params.id,
+      userId: this.state.userId,
+      text: this.state.message
+    }
+    axios.post(`/message/${this.props.match.params.id}`, newMsg, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.socket.emit("newMessage", this.state.message);
-    this.setState({ message: "" });
+    this.setState({ message: "" });  
   }
 
   render() {
@@ -144,7 +156,7 @@ class MessageDetail extends Component {
                       <div className="input-group">
                         <input onChange={this.messageChange} value={this.state.message} type="text" name="message" className="form-control text-input" placeholder="Type a message..."/>
                         <div className="input-group-append">
-                          <button onClick={this.createMessage} className="btn btn-outline-secondary" type="button">Send</button>
+                          <button onClick={this.createMessage} className="btn btn-outline-secondary" type="submit">Send</button>
                         </div>
                       </div>
                     </div>
