@@ -54,7 +54,6 @@ class Navbar extends Component {
                       aria-labelledby="navbarDropdownMenuLink-55">
                       <a className="dropdown-item" href="/profile-image">Profile Image</a>
                       <a className="dropdown-item" href={`/items-by-user/${this.state.userId}`}>My Post</a>
-                      <a className="dropdown-item" href="message">Message</a>
                       <a className="dropdown-item" onClick={this.logOut} href="/logout">Log Out</a>
                     </div>
                   </li>
@@ -87,6 +86,9 @@ class Navbar extends Component {
               <a className="nav-link" href="/create">Post Item
                 <span className="sr-only">(current)</span>
               </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/message">Message</a>
             </li>
           </ul>
           {navlist}

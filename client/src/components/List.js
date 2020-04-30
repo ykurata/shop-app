@@ -37,8 +37,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.state.search);
-
     const filteredItems = this.state.items.filter((item) => {
       const query = this.state.search.toLowerCase();
       return (

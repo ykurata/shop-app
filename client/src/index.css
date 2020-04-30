@@ -243,7 +243,7 @@ p {
   margin-top: 2rem;
 }
 
-/* Message Page Styles */
+/* Message list Page Styles */
 .message-card {
   max-height: 120px;
   padding: .5rem;
@@ -284,6 +284,12 @@ p {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+.delete-conversation {
+  display: none;
+}
+.message-card:hover .delete-conversation {
+  display: block;
 }
 
 /* Message Detail Page Styles */

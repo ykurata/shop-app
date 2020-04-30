@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
     conversationId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     text: DataTypes.STRING
   }, {});
   Message.associate = function(models) {

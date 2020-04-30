@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
       foreignKey: 'userId' 
     });
+    Item.hasMany(models.Conversation, {foreignKey: 'itemId'});
   };
   return Item;
 };
