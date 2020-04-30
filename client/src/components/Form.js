@@ -60,14 +60,14 @@ class Form extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.name}</p>
               : null}
-              <input type="text" onChange={this.onChange} className="form-control" name="name" id="name" placeholder="Item's Title"/>
+              <input type="text" onChange={this.onChange} className="form-control form-control-lg" name="name" id="name" placeholder="Item's Title"/>
             </div>
             <div className="form-group">
               <label>Category</label>
               {this.state.errors ? 
                 <p className="error">{this.state.errors.category}</p>
               : null}
-              <select className="form-control" id="category" name="category" onChange={this.onChange}>
+              <select className="form-control form-control-lg" id="category" name="category" onChange={this.onChange}>
                 <option>--Select--</option>
                 <option>Phone/Laptop</option>
                 <option>Clothing</option>
@@ -86,7 +86,7 @@ class Form extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text">$</span>
                 </div>
-                <input type="number" name="price" onChange={this.onChange} className="form-control" aria-label="Amount (to the nearest dollar)" />
+                <input type="number" name="price" onChange={this.onChange} className="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" />
                 <div className="input-group-append">
                   <span className="input-group-text">.00</span>
                 </div>
