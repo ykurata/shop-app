@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Op } = require("sequelize");
 
 const authentication = require("./middleware/auth");
 
@@ -75,7 +76,12 @@ router.get("/get-conversations", (req, res) => {
 // Get a list of login user's conversations 
 router.get("/get-conversations/:id", authentication, (req, res) => {
   Conversation.findAll({ 
-    where: { senderId: req.params.id },
+    where: {  
+      [Op.or]: [
+        { senderId: req.params.id },
+        { receiverId: req.params.id }
+      ]
+     },
     include: [
       { 
         model: Message
