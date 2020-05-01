@@ -1,7 +1,7 @@
-# Buy and Sell 
+# Buy and Sell (Yajiji)
 
 This is an application for buying and selling items.
-The app allows users to post adds for things you want to sell and search for items you want  to buy by either item's name or categories.
+The app allows users to post ads for things you want to sell and search for items you want  to buy by either item's name or categories.
 User can also send messages to the person who posted the add.
 <br></br>
 Responsive for both web and mobile.
