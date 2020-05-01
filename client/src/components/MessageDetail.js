@@ -91,7 +91,7 @@ class MessageDetail extends Component {
   }
 
   render() {
-    const { item, messages, sender, receiver } = this.state;
+    const { con, item, messages, sender, receiver } = this.state;
   
     const message = this.state.newMessage.map((message, i) => (
                       <div className="message" key={i}>
@@ -143,7 +143,7 @@ class MessageDetail extends Component {
                         <p className="message-item-title"><b>{item.name}</b></p> 
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-3 col-3">
-                          <p className="message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
+                          <p className="message-date"><Moment fromNow ago>{con.createdAt}</Moment>&nbsp;ago</p>
                         </div>
                       </div>
                       <p className="message-username">$ {item.price}</p>
