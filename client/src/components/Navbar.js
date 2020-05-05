@@ -88,7 +88,7 @@ class Navbar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/message">Message</a>
+              <a className="nav-link" href="/message">Message<span className="badge badge-pill badge-danger" >new</span></a>
             </li>
           </ul>
           {navlist}
