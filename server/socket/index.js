@@ -5,7 +5,7 @@ const socketEvents = (io) => {
     socket.on('newMessage', (msg) => {
       socket.emit('newMessage', msg);
     });
-    
+
     socket.on('disconnect', () => {
       console.log(`SocketId: ${socket.id} has disconnected!`);
     });
