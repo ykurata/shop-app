@@ -86,7 +86,7 @@ class Message extends Component {
               <div className="col-lg-9 col-md-9 col-sm-9 col-9">
                 <p className="message-item-title"><b>{con.Item.name}</b></p> 
               </div>
-              <div className="col-lg-2 col-md-2 col-sm-2 col-3">
+              <div className="col-lg-2 col-md-2 col-sm-2 col-3 p-0">
                 <p className="message-date" ><Moment fromNow ago>{con.createdAt}</Moment>&nbsp;ago</p>
                 <ToastContainer autoClose={2000} />
                 <button 

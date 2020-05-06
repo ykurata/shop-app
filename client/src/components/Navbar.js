@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import socketIOClient from "socket.io-client";
 
 class Navbar extends Component {
   constructor(props) {
@@ -9,15 +8,13 @@ class Navbar extends Component {
       user: "",
       token: localStorage.getItem("jwtToken"),
       userId: localStorage.getItem("userId"),
+      notifications: ""
     };
   }
 
   componentDidMount() {
     this.getUser();
-    this.socket = socketIOClient("http://localhost:5000");
-    this.socket.on("newMessage", msg => {
-      this.setState({ newMessage: [...this.state.newMessage, msg] });
-    });
+    this.getNotifications();
   }
 
   getUser() {
@@ -32,15 +29,15 @@ class Navbar extends Component {
       });
   }
 
-  // getMessages() {
-  //   axios.get(`/message/get-message/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
-  //     .then(res => {
-  //       this.setState({ messages: res.data });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+  getNotifications() {
+    axios.get(`/message/notifications/${this.state.userId}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({ notifications: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   logOut = e => {
     e.preventDefault();
@@ -103,7 +100,13 @@ class Navbar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/message">Message<span className="badge badge-pill badge-danger" >new</span></a>
+              <a className="nav-link" href="/message">Message
+              {this.state.notifications.length > 0 ? (
+                <span className="badge badge-pill badge-danger" >new</span>
+              ) : (
+                null
+              )}
+              </a>
             </li>
           </ul>
           {navlist}

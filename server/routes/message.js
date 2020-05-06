@@ -52,21 +52,6 @@ router.post("/:id", authentication, (req, res) => {
   });
 });
 
-
-// Create a notification
-router.post("/notification/:id", authentication, (req, res) => {
-  Notification.create({
-    senderId: req.params.id,
-    receiverId: req.body.receiverId
-  })
-  .then(notification => {
-    res.status(200).json(notification);
-  })
-  .catch(err => {
-    res.status(400).json(err);
-  });
-});
-
 // Get messages by conversationId
 router.get("/get-message/:id", authentication, (req, res) => {
   Message.findAll({ where: { conversationId: req.params.id }} )
@@ -134,6 +119,33 @@ router.get("/get-conversation/:conId", authentication, (req, res) => {
   .catch(err => {
     res.status(400).json(err);
   });
+});
+
+
+// Create a notification
+router.post("/notification/:id", authentication, (req, res) => {
+  Notification.create({
+    senderId: req.params.id,
+    receiverId: req.body.receiverId
+  })
+  .then(notification => {
+    res.status(200).json(notification);
+  })
+  .catch(err => {
+    res.status(400).json(err);
+  });
+});
+
+
+// Get login user's notifications 
+router.get("/notifications/:id", authentication, (req, res) => {
+  Notification.findAll({where: { receiverId: req.params.id }})
+    .then(notifications => {
+      res.status(200).json(notifications);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
 });
 
 // Delete a conversation
