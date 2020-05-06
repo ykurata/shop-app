@@ -104,6 +104,7 @@ class MessageDetail extends Component {
   }
 
   render() {
+    console.log(this.state.receiverId);
     const { con, item, messages, sender, receiver } = this.state;
   
     const message = this.state.newMessage.map((message, i) => (
