@@ -6,6 +6,10 @@ const socketEvents = (io) => {
       socket.emit('newMessage', msg);
     });
 
+    socket.on('notification', (ntf) => {
+      socket.emit('notification', ntf);
+    });
+
     socket.on('disconnect', () => {
       console.log(`SocketId: ${socket.id} has disconnected!`);
     });

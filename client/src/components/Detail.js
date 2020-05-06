@@ -68,7 +68,11 @@ class Detail extends Component {
       const newMessage = {
         text: this.state.message
       }
-  
+    
+    const newNotification = {
+      senderId: this.state.userId,
+      receiverId: this.state.itemUserId
+    }  
       axios.post(`/message/create-conversation/${this.props.match.params.id}`, newConversation, { headers: { Authorization: `Bearer ${this.state.token}`}})
         .then(res => {
           axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${this.state.token}`}})
@@ -78,6 +82,13 @@ class Detail extends Component {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
               });
+              axios.post(`/message/notification/${this.state.userId}`, newNotification, { headers: { Authorization: `Bearer ${this.state.token}`}})
+                .then(res => {
+                  console.log(res.data);
+                })
+                .catch(err => {
+                  console.log(err);
+                })
             })
             .catch(err => {
               console.log(err);

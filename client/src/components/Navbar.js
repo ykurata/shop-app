@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import socketIOClient from "socket.io-client";
 
 class Navbar extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.getUser();
+    this.socket = socketIOClient("http://localhost:5000");
+    this.socket.on("newMessage", msg => {
+      this.setState({ newMessage: [...this.state.newMessage, msg] });
+    });
   }
 
   getUser() {
@@ -26,6 +31,16 @@ class Navbar extends Component {
         console.log(err);
       });
   }
+
+  // getMessages() {
+  //   axios.get(`/message/get-message/${this.props.match.params.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+  //     .then(res => {
+  //       this.setState({ messages: res.data });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
 
   logOut = e => {
     e.preventDefault();

@@ -18,7 +18,8 @@ class MessageDetail extends Component {
       newMessage: [],
       sender: "",
       receiver: "",
-      senderId: ""
+      senderId: "",
+      receiverId: ""
     }
   }
 
@@ -43,7 +44,8 @@ class MessageDetail extends Component {
         this.setState({ 
           con: res.data,
           item: res.data.Item,
-          senderId: res.data.senderId
+          senderId: res.data.senderId,
+          receiverId: res.data.receiverId
         });
         axios.all([
           axios.get(`/user/get/${res.data.senderId}`),
@@ -79,9 +81,20 @@ class MessageDetail extends Component {
       userId: this.state.userId,
       text: this.state.message
     }
+    const newNotification = {
+      senderId: this.state.userId,
+      receiverId: this.state.receiverId
+    }
     axios.post(`/message/${this.props.match.params.id}`, newMsg, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         console.log(res.data);
+        axios.post(`/message/notification/${this.state.userId}`, newNotification, { headers: { Authorization: `Bearer ${this.state.token}`}})
+          .then(res => {
+            console.log(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+          })
       })
       .catch(err => {
         console.log(err);

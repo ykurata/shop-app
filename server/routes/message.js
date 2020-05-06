@@ -8,6 +8,7 @@ const Conversation = require('../models').Conversation;
 const Message = require('../models').Message;
 const Item = require('../models').Item;
 const User = require('../models').User;
+const Notification = require('../models').Notification;
 
 
 // Create a new conversaion
@@ -51,9 +52,24 @@ router.post("/:id", authentication, (req, res) => {
   });
 });
 
+
+// Create a notification
+router.post("/notification/:id", authentication, (req, res) => {
+  Notification.create({
+    senderId: req.params.id,
+    receiverId: req.body.receiverId
+  })
+  .then(notification => {
+    res.status(200).json(notification);
+  })
+  .catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 // Get messages by conversationId
 router.get("/get-message/:id", authentication, (req, res) => {
-  Message.findAll({ where: { conversationId: req.params.id }})
+  Message.findAll({ where: { conversationId: req.params.id }} )
     .then(messages => {
       res.status(200).json(messages);
     })
@@ -90,7 +106,8 @@ router.get("/get-conversations/:id", authentication, (req, res) => {
         model: Item,
         include: [{ model: User }]
       }
-    ]
+    ],
+    order: [[ "createdAt", "DESC"]] 
   })
   .then(conversations => {
     res.json(conversations)
