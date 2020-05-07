@@ -37,7 +37,14 @@ class Navbar extends Component {
     let navlist;
 
     if (this.state.token) { 
-      navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
+       
+    
+    navlist =   <ul className="navbar-nav ml-auto nav-flex-icons">
+                  <li className="nav-item mt-2">
+                    <a className="nav-link" href="/message">Message
+                    <span className="badge badge-pill badge-danger" >new</span>
+                    </a>
+                  </li>
                   <li className="nav-item avatar dropdown">
                     <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -85,11 +92,6 @@ class Navbar extends Component {
             <li className="nav-item active">
               <a className="nav-link" href="/create">Post Item
                 <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/message">Message
-              <span className="badge badge-pill badge-danger" >new</span>
               </a>
             </li>
           </ul>
