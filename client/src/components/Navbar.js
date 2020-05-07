@@ -50,7 +50,7 @@ class Navbar extends Component {
   render() {
     let badge;
     this.state.conversations.map(con => {
-      if (con.read === false) {
+      if (con.read === true) {
         badge = <span className="badge badge-pill badge-danger" >new</span>;
       } else {
         badge = null;
