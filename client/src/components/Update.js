@@ -80,14 +80,14 @@ class Update extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.name}</p>
               : null}
-              <input type="text" value={this.state.name} onChange={this.onChange} className="form-control" name="name" id="name" placeholder="Item's Title"/>
+              <input type="text" value={this.state.name} onChange={this.onChange} className="form-control form-control-lg" name="name" id="name" placeholder="Item's Title"/>
             </div>
             <div className="form-group">
               <label>Category</label>
               {this.state.errors ? 
                 <p className="error">{this.state.errors.category}</p>
               : null}
-              <select className="form-control" id="category" name="category" value={this.state.category} onChange={this.onChange}>
+              <select className="form-control form-control-lg" id="category" name="category" value={this.state.category} onChange={this.onChange}>
                 <option>--Select--</option>
                 <option>Phone/Laptop</option>
                 <option>Clothing</option>
@@ -106,7 +106,7 @@ class Update extends Component {
                 <div className="input-group-prepend">
                   <span className="input-group-text">$</span>
                 </div>
-                <input type="number" name="price" value={this.state.price} onChange={this.onChange} className="form-control" aria-label="Amount (to the nearest dollar)" />
+                <input type="number" name="price" value={this.state.price} onChange={this.onChange} className="form-control form-control-lg" aria-label="Amount (to the nearest dollar)" />
                 <div className="input-group-append">
                   <span className="input-group-text">.00</span>
                 </div>
@@ -117,7 +117,7 @@ class Update extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.description}</p>
               : null}
-              <textarea className="form-control" value={this.state.description} onChange={this.onChange} id="description" name="description" rows="5"></textarea>
+              <textarea className="form-control form-control-lg" value={this.state.description} onChange={this.onChange} id="description" name="description" rows="5"></textarea>
             </div>
             <ToastContainer autoClose={2000} />
             <button type="submit" className="btn btn-primary btn-lg btn-block mb-3">Update</button>

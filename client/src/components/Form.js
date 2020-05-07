@@ -97,7 +97,7 @@ class Form extends Component {
               {this.state.errors ? 
                 <p className="error">{this.state.errors.description}</p>
               : null}
-              <textarea className="form-control"  onChange={this.onChange} id="description" name="description" rows="5"></textarea>
+              <textarea className="form-control form-control-lg"  onChange={this.onChange} id="description" name="description" rows="5"></textarea>
             </div>
             <ToastContainer autoClose={2000} />
             <button type="submit" className="btn btn-primary btn-lg btn-block">Submit</button>
