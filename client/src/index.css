@@ -156,6 +156,7 @@ p {
   border: 1px solid #dcdee0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.1);
   padding-bottom: 2rem;
+  background-color: white;
 }
 .user-name {
   margin-top: 1rem;
