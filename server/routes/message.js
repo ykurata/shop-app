@@ -21,7 +21,8 @@ router.post("/create-conversation/:id", authentication, (req, res) => {
         Conversation.create({
           itemId: req.params.id,
           senderId: req.user,
-          receiverId: req.body.receiverId
+          receiverId: req.body.receiverId,
+          read: false
         })
         .then(conversation => {
           res.status(200).json(conversation);
@@ -123,7 +124,7 @@ router.get("/get-conversation/:conId", authentication, (req, res) => {
 
 
 // Update read boolean value
-router.put("/update-conversation/:conId", authentication, (req, res) => {
+router.put("/update-conversation/:conId", (req, res) => {
   Conversation.findOne({
     where: { id: req.params.conId }
   })

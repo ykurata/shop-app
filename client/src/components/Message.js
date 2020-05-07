@@ -19,6 +19,7 @@ class Message extends Component {
       loading: false,
       conversationId: ""
     }
+    this.updateConversation = this.updateConversation.bind(this)
   }
 
   componentDidMount() {
@@ -52,7 +53,17 @@ class Message extends Component {
       });
   }
 
-  deleteConversation = e =>{
+  updateConversation = (e) => {
+    axios.put(`/message/update-conversation/${e.currentTarget.id}`)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+
+  deleteConversation = e => {
     axios.delete(`/message/delete-conversation/${e.target.id}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         toast("Successfully Deleted!", {
@@ -72,7 +83,7 @@ class Message extends Component {
     
     conversationList = this.state.conversations.map(con => (
       <Link to={`/message-detail/${con.id}`} key={con.id} id={con.id} className="card item-card message-card" >
-        <div className="row message-card-row">
+        <div className="row message-card-row" id={con.id} onClick={this.updateConversation.bind(this)} >
           <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
             {con.Item.image ? (
               <img src={con.Item.image[0]} alt="..." className="rounded message-list-item-img" />

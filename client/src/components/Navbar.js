@@ -6,6 +6,7 @@ class Navbar extends Component {
     super(props);
     this.state = {
       user: "",
+      conversations: [],
       token: localStorage.getItem("jwtToken"),
       userId: localStorage.getItem("userId"),
     };
@@ -13,6 +14,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.getUser();
+    this.getConversations();
   }
 
   getUser() {
@@ -27,6 +29,18 @@ class Navbar extends Component {
       });
   }
 
+  getConversations() {
+    axios.get(`/message/get-conversations/${this.state.userId}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({
+          conversations: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   logOut = e => {
     e.preventDefault();
     localStorage.clear();
@@ -34,15 +48,22 @@ class Navbar extends Component {
   }
 
   render() {
+    let badge;
+    this.state.conversations.map(con => {
+      if (con.read === false) {
+        badge = <span className="badge badge-pill badge-danger" >new</span>;
+      } else {
+        badge = null;
+      }
+    })
+
     let navlist;
 
     if (this.state.token) { 
-       
-    
     navlist =   <ul className="navbar-nav ml-auto nav-flex-icons">
                   <li className="nav-item mt-2">
                     <a className="nav-link" href="/message">Message
-                    <span className="badge badge-pill badge-danger" >new</span>
+                    {badge}
                     </a>
                   </li>
                   <li className="nav-item avatar dropdown">
