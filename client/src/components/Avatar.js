@@ -14,7 +14,8 @@ class Avatar extends Component {
       sendImage: null,
       token: localStorage.getItem("jwtToken"),
       userId: localStorage.getItem("userId"),
-      error: ""
+      error: "",
+      isLoading: false
     }
   }
 
@@ -50,11 +51,16 @@ class Avatar extends Component {
       });
     }
     
+    this.setState({ isLoading: true });
+
     const formData = new FormData();
     formData.append("image", this.state.sendImage);
 
     axios.post("/user/image", formData, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
+        this.setState({
+          isLoading: false
+        })
         console.log(res.data);
         toast("Successfully Submitted!", {
           position: toast.POSITION.TOP_RIGHT,
@@ -106,7 +112,14 @@ class Avatar extends Component {
                     </label>
                   </div>
                   <div className="mt-3">
-                    <button className="btn btn-primary" type="submit" style={{ width: "200px"}}>Submit</button>
+                    {this.state.isLoading === false ? (
+                      <button className="btn btn-primary" type="submit" style={{ width: "200px"}}>Submit</button>
+                    ) : (
+                      <button className="btn btn-primary" type="button" disabled style={{ width: "200px"}}>
+                      <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                      </button>
+                    )}
                   </div>
                   <ToastContainer autoClose={2000} />
                 </div>
