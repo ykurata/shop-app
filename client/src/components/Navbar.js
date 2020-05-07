@@ -8,11 +8,13 @@ class Navbar extends Component {
       user: "",
       token: localStorage.getItem("jwtToken"),
       userId: localStorage.getItem("userId"),
+      notifications: ""
     };
   }
 
   componentDidMount() {
     this.getUser();
+    this.getNotifications();
   }
 
   getUser() {
@@ -25,6 +27,16 @@ class Navbar extends Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  getNotifications() {
+    axios.get(`/message/notifications/${this.state.userId}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
+      .then(res => {
+        this.setState({ notifications: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   logOut = e => {
@@ -88,7 +100,13 @@ class Navbar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/message">Message<span className="badge badge-pill badge-danger" >new</span></a>
+              <a className="nav-link" href="/message">Message
+              {this.state.notifications.length > 0 ? (
+                <span className="badge badge-pill badge-danger" >new</span>
+              ) : (
+                null
+              )}
+              </a>
             </li>
           </ul>
           {navlist}
