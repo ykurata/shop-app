@@ -19,7 +19,6 @@ class MessageDetail extends Component {
       sender: "",
       receiver: "",
       senderId: "",
-      receiverId: ""
     }
   }
 
@@ -81,20 +80,9 @@ class MessageDetail extends Component {
       userId: this.state.userId,
       text: this.state.message
     }
-    const newNotification = {
-      senderId: this.state.userId,
-      receiverId: this.state.receiverId
-    }
     axios.post(`/message/${this.props.match.params.id}`, newMsg, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         console.log(res.data);
-        axios.post(`/message/notification/${this.state.userId}`, newNotification, { headers: { Authorization: `Bearer ${this.state.token}`}})
-          .then(res => {
-            console.log(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          })
       })
       .catch(err => {
         console.log(err);
