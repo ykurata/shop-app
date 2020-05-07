@@ -5,6 +5,7 @@ html, body {
   width: 100%;
   overflow-x: hidden;
   font-family: 'Lato', sans-serif;
+  background-color: #f2f5fa;
 }
 .error {
   color: red;

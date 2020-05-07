@@ -17,6 +17,11 @@ module.exports = {
       receiverId: {
         type: Sequelize.INTEGER
       },
+      read: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        default: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
