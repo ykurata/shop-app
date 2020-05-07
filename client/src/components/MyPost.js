@@ -117,7 +117,11 @@ class MyPost extends Component {
                 {/* Loading Message */}
                 {this.state.loading === false ? (
                   <div className="text-center mt-5">
-                    <h5>Loading Items...</h5>
+                    <div className="d-flex justify-content-center">
+                      <div className="spinner-border text-primary" role="status">
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    </div>
                   </div>  
                 ) : (
                   null
