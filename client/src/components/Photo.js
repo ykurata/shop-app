@@ -19,6 +19,7 @@ class Photo extends Component {
      sendFile4: null,
      token: localStorage.getItem("jwtToken"),
      itemId: "",
+     isLoading: false
     };
   }
 
@@ -97,6 +98,8 @@ class Photo extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    this.setState({ isLoading: true });
+
     const formData = new FormData();
     formData.append("image", this.state.sendFile1);
     formData.append("image", this.state.sendFile2);
@@ -106,6 +109,9 @@ class Photo extends Component {
     axios.post(`/image/${this.props.match.params.id}`, formData, { headers: { Authorization: `Bearer ${this.state.token}`}})
       .then(res => {
         console.log(res.data);
+        this.setState({
+          isLoading: false
+        })
         toast("Successfully Submitted!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 2000,
@@ -292,7 +298,14 @@ class Photo extends Component {
               </div>
               
               <ToastContainer autoClose={2000} />
-              <button style={{ marginTop: "2rem", marginBottom: "2rem" }} type="Submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+              {this.state.isLoading === false ? (
+                <button style={{ marginTop: "2rem", marginBottom: "2rem" }} type="Submit" className="btn btn-primary btn-lg btn-block">Submit</button>
+              ) : (
+                <button className="btn btn-primary btn-lg btn-block" type="button" disabled style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Loading...
+                </button>
+              )}
               <a href={`/detail/${this.state.itemId}`}>Back to Detail Page</a>
             </div>
           </form>
