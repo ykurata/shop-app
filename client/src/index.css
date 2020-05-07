@@ -104,6 +104,25 @@ nav {
   color: #dcdee0;  
   margin-top: 2rem;
 }
+.pagination {
+  display: inline-block;
+}
+.pagination li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  border: 1px solid grey;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+.pagination li.active {
+  background-color: #31257d;
+  color: white;
+}
+.pagination li:hover:not(.active) {
+  background-color: #31257d;
+  color: white;
+}
 
 
 /* Item Detail Styles  */
