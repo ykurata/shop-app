@@ -41,6 +41,9 @@ nav {
   border: 1px solid white;
   object-fit: cover;
 }
+.dropdown-item:hover {
+  background-color: #ebeff2;
+}
 
 /* List Item styles  */
 .item-list {
