@@ -29,7 +29,8 @@ class MessageDetail extends Component {
   }
 
   componentDidMount() {
-    this.socket = socketIOClient("http://localhost:5000");
+    // this.socket = socketIOClient("http://localhost:5000");
+    this.socket = socketIOClient("http://yasuko-shop-app.herokuapp.com/");
     this.socket.on("newMessage", msg => {
       this.setState({ newMessage: [...this.state.newMessage, msg] });
     })
