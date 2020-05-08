@@ -34,8 +34,12 @@ Responsive for both web and mobile.
 * Create adds for your items. 
 * Add images for your items.
 * Search items through items's name and category.
+![](./readme-assets/list-items.gif) 
+<br />
 * Sending messages to other users.
-![alt text](./readme-assets/list-items.gif) 
+
+
+
 
         
 
