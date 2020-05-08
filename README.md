@@ -31,22 +31,28 @@ Responsive for both web and mobile.
 
 ## Features
 * #### Register/ Login / Logout
-![](./readme-assets/login.gif )
+![](./readme-assets/login.gif | width=100 )
 <br />
-* #### Create adds for your items. 
+<br />
+* ### Create adds for your items. 
 ![](./readme-assets/create-add.jpg)
 <br />
-* #### Add images for your items.
+<br />
+* ### Add images for your items.
 ![](./readme-assets/add-images.jpg)
 <br />
-* #### Search items through items's name and category.
+<br />
+* ### Search items through items's name and category.
 ![](./readme-assets/list-items.gif ) 
+<br />
 <br />
 * ### Sending messages to other users.
 ![](./readme-assets/sending-message.gif ) 
 <br />
+<br />
 * ### Replying to a message
 ![](./readme-assets/replying-message.gif )
+<br />
 <br />
 
         
