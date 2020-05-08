@@ -11,12 +11,21 @@ class List extends Component {
     this.state = {
       items: [],
       search: "",
-      loading: false
+      loading: false,
+      currentPage: 1,
+      itemsPerPage: 10
     };
+    this.handleClick = this.handleClick.bind(this);
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleClick = e => {
+    this.setState({
+      currentPage: Number(e.target.id)
+    })
   }
 
   componentDidMount() {
@@ -45,9 +54,28 @@ class List extends Component {
       );
     });
 
+    const { currentPage, itemsPerPage } = this.state;
+
+    // Logic for displaying items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredItems.length / itemsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+     
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li key={number} id={number} onClick={this.handleClick}>{number}</li>
+      );
+    });
+
     let items;
 
-    items = filteredItems.map((item, i) => (
+    items = currentItems.map((item, i) => (
       <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
         <div className="card-body row">
           <div className="col-lg-3 col-md-3 col-sm-2">
@@ -66,6 +94,15 @@ class List extends Component {
       </Link>
     ));
 
+    let numberOfItems;
+    if (filteredItems.length < 10) {
+      numberOfItems = <p>Showing {filteredItems.length} items</p>
+    } else if (filteredItems.length > 10) {
+      numberOfItems = <p>Showing {indexOfFirstItem + 1} - {indexOfLastItem}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
+    } else {
+      numberOfItems = null;
+    }
+
     return (
       <div>
         <Navbar></Navbar>
@@ -74,11 +111,7 @@ class List extends Component {
           <div className="row">
             <div className="col-lg-3 col-md-3"></div>
             <div className="col-lg-9 col-md-9">
-              {filteredItems.length > 0 ? (
-                <p>Showing {filteredItems.length} items</p>
-              ) : (
-                null
-              )} 
+              {numberOfItems}
             </div>
           </div>
           <div className="row list-outer">
@@ -129,6 +162,11 @@ class List extends Component {
               </div>
             </div>
           </div>
+          <div className="container-fluid text-center">
+            <ul className="pagination justify-content-center">
+              {renderPageNumbers}
+            </ul>
+          </div>  
         </div>
       </div>
     );
