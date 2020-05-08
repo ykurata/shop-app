@@ -31,7 +31,7 @@ Responsive for both web and mobile.
 
 ## Features
 * #### Register/ Login / Logout
-![](./readme-assets/login.gif | width=100 )
+<img src="./readme-assets/login.gif" width="500" heigt="300">
 <br />
 <br />
 * ### Create adds for your items. 
