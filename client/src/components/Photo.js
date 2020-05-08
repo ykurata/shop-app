@@ -123,6 +123,8 @@ class Photo extends Component {
   }
 
   render() {
+    const link = <a href={`/detail/${this.props.match.params.id}`}>Back to Detail Page</a>
+
     return (
       <div>
         <Navbar></Navbar>
@@ -306,7 +308,7 @@ class Photo extends Component {
                   Loading...
                 </button>
               )}
-              <a href={`/detail/${this.state.itemId}`}>Back to Detail Page</a>
+              {link}
             </div>
           </form>
         </div>
