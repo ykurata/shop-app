@@ -63,7 +63,7 @@ class Navbar extends Component {
     navlist =   <ul className="navbar-nav ml-auto nav-flex-icons">
                   <li className="nav-item mt-2">
                     <a className="nav-link" href="/message">Message
-                    {badge}
+                    {/* {badge} */}
                     </a>
                   </li>
                   <li className="nav-item avatar dropdown">

@@ -95,13 +95,15 @@ class List extends Component {
     ));
 
     let numberOfItems;
-    if (filteredItems.length < 5) {
-      numberOfItems = <p>Showing {filteredItems.length} items</p>
+    if (filteredItems.length === 0) {
+      numberOfItems = null;
+    } else if (filteredItems.length <= indexOfLastItem ) {
+      numberOfItems = <p>Showing {indexOfFirstItem + 1}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
     } else if (filteredItems.length > 5) {
       numberOfItems = <p>Showing {indexOfFirstItem + 1} - {indexOfLastItem}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
-    } else {
-      numberOfItems = null;
-    }
+    } else if (filteredItems.length < 5) {
+      numberOfItems = <p>Showing {filteredItems.length} items</p>
+    } 
 
     return (
       <div>
