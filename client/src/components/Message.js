@@ -80,7 +80,7 @@ class Message extends Component {
   render() {
     const { user, conversations } = this.state;
     let conversationList;
-    
+
     conversationList = this.state.conversations.map(con => (
       <Link to={`/message-detail/${con.id}`} key={con.id} id={con.id} className="card item-card message-card" >
         <div className="row message-card-row" id={con.id}>
@@ -109,7 +109,7 @@ class Message extends Component {
               </div>
             </div>
             {con.Messages.length > 0 ? (
-              <p className="text mb-2">{con.Messages.pop().text}</p>
+              <p className="text mb-2">{con.Messages[con.Messages.length-1].text}</p>
             ) : (
               null
             )}
