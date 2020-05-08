@@ -13,7 +13,7 @@ class List extends Component {
       search: "",
       loading: false,
       currentPage: 1,
-      itemsPerPage: 2
+      itemsPerPage: 10
     };
     this.handleClick = this.handleClick.bind(this);
   };
@@ -94,6 +94,15 @@ class List extends Component {
       </Link>
     ));
 
+    let numberOfItems;
+    if (filteredItems.length < 10) {
+      numberOfItems = <p>Showing {filteredItems.length} items</p>
+    } else if (filteredItems.length > 10) {
+      numberOfItems = <p>Showing {indexOfFirstItem + 1} - {indexOfLastItem}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
+    } else {
+      numberOfItems = null;
+    }
+
     return (
       <div>
         <Navbar></Navbar>
@@ -102,11 +111,7 @@ class List extends Component {
           <div className="row">
             <div className="col-lg-3 col-md-3"></div>
             <div className="col-lg-9 col-md-9">
-              {filteredItems.length > 0 ? (
-                <p>Showing {indexOfFirstItem + 1} - {indexOfLastItem}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
-              ) : (
-                null
-              )} 
+              {numberOfItems}
             </div>
           </div>
           <div className="row list-outer">
