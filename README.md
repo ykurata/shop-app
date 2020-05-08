@@ -30,32 +30,41 @@ Responsive for both web and mobile.
 
 
 ## Features
-* #### Register/ Login / Logout
-<img src="./readme-assets/login.gif" width="500" heigt="300">
+* ### Register/ Login / Logout
+<div align="center">
+  <img src="./readme-assets/login.gif" width="600" heigt="400">
+</div>    
 <br />
 <br />
 * ### Create adds for your items. 
-![](./readme-assets/create-add.jpg)
+<div align="center">
+  <img src="./readme-assets/create-add.jpg" width="600" heigt="400">
+</div>  
 <br />
 <br />
 * ### Add images for your items.
-![](./readme-assets/add-images.jpg)
+<div align="center">
+  <img src="./readme-assets/add-images.jpg" width="600" heigt="400">
+</div>  
 <br />
 <br />
 * ### Search items through items's name and category.
-![](./readme-assets/list-items.gif ) 
+<div align="center">
+  <img src="./readme-assets/list-items.gif" width="600" heigt="400">
+</div>  
 <br />
 <br />
 * ### Sending messages to other users.
-![](./readme-assets/sending-message.gif ) 
+<div align="center">
+  <img src="./readme-assets/sending-message.gif" width="600" heigt="400">
+</div>  
 <br />
 <br />
 * ### Replying to a message
-![](./readme-assets/replying-message.gif )
-<br />
-<br />
-
-        
+<div align="center">
+  <img src="./readme-assets/replying-message.gif" width="600" heigt="400">
+</div>  
+<br />        
 
 ## Built With 
 
