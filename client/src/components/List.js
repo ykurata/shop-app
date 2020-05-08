@@ -13,7 +13,7 @@ class List extends Component {
       search: "",
       loading: false,
       currentPage: 1,
-      itemsPerPage: 10
+      itemsPerPage: 5
     };
     this.handleClick = this.handleClick.bind(this);
   };
@@ -95,9 +95,9 @@ class List extends Component {
     ));
 
     let numberOfItems;
-    if (filteredItems.length < 10) {
+    if (filteredItems.length < 5) {
       numberOfItems = <p>Showing {filteredItems.length} items</p>
-    } else if (filteredItems.length > 10) {
+    } else if (filteredItems.length > 5) {
       numberOfItems = <p>Showing {indexOfFirstItem + 1} - {indexOfLastItem}&nbsp; of &nbsp;{filteredItems.length}&nbsp; items</p>
     } else {
       numberOfItems = null;
