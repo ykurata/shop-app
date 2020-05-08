@@ -11,12 +11,14 @@
     "password": "password",
     "database": "shop",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "storage": "test.db",
   },
   "production": {
-    "username": "root",
+    "username": "shopapp",
     "password": "password",
     "database": "shop",
+    "storage": "production.db",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
