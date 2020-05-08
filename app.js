@@ -10,14 +10,14 @@ const app = express();
 const socketio = require('socket.io');
 const server = require('http').Server(app);
 const io = socketio(server);
-const socketEvents = require('./server/socket');
+const socketEvents = require('./socket');
 socketEvents(io);
 
 // Import routes
-const user = require("./server/routes/user");
-const item = require("./server/routes/item");
-const image = require("./server/routes/image");
-const message = require("./server/routes/message");
+const user = require("./routes/user");
+const item = require("./routes/item");
+const image = require("./routes/image");
+const message = require("./routes/message");
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 // Passport config
-require("./server/config/passport")(passport);
+require("./config/passport")(passport);
 
 // Routes
 app.use("/user", user);
