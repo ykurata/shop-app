@@ -29,9 +29,13 @@ Responsive for both web and mobile.
     * To start server, run `npm start`.
 
 
-## Test User
-Email: yasuko@gmail.com </br>
-Password: password
+## Features
+* Register/ Login / Logout
+* Create adds for your items. 
+* Add images for your items.
+* Search items through items's name and category.
+* 
+
         
 
 ## Built With 

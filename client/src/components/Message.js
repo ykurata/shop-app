@@ -83,7 +83,7 @@ class Message extends Component {
     
     conversationList = this.state.conversations.map(con => (
       <Link to={`/message-detail/${con.id}`} key={con.id} id={con.id} className="card item-card message-card" >
-        <div className="row message-card-row" id={con.id} onClick={this.updateConversation.bind(this)} >
+        <div className="row message-card-row" id={con.id}>
           <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
             {con.Item.image ? (
               <img src={con.Item.image[0]} alt="..." className="rounded message-list-item-img" />
@@ -109,7 +109,7 @@ class Message extends Component {
               </div>
             </div>
             {con.Messages.length > 0 ? (
-              <p className="text mb-2">{con.Messages[con.Messages.length - 1].text}</p>
+              <p className="text mb-2">{con.Messages.pop().text}</p>
             ) : (
               null
             )}
