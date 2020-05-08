@@ -7,9 +7,10 @@ const cors = require('cors');
 const app = express();
 
 // Socket setup
-const socketio = require('socket.io');
-const server = require('http').Server(app);
-const io = socketio(server);
+// const socketio = require('socket.io');
+const server = require('http').createServer(app);
+// const io = socketio(server);
+const io = require('socket.io').listen(server);
 const socketEvents = require('./socket');
 socketEvents(io);
 
