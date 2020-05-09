@@ -5,8 +5,6 @@ The app allows users to post adds for things you want to sell and search for ite
 Users can also send messages to the person who posted the add.
 Responsive for both web and mobile.
 
-## Requirements
-
 ## Built With 
 
 * Backend
@@ -20,6 +18,12 @@ Responsive for both web and mobile.
   * [Bootstrap](https://getbootstrap.com/)
 
 
+## Requirements
+
+* Make sure you have install and run PostgreSQL server.
+* Create database with the name same as in config file.
+
+
 ## Getting Started 
 
 * To get started, clone the repo to your local machine.
@@ -31,8 +35,10 @@ Responsive for both web and mobile.
     **Backend (Server)**
         
     * Go to the root directory(shop-app), and run `npm install`.
+    
+    * Run `sequelize db:migrate`
 
-    * To start server, run `npm start`.
+    * To start server, run `nodemon` or `npm start`.
 
 
     **Frontend (Client)**
