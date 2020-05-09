@@ -7,6 +7,18 @@ Responsive for both web and mobile.
 
 ## Requirements
 
+## Built With 
+
+* Backend
+  * [NodeJS](https://nodejs.org/en/download/)
+  * [Express](https://expressjs.com/)
+  * [Postgres](https://www.postgresql.org/download/)
+
+
+* Frondend
+  * [React](https://reactjs.org/)
+  * [Bootstrap](https://getbootstrap.com/)
+
 
 ## Getting Started 
 
@@ -14,7 +26,14 @@ Responsive for both web and mobile.
 
     ```https://github.com/ykurata/shop-app.git```
 
-* Install all dependencies on the both front end and back end. 
+* Install all dependencies on the both back end and front end. 
+
+    **Backend (Server)**
+        
+    * Go to the root directory(shop-app), and run `npm install`.
+
+    * To start server, run `npm start`.
+
 
     **Frontend (Client)**
 
@@ -22,11 +41,7 @@ Responsive for both web and mobile.
 
     * To start client, run `npm start`.
 
-    **Backend (Server)**
-        
-    * Go to recipe-app directory, and run `npm install`.
-
-    * To start server, run `npm start`.
+    
 
 
 ## Features
@@ -71,9 +86,3 @@ Responsive for both web and mobile.
 </div>  
 <br />        
 
-## Built With 
-
-* [NodeJS](https://nodejs.org/en/download/)
-* [Postgres](https://www.postgresql.org/download/)
-* [Express](https://expressjs.com/)
-* [React](https://reactjs.org/)
