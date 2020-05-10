@@ -2,8 +2,9 @@
 
 This is an application for buying and selling items.
 The app allows users to post adds for things you want to sell and search for items you want to buy.  Either by the item's name or category.
-Users can also send messages to the person who posted the add.
-Responsive for both web and mobile.
+Users can also send messages to the person who posted the add.<br></br>
+Responsive for both web and mobile.<br></br>
+[**Live Demo**](https://yasuko-shop-app.herokuapp.com/)
 
 ## Built With 
 
