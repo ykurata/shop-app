@@ -10,7 +10,7 @@ const List = () => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(5);
 
   const onChange = e => {
     setSearch(e.target.value);
