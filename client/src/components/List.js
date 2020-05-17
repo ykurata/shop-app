@@ -30,7 +30,6 @@ const List = () => {
         console.log(err);
       });
   }, []);
-  console.log(items);
   
   const filteredItems = items.filter((item) => {
     const query = search.toLowerCase();
