@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Moment from 'react-moment';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import Item from '../components/Item';
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -44,6 +44,14 @@ const List = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
+  let showItems;
+  // Map each items to Item component
+  showItems = currentItems.map((item, i) => (
+    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
+      <Item data={item} />
+    </Link>
+  ));
+
   // Logic for displaying page numbers
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredItems.length / itemsPerPage); i++) {
@@ -55,27 +63,6 @@ const List = () => {
       <li key={number} id={number} onClick={handleClick}>{number}</li>
     );
   });
-
-  let showItems;
-
-  showItems = currentItems.map((item, i) => (
-    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-      <div className="card-body row">
-        <div className="col-lg-3 col-md-3 col-sm-2">
-          {item.image === null || item.image.length === 0  ? (
-            <div className="list-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-          ) : (
-            <img src={item.image[0]} alt="..." className="rounded list-item-img" />
-          )}
-        </div>
-        <div className="col-lg-9 col-md-9 col-sm-10">
-          <h5 className="item-title">{item.name}</h5>
-          <p className="date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
-          <p className="description">{item.description}</p>
-        </div>
-      </div>
-    </Link>
-  ));
 
   let numberOfItems;
   if (filteredItems.length === 0) {
@@ -90,7 +77,7 @@ const List = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       {/* display number of items */}
       <div className="container-fluid item-list">
         <div className="row">
