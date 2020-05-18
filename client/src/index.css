@@ -245,6 +245,9 @@ p {
   color: #dcdee0;  
   margin-top: 2rem;
 }
+.photo-error {
+  color: red;
+}
 
 /* Avatar Page Styles */
 .main-avatar {
