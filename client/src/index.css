@@ -94,13 +94,13 @@ nav {
   border: 1px solid#dcdee0;
   object-fit: cover;
 }
-.no-image {
+.list-no-image {
   width: 140px;
   height: 140px;
   border: 1px solid #dcdee0;
   border-radius: 5px;
 }
-.no-image i {
+.list-no-image i {
   color: #dcdee0;  
   margin-top: 2rem;
 }
@@ -245,6 +245,9 @@ p {
   color: #dcdee0;  
   margin-top: 2rem;
 }
+.photo-error {
+  color: red;
+}
 
 /* Avatar Page Styles */
 .main-avatar {
@@ -384,11 +387,11 @@ p {
     padding-left: .2rem;
     padding-right: .2rem;
   }
-  .list-item-img, .no-image {
+  .list-item-img, .list-no-image {
     width: 60px;
     height: 60px;
   }
-  .no-image i {
+  .list-no-image i {
     font-size: 2rem;
     margin-top: .9rem;
   }
@@ -489,11 +492,12 @@ p {
     padding-left: .2rem;
     padding-right: .2rem;
   }
-  .list-item-img, .no-image {
+  .list-item-img, .list-no-image {
     width: 65px;
     height: 65px;
+    margin-left: .2rem;
   }
-  .no-image i {
+  .list-no-image i {
     font-size: 2.5rem;
     margin-top: .7rem;
   }
@@ -599,11 +603,11 @@ p {
     padding-left: .2rem;
     padding-right: .2rem;
   }
-  .list-item-img, .no-image {
+  .list-item-img, .list-no-image {
     width: 75px;
     height: 75px;
   }
-  .no-image i {
+  .list-no-image i {
     font-size: 3rem;
     margin-top: .8rem;
   }
@@ -697,11 +701,11 @@ p {
     padding-left: .5rem;
     padding-right: .5rem;
   }
-  .list-item-img, .no-image {
+  .list-item-img, .list-no-image {
     width: 90px;
     height: 90px;
   }
-  .no-image i {
+  .list-no-image i {
     font-size: 3.5rem;
     margin-top: .8rem;
   }
@@ -781,11 +785,11 @@ p {
     padding-left: .5rem;
     padding-right: .5rem;
   }
-  .list-item-img, .no-image {
+  .list-item-img, .list-no-image {
     width: 100px;
     height: 100px;
   }
-  .no-image i {
+  .list-no-image i {
     font-size: 4rem;
     margin-top: 1.1rem;
   }

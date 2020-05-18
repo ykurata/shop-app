@@ -1,35 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 import Navbar from "./Navbar";
 
-class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      email: "",
-      password: "",
-      password2: "",
-      validationErrors: [],
-      error: ""
-    };
+const Signup = (props) => {
+  const [userInput, setUserInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+    password2: ""
+  });
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [error, setError] = useState("");
+
+  const onChange = e => {
+    const value = e.target.value;
+    setUserInput({
+      ...userInput,
+      [e.target.name]: value
+    });
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
 
-    const { username, email, password, password2 } = this.state;
     const newUser = {
-      username: username,
-      email: email,
-      password: password,
-      password2: password2
+      username: userInput.username,
+      email: userInput.email,
+      password: userInput.password,
+      password2: userInput.password2
     };
 
     axios.post("/user/register", newUser)
@@ -39,51 +39,53 @@ class Signup extends Component {
         localStorage.setItem("jwtToken", token);
         localStorage.setItem("name", decoded.name);
         localStorage.setItem("userId", decoded.id);
-        this.props.history.push("/");
+        props.history.push("/");
       })
       .catch(err => {
-        this.setState({
-          validationErrors: err.response.data,
-          error: err.response.data.error
-        });
+        setValidationErrors(err.response.data);
+        setError(err.response.data.error);
       });
   }
 
-  render() {
-    return (
-      <div>
-        <Navbar></Navbar>
-        <div className="form">
-          <form className="text-center border border-light pt-5" onSubmit={this.onSubmit}>
-            <p className="h4 mb-4">Sign Up</p>
-            {this.state.error ? 
-              <p className="error">{this.state.error}</p>
-            : null}
-            {this.state.validationErrors ? 
-              <p className="error">{this.state.validationErrors.username}</p>
-            : null}
-            <input onChange={this.onChange} type="text" name="username" id="defaultRegisterFormName" className="form-control form-control-lg mb-4" placeholder="Name"></input>
-            {this.state.validationErrors ? 
-              <p className="error">{this.state.validationErrors.email}</p>
-            : null}
-            <input onChange={this.onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control form-control-lg mb-4" placeholder="E-mail" />
-            {this.state.validationErrors ? 
-              <p className="error">{this.state.validationErrors.password}</p>
-            : null}
-            <input onChange={this.onChange} type="password" name="password" id="password" className="form-control form-control-lg mb-4" placeholder="Password" />
-            {this.state.validationErrors ? 
-              <p className="error">{this.state.validationErrors.password2}</p>
-            : null}
-            <input onChange={this.onChange} type="password" name="password2" id="password2" className="form-control form-control-lg mb-4" placeholder="Confirm Password" />
-            <button className="btn btn-primary btn-block btn-lg my-4" type="submit">Sign Up</button>
-            <p>Already a member?
-                <a href="/login">Log In</a>
+  return (
+    <div>
+      <Navbar></Navbar>
+      <div className="form">
+        <form className="text-center border border-light pt-5" onSubmit={onSubmit}>
+          <p className="h4 mb-4">Sign Up</p>
+          {error ? 
+            <p className="error">
+              {error}
             </p>
-          </form>
-        </div>
+          : null}
+          {validationErrors ? 
+            <p className="error">
+              {validationErrors.username}</p>
+          : null}
+          <input onChange={onChange} type="text" name="username" id="defaultRegisterFormName" className="form-control form-control-lg mb-4" placeholder="Name"></input>
+          {validationErrors ? 
+            <p className="error">
+              {validationErrors.email}</p>
+          : null}
+          <input onChange={onChange} type="email" name="email" id="defaultLoginFormEmail" className="form-control form-control-lg mb-4" placeholder="E-mail" />
+          {validationErrors ? 
+            <p className="error">
+              {validationErrors.password}</p>
+          : null}
+          <input onChange={onChange} type="password" name="password" id="password" className="form-control form-control-lg mb-4" placeholder="Password" />
+          {validationErrors ? 
+            <p className="error">
+              {validationErrors.password2}</p>
+          : null}
+          <input onChange={onChange} type="password" name="password2" id="password2" className="form-control form-control-lg mb-4" placeholder="Confirm Password" />
+          <button className="btn btn-primary btn-block btn-lg my-4" type="submit">Sign Up</button>
+          <p>Already a member?
+              <a href="/login">Log In</a>
+          </p>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Signup;
