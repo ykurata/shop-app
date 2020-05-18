@@ -52,10 +52,10 @@ class MyPost extends Component {
       <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
         <div className="card-body row">
           <div className="col-lg-3 col-md-3 col-sm-2">
-            {item.image.length !== 0 ? (
-              <img src={item.image[0]} alt="..." className="rounded list-item-img" />
+            {item.image === null || item.image.length === 0  ? (
+              <div className="list-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
             ) : (
-              <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+              <img src={item.image[0]} alt="..." className="rounded list-item-img" />
             )}
           </div>
           <div className="col-lg-9 col-md-9 col-sm-10">
