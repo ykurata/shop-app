@@ -1,104 +1,69 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: "",
-      conversations: [],
-      token: localStorage.getItem("jwtToken"),
-      userId: localStorage.getItem("userId"),
-    };
-  }
+const Navbar = () => {
+  const [user, setUser] = useState("");
+  const [token] = useState(localStorage.getItem("jwtToken"));
+  const [userId] = useState(localStorage.getItem("userId"));
 
-  componentDidMount() {
-    this.getUser();
-    this.getConversations();
-  }
+  useEffect(() => {
+    axios.get(`/user/get/${userId}`)
+    .then(res => {
+      setUser(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, [userId])
 
-  getUser() {
-    axios.get(`/user/get/${this.state.userId}`)
-      .then(res => {
-        this.setState({ 
-          user: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  getConversations() {
-    axios.get(`/message/get-conversations/${this.state.userId}`, { headers: { Authorization: `Bearer ${this.state.token}`}})
-      .then(res => {
-        this.setState({
-          conversations: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  logOut = e => {
+  const logOut = e => {
     e.preventDefault();
     localStorage.clear();
     window.location.href="/"
   }
 
-  render() {
-    let badge;
-    this.state.conversations.map(con => {
-      if (con.read === true) {
-        badge = <span className="badge badge-pill badge-danger" >new</span>;
-      } else {
-        badge = null;
-      }
-    })
+  let navlist;
 
-    let navlist;
-
-    if (this.state.token) { 
-    navlist =   <ul className="navbar-nav ml-auto nav-flex-icons">
-                  <li className="nav-item mt-2">
-                    <a className="nav-link" href="/message">Message
-                    {/* {badge} */}
-                    </a>
-                  </li>
-                  <li className="nav-item avatar dropdown">
-                    <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                        {this.state.user.image ? (
-                          <img src={this.state.user.image} className="rounded-circle z-depth-0 navbar-img"
-                          alt="avatar" />
-                        ) : 
-                          <span style={{ fontSize: "0.8rem"}}>
-                            <i className="fas fa-user-circle fa-3x"></i>
-                          </span> 
-                        }
-                    </div>
-                    <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
-                      aria-labelledby="navbarDropdownMenuLink-55">
-                      <a className="dropdown-item" href="/profile-image">Profile Image</a>
-                      <a className="dropdown-item" href={`/items-by-user/${this.state.userId}`}>My Post</a>
-                      <a className="dropdown-item" onClick={this.logOut} href="/logout">Log Out</a>
-                    </div>
-                  </li>
-                </ul>
-    } else {
-      navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
-                  <li className="nav-item">
-                    <a className="nav-link" href="/login">Log In</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/signup">Sign Up</a>
-                  </li>
-                </ul>
-    }
-    
-    return (
-     <div>
+  if (token) { 
+    navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
+              <li className="nav-item mt-2">
+                <a className="nav-link" href="/message">Message
+                {/* {badge} */}
+                </a>
+              </li>
+              <li className="nav-item avatar dropdown">
+                <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                    {user.image ? (
+                      <img src={user.image} className="rounded-circle z-depth-0 navbar-img"
+                      alt="avatar" />
+                    ) : 
+                      <span style={{ fontSize: "0.8rem"}}>
+                        <i className="fas fa-user-circle fa-3x"></i>
+                      </span> 
+                    }
+                </div>
+                <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                  aria-labelledby="navbarDropdownMenuLink-55">
+                  <a className="dropdown-item" href="/profile-image">Profile Image</a>
+                  <a className="dropdown-item" href={`/items-by-user/${userId}`}>My Post</a>
+                  <a className="dropdown-item" onClick={logOut} href="/logout">Log Out</a>
+                </div>
+              </li>
+            </ul>
+  } else {
+    navlist = <ul className="navbar-nav ml-auto nav-flex-icons">
+                <li className="nav-item">
+                  <a className="nav-link" href="/login">Log In</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/signup">Sign Up</a>
+                </li>
+              </ul>
+  }
+  
+  return (
+    <div>
       <nav className="navbar navbar-expand-md navbar-dark">
         <a className="navbar-brand" href="/">Yajiji</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
@@ -120,8 +85,7 @@ class Navbar extends Component {
         </div>
       </nav>
     </div>  
-    );
-  }  
+  );
 }
 
 export default Navbar;
