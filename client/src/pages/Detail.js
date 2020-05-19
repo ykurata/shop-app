@@ -4,7 +4,8 @@ import Moment from 'react-moment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import UserInfoCard from "../components/UserInfoCard";
 
 const Detail = (props) => {
   const [item, setItem] = useState("");
@@ -76,19 +77,13 @@ const Detail = (props) => {
     }
     setMessage("");
   }
-
   
-  let aTag;
-  if (items.length === 1) {
-    aTag = null
-  } else if (items.length === 2) {
-    aTag = <a href={`/items-by-user/${item.userId}`}>View {items.length -1} other item</a>
-  } else if (items.length > 2) {
-    aTag = <a href={`/items-by-user/${item.userId}`}>View {items.length -1} other items</a>
-  } else {
-    aTag = null
+  let data = {
+    itemData: item,
+    itemsData: items,
+    userData: user
   }
-
+  
   return (
     <div>
       <Navbar></Navbar>
@@ -155,24 +150,9 @@ const Detail = (props) => {
           </div>
           <div className="col-lg-3 align-items-center">
             <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment></h6>
-            <div className="user-info-container mt-5 mb-2">
-              <div className="user-info text-center">
-                <div className="user-icon">
-                  {user.image ? (
-                    <img src={user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                  ) : (
-                    <i className="fas fa-user-circle fa-5x"></i>
-                  )}
-                </div>
-                <div className="user-name">
-                  <h5>{user.username}</h5>
-                  <p className="user-joined-date">Joined <Moment format="MMM YYYY">{user.createdAt}</Moment></p>
-                </div>
-                <div>
-                  {aTag}
-                </div>
-              </div>
-            </div>
+
+            <UserInfoCard {...data} />
+
             {/* hide message input for own post */}
             {parseInt(userId) === parseInt(itemUserId) ? (
               null

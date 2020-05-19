@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Moment from 'react-moment';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import Loading from "../components/Loading";
 
 const MyPost = (props) => {
   const [items, setItems] = useState([]);
@@ -100,13 +101,7 @@ const MyPost = (props) => {
 
               {/* Loading Message */}
               {loading === false ? (
-                <div className="text-center mt-5">
-                  <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                </div>  
+                <Loading />
               ) : (
                 null
               )}

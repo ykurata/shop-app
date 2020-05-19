@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
+import Loading from '../components/Loading';
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -87,7 +88,7 @@ const List = () => {
           </div>
         </div>
         <div className="row list-outer">
-          {/* Search input and select form category */}
+           {/* Search input and select form category */}
           <div className="col-lg-3 col-md-3">
             <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
               <div className="input-group-prepend">
@@ -105,7 +106,7 @@ const List = () => {
               <option value="Furniture">Furniture</option>
               <option value="Camera">Camera</option>
             </select>
-          </div>
+          </div>  
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
@@ -119,13 +120,7 @@ const List = () => {
 
               {/* Loading Message */}
               {loading === false ? (
-                <div className="text-center mt-5">
-                  <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                </div>  
+                <Loading />
               ) : (
                 null
               )}

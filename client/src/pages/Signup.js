@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const Signup = (props) => {
   const [userInput, setUserInput] = useState({
