@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 export const ItemContext = createContext();
@@ -8,7 +8,7 @@ const ItemContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   
   // Get a list of all items
-  const getAllItems = () => {
+  useEffect(() => {
     axios.get("/item/all") 
       .then(res => {
         setAllItems(res.data);
@@ -17,10 +17,10 @@ const ItemContextProvider = (props) => {
       .catch(err => {
         console.log(err);
       });
-  };
+  }, [])
 
   return (
-    <ItemContext.Provider value={{ allItems, loading, getAllItems }}>
+    <ItemContext.Provider value={{ allItems, loading }}>
       {props.children}
     </ItemContext.Provider>
   )

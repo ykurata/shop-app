@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
+
+import { UserContext } from '../contexts/UserContext';
 
 const Navbar = () => {
-  const [user, setUser] = useState("");
-  const [token] = useState(localStorage.getItem("jwtToken"));
-  const [userId] = useState(localStorage.getItem("userId"));
-
-  useEffect(() => {
-    axios.get(`/user/get/${userId}`)
-    .then(res => {
-      setUser(res.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }, [userId])
-
+  const { user, token, userId } = useContext(UserContext);
+ 
   const logOut = e => {
     e.preventDefault();
     localStorage.clear();

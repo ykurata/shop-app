@@ -1,22 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ItemContext } from '../contexts/ItemContext';
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from '../components/Loading';
 import NoItem from '../components/NoItem';
+import { ItemContext } from '../contexts/ItemContext';
 
 const List = () => {
-  const { allItems, loading, getAllItems } = useContext(ItemContext);
+  const { allItems, loading } = useContext(ItemContext);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   
-  useEffect(() => {
-    getAllItems();
-  }, [getAllItems]);
-
   const onChange = e => {
     setSearch(e.target.value);
   }
