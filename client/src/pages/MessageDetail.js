@@ -3,7 +3,8 @@ import axios from 'axios';
 import Moment from 'react-moment';
 import socketIOClient from "socket.io-client";
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import LoginUserCard from '../components/LoginUserCard';
 
 const MessageDetail = (props) => {
   const [userId] = useState(localStorage.getItem("userId"));
@@ -167,39 +168,11 @@ const MessageDetail = (props) => {
           {/* Posted User's info */}
           {parseInt(senderId) === parseInt(userId) ? (
             <div className="col-lg-3 col-md-3">
-              <div className="user-info-container ">
-                <div className="user-info text-center m-auto">
-                  <div className="user-icon">
-                    {receiver.image ? (
-                      <img src={receiver.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                    ) : (
-                      <i className="fas fa-user-circle fa-5x"></i>
-                    )}
-                  </div>
-                  <div className="user-name">
-                    <h5>{receiver.username}</h5>
-                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">{receiver.createdAt}</Moment></p>
-                  </div>
-                </div>
-              </div>
+              <LoginUserCard user={receiver} />
             </div>
           ) : (
             <div className="col-lg-3 col-md-3">
-              <div className="user-info-container ">
-                <div className="user-info text-center m-auto">
-                  <div className="user-icon">
-                    {sender.image ? (
-                      <img src={sender.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                    ) : (
-                      <i className="fas fa-user-circle fa-5x"></i>
-                    )}
-                  </div>
-                  <div className="user-name">
-                    <h5>{sender.username}</h5>
-                    <p className="user-joined-date">Joined <Moment format="MMM YYYY">{sender.createdAt}</Moment></p>
-                  </div>
-                </div>
-              </div>
+              <LoginUserCard user={sender} />
             </div>
           )}
           

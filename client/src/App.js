@@ -8,10 +8,10 @@ import MyPost from "./pages/MyPost";
 import Detail from "./pages/Detail";
 import Form from "./pages/Form";
 import Update from "./components/Update";
-import Avatar from "./components/Avatar";
+import Avatar from "./pages/Avatar";
 import Photo from "./components/Photo";
 import Message from "./pages/Message";
-import MessageDetail from "./components/MessageDetail";
+import MessageDetail from "./pages/MessageDetail";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
