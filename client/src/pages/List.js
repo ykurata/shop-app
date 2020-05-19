@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Moment from 'react-moment';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import Item from '../components/Item';
+import Loading from '../components/Loading';
+import NoItem from '../components/NoItem';
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -44,6 +46,13 @@ const List = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Map each items to Item component
+  const card = currentItems.map((item, i) => (
+    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
+      <Item data={item} />
+    </Link>
+  ));
+
   // Logic for displaying page numbers
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredItems.length / itemsPerPage); i++) {
@@ -55,27 +64,6 @@ const List = () => {
       <li key={number} id={number} onClick={handleClick}>{number}</li>
     );
   });
-
-  let showItems;
-
-  showItems = currentItems.map((item, i) => (
-    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-      <div className="card-body row">
-        <div className="col-lg-3 col-md-3 col-sm-2">
-          {item.image === null || item.image.length === 0  ? (
-            <div className="list-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-          ) : (
-            <img src={item.image[0]} alt="..." className="rounded list-item-img" />
-          )}
-        </div>
-        <div className="col-lg-9 col-md-9 col-sm-10">
-          <h5 className="item-title">{item.name}</h5>
-          <p className="date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
-          <p className="description">{item.description}</p>
-        </div>
-      </div>
-    </Link>
-  ));
 
   let numberOfItems;
   if (filteredItems.length === 0) {
@@ -90,7 +78,7 @@ const List = () => {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       {/* display number of items */}
       <div className="container-fluid item-list">
         <div className="row">
@@ -100,7 +88,7 @@ const List = () => {
           </div>
         </div>
         <div className="row list-outer">
-          {/* Search input and select form category */}
+           {/* Search input and select form category */}
           <div className="col-lg-3 col-md-3">
             <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
               <div className="input-group-prepend">
@@ -118,32 +106,24 @@ const List = () => {
               <option value="Furniture">Furniture</option>
               <option value="Camera">Camera</option>
             </select>
-          </div>
+          </div>  
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
               {filteredItems.length === 0 && loading === true ? (
-                <div className="text-center mt-5">
-                  <h5>No Items</h5>
-                </div>
+                <NoItem />
               ) : (
                 null
               )}
 
               {/* Loading Message */}
               {loading === false ? (
-                <div className="text-center mt-5">
-                  <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                </div>  
+                <Loading />
               ) : (
                 null
               )}
 
-              {showItems}
+              {card}
             </div>
           </div>
         </div>

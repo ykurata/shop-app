@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import List from "./components/List";
-import MyPost from "./components/MyPost";
-import Detail from "./components/Detail";
-import Form from "./components/Form";
-import Update from "./components/Update";
-import Avatar from "./components/Avatar";
-import Photo from "./components/Photo";
-import Message from "./components/Message";
-import MessageDetail from "./components/MessageDetail";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import List from "./pages/List";
+import MyPost from "./pages/MyPost";
+import Detail from "./pages/Detail";
+import Form from "./pages/Form";
+import Update from "./pages/Update";
+import Avatar from "./pages/Avatar";
+import Photo from "./pages/Photo";
+import Message from "./pages/Message";
+import MessageDetail from "./pages/MessageDetail";
 import PrivateRoute from "./components/PrivateRoute";
 
 function App() {

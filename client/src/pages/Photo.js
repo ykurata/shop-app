@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const Photo = (props) => {
   const [file1, setFile1] = useState(null);
