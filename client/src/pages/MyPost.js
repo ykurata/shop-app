@@ -4,6 +4,7 @@ import axios from 'axios';
 import Moment from 'react-moment';
 
 import Navbar from "../components/Navbar";
+import Item from '../components/Item';
 import Loading from "../components/Loading";
 
 const MyPost = (props) => {
@@ -31,24 +32,10 @@ const MyPost = (props) => {
         console.log(err);
       });
   }, [props.match.params.id]);
-
-
+  
   const card = items.map((item, i) => (
     <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-      <div className="card-body row">
-        <div className="col-lg-3 col-md-3 col-sm-2">
-          {item.image === null || item.image.length === 0  ? (
-            <div className="list-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
-          ) : (
-            <img src={item.image[0]} alt="..." className="rounded list-item-img" />
-          )}
-        </div>
-        <div className="col-lg-9 col-md-9 col-sm-10">
-          <h5 className="item-title">{item.name}</h5>
-          <p className="date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></p>
-          <p className="description">{item.description}</p>
-        </div>
-      </div>
+      <Item data={item} />
     </Link>
   ));
 

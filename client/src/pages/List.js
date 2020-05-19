@@ -45,9 +45,8 @@ const List = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
-  let showItems;
   // Map each items to Item component
-  showItems = currentItems.map((item, i) => (
+  const card = currentItems.map((item, i) => (
     <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
       <Item data={item} />
     </Link>
@@ -125,7 +124,7 @@ const List = () => {
                 null
               )}
 
-              {showItems}
+              {card}
             </div>
           </div>
         </div>
