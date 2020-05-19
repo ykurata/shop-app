@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
+import { ItemContext } from '../contexts/ItemContext';
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from '../components/Loading';
 import NoItem from '../components/NoItem';
 
 const List = () => {
-  const [items, setItems] = useState([]);
+  const { items, loading } = useContext(ItemContext);
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 
@@ -21,17 +20,6 @@ const List = () => {
   const handleClick = e => {
     setCurrentPage(Number(e.target.id));
   }
-
-  useEffect(() =>{
-    axios.get("/item/all") 
-      .then(res => {
-        setItems(res.data);
-        setLoading(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
 
   const filteredItems = items.filter((item) => {
     const query = search.toLowerCase();
