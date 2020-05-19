@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ItemContext } from '../contexts/ItemContext';
@@ -8,10 +8,14 @@ import Loading from '../components/Loading';
 import NoItem from '../components/NoItem';
 
 const List = () => {
-  const { items, loading } = useContext(ItemContext);
+  const { allItems, loading, getAllItems } = useContext(ItemContext);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  
+  useEffect(() => {
+    getAllItems();
+  }, [getAllItems]);
 
   const onChange = e => {
     setSearch(e.target.value);
@@ -21,7 +25,7 @@ const List = () => {
     setCurrentPage(Number(e.target.id));
   }
 
-  const filteredItems = items.filter((item) => {
+  const filteredItems = allItems.filter((item) => {
     const query = search.toLowerCase();
     return (
       item.name.toLowerCase().indexOf(query) >= 0 ||
