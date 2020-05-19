@@ -15,24 +15,27 @@ import MessageDetail from "./pages/MessageDetail";
 import PrivateRoute from "./components/PrivateRoute";
 
 import ItemContextProvider from './contexts/ItemContext';
+import AuthContextProvider from './contexts/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <ItemContextProvider>
-          <PrivateRoute path="/create" component={Form} /> 
-          <PrivateRoute path="/update/:id" component={Update} /> 
-          <PrivateRoute path="/profile-image" component={Avatar} /> 
-          <PrivateRoute path="/image/:id" component={Photo} /> 
-          <PrivateRoute path="/message" component={Message} />
-          <PrivateRoute path="/message-detail/:id" component={MessageDetail} />
-          <Route exact path="/" component={List} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/detail/:id" component={Detail} /> 
-          <Route path="/items-by-user/:id" component={MyPost} /> 
-        </ItemContextProvider>
+        <AuthContextProvider>
+          <ItemContextProvider>
+            <PrivateRoute path="/create" component={Form} /> 
+            <PrivateRoute path="/update/:id" component={Update} /> 
+            <PrivateRoute path="/profile-image" component={Avatar} /> 
+            <PrivateRoute path="/image/:id" component={Photo} /> 
+            <PrivateRoute path="/message" component={Message} />
+            <PrivateRoute path="/message-detail/:id" component={MessageDetail} />
+            <Route exact path="/" component={List} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/detail/:id" component={Detail} /> 
+            <Route path="/items-by-user/:id" component={MyPost} /> 
+          </ItemContextProvider>
+        </AuthContextProvider>
       </Switch>
     </BrowserRouter>
   );

@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
-
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import Navbar from "../components/Navbar";
 
-
 const Login = (props) =>  {
+  const { validationErrors, error, login } = useContext(AuthContext);
   const [userInput, setUserInput] = useState({
     email: "",
     password: ""
   });
-  const [validationErrors, setValidationErrors] = useState([]);
-  const [error, setError] = useState("");
-
+  
   const onChange = e => {
     const value = e.target.value;
     setUserInput({
@@ -29,19 +25,7 @@ const Login = (props) =>  {
       password: userInput.password
     };
 
-    axios.post("/user/login", user)
-      .then(res => {
-        const { token } = res.data;
-        const decoded = jwt_decode(token);
-        localStorage.setItem("jwtToken", token);
-        localStorage.setItem("name", decoded.name);
-        localStorage.setItem("userId", decoded.id);
-        props.history.push("/");
-      })
-      .catch(err => {
-        setValidationErrors(err.response.data);
-        setError(err.response.data.error);
-      });
+    login(user);
   }
 
   return(
