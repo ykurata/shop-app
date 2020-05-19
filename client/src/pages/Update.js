@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const Update = (props) => {
   const [item, setItem] = useState({
