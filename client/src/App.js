@@ -10,7 +10,7 @@ import Form from "./pages/Form";
 import Update from "./components/Update";
 import Avatar from "./components/Avatar";
 import Photo from "./components/Photo";
-import Message from "./components/Message";
+import Message from "./pages/Message";
 import MessageDetail from "./components/MessageDetail";
 import PrivateRoute from "./components/PrivateRoute";
 

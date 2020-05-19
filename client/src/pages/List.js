@@ -5,6 +5,7 @@ import axios from 'axios';
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from '../components/Loading';
+import NoItem from '../components/NoItem';
 
 const List = () => {
   const [items, setItems] = useState([]);
@@ -110,9 +111,7 @@ const List = () => {
             <div className="list-group">
               {/* display message if there is no items  */}
               {filteredItems.length === 0 && loading === true ? (
-                <div className="text-center mt-5">
-                  <h5>No Items</h5>
-                </div>
+                <NoItem />
               ) : (
                 null
               )}

@@ -151,9 +151,7 @@ const Detail = (props) => {
           <div className="col-lg-3 align-items-center">
             <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment></h6>
             
-            <div className="mt-5 mb-2">
               <UserInfoCard {...data} />
-            </div>
             
             {/* hide message input for own post */}
             {parseInt(userId) === parseInt(itemUserId) ? (

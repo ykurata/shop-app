@@ -6,7 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
+import LoginUserCard from '../components/LoginUserCard';
 
 const Message = (props) => {
   const [userId] = useState(localStorage.getItem("userId"));
@@ -101,21 +102,7 @@ const Message = (props) => {
 
           {/* User's info */}
           <div className="col-lg-3 col-md-3">
-            <div className="user-info-container ">
-              <div className="user-info text-center m-auto">
-                <div className="user-icon">
-                  {user.image ? (
-                    <img src={user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                  ) : (
-                    <i className="fas fa-user-circle fa-5x"></i>
-                  )}
-                </div>
-                <div className="user-name">
-                  <h5>{user.usernme}</h5>
-                  <p className="user-joined-date mt-4">Joined <Moment format="MMM YYYY">{user.createdAt}</Moment></p>
-                </div>
-              </div>
-            </div>
+            <LoginUserCard user={user} />
           </div>
 
           <div className="col-lg-9 col-md-9">

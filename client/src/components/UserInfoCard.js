@@ -10,7 +10,7 @@ const UserInfoCard = (props) => {
   }
 
   return (
-    <div className="user-info-container">
+    <div className="user-info-container mt-5 mb-2">
       <div className="user-info text-center">
         <div className="user-icon">
           {props.userData.image ? (

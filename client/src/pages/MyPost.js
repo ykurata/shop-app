@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Moment from 'react-moment';
 
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from "../components/Loading";
+import NoItem from '../components/NoItem';
+import LoginUserCard from '../components/LoginUserCard';
 
 const MyPost = (props) => {
   const [items, setItems] = useState([]);
@@ -58,30 +59,14 @@ const MyPost = (props) => {
 
           {/* User's info */}
           <div className="col-lg-3 col-md-3">
-            <div className="user-info-container ">
-              <div className="user-info text-center m-auto">
-                <div className="user-icon">
-                  {user.image ? (
-                    <img src={user.image} className="rounded-circle detail-user-avatar" alt="avatar" />
-                  ) : (
-                    <i className="fas fa-user-circle fa-5x"></i>
-                  )}
-                </div>
-                <div className="user-name">
-                  <h5>{user.username}</h5>
-                  <p className="user-joined-date">Joined <Moment format="MMM YYYY">{user.createdAt}</Moment></p>
-                </div>
-              </div>
-            </div>
+            <LoginUserCard user={user} />
           </div>
 
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
               {items.length === 0 && loading === true ? (
-                <div className="text-center mt-5">
-                  <h5>No Items</h5>
-                </div>
+                <NoItem />
               ) : (
                 null
               )}
