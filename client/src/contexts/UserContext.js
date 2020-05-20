@@ -8,7 +8,7 @@ const UserContextProvider = (props) => {
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
 
-  useEffect(() => {
+  const getUserById = (userId) => {
     axios.get(`/user/get/${userId}`)
     .then(res => {
       setUser(res.data);
@@ -16,7 +16,7 @@ const UserContextProvider = (props) => {
     .catch(err => {
       console.log(err);
     });
-  }, [userId]);
+  }
 
   const logOut = e => {
     e.preventDefault();
@@ -24,8 +24,18 @@ const UserContextProvider = (props) => {
     window.location.href="/"
   }
 
+  const postAvatar = (formData) => {
+    axios.post("/user/image", formData, { headers: { Authorization: `Bearer ${token}`}})
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   return (
-    <UserContext.Provider value={{ user, token, userId, logOut }}>
+    <UserContext.Provider value={{ user, token, userId, getUserById, logOut, postAvatar }}>
       {props.children}
     </UserContext.Provider>
   );

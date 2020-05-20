@@ -1,38 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from "../components/Loading";
 import NoItem from '../components/NoItem';
 import LoginUserCard from '../components/LoginUserCard';
+import { UserContext } from '../contexts/UserContext';
+import { ItemContext } from '../contexts/ItemContext';
 
 const MyPost = (props) => {
-  const [items, setItems] = useState([]);
-  const [user, setUser] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { user, getUserById } = useContext(UserContext);
+  const { items, getItemsByUserId, loading } = useContext(ItemContext);
+ 
+  useEffect(() => {
+    getItemsByUserId(props.match.params.id);
+  });
 
   useEffect(() => {
-    axios.get(`/item/get/by-user/${props.match.params.id}`) 
-      .then(res => {
-        setItems(res.data);
-        setLoading(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [props.match.params.id])
-  
-  useEffect(() => {
-    axios.get(`/user/get/${props.match.params.id}`)
-      .then(res => {
-        setUser(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [props.match.params.id]);
+    getUserById(props.match.params.id);
+  });
   
   const card = items.map((item, i) => (
     <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
