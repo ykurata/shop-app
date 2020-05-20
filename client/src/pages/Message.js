@@ -10,10 +10,6 @@ import LoginUserCard from '../components/LoginUserCard';
 const Message = (props) => {
   const { user } = useContext(UserContext);
   const { conversations, loading, deleteConversation } = useContext(MessageContext);
-
-  const onClick = e => {
-    deleteConversation(e.target.value);
-  }
   
   let conversationList;
 
@@ -38,7 +34,7 @@ const Message = (props) => {
               <button 
                 id={con.id} 
                 className="btn btn-link delete-conversation pt-3"
-                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) deleteConversation(e) } }
+                onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) deleteConversation(con.id) } }
               ><i className="far fa-trash-alt"></i>&nbsp;Delete
               </button>
             </div>

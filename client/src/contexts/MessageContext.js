@@ -20,9 +20,10 @@ const MessageContextProvider = (props) => {
         console.log(err);
       });
   }, [token, userId]);
-
-  const deleteConversation = (e) => {
-    axios.delete(`/message/delete-conversation/${e.target.id}`, { headers: { Authorization: `Bearer ${token}`}})
+  
+  // Delete a selected conversation
+  const deleteConversation = (conId) => {
+    axios.delete(`/message/delete-conversation/${conId}`, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
         console.log("deleted conversation");
         window.location = '/message'
