@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
-import { MessageContext } from '../contexts/MessageContext';
-import { UserContext } from '../contexts/UserContext';
 import Navbar from "../components/Navbar";
 import LoginUserCard from '../components/LoginUserCard';
 import MessageCard from '../components/MessageCard';
 import Loading from "../components/Loading";
+import { MessageContext } from '../contexts/MessageContext';
+import { UserContext } from '../contexts/UserContext';
 
 const Message = (props) => {
   const { user } = useContext(UserContext);

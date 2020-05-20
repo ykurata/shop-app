@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
 import socketIOClient from "socket.io-client";
 
 import Navbar from "../components/Navbar";
 import LoginUserCard from '../components/LoginUserCard';
+import { MessageContext } from '../contexts/MessageContext';
+import { UserContext } from '../contexts/UserContext';
 
 const MessageDetail = (props) => {
+  const { getMessages, getConversation, messages, conInfo } = useContext(MessageContext);
+  const { getUserById, user } = useContext(UserContext);
   const [userId] = useState(localStorage.getItem("userId"));
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const [con, setCon] = useState("");
-  const [item, setItem] = useState("");
   const [newMessage, setNewMessage] = useState([]);
-  const [sender, setSender] = useState("");
-  const [receiver, setReceiver] = useState("");
-  const [senderId, setSenderId] = useState("");
 
   const messageChange = e => {
     setMessage(e.target.value);
@@ -30,39 +28,16 @@ const MessageDetail = (props) => {
     });
   }, [newMessage, socket])
 
-  useEffect(() =>{  
-    // Get a conversation
-    axios.get(`/message/get-conversation/${props.match.params.id}`, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        setCon(res.data);
-        setItem(res.data.Item);
-        setSenderId(res.data.senderId);
-        axios.all([
-          axios.get(`/user/get/${res.data.senderId}`),
-          axios.get(`/user/get/${res.data.receiverId}`)
-        ])
-        .then(axios.spread((sender, receiver) => {
-          setSender(sender.data);
-          setReceiver(receiver.data);
-        }))
-        .catch(err => {
-          console.log(err);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    
-    // Get messages in a conversation  
-    axios.get(`/message/get-message/${props.match.params.id}`, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        setMessages(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })  
-  }, [token, props.match.params.id])
-
+  useEffect(() => {
+    getMessages(props.match.params.id);
+    getConversation(props.match.params.id);
+  }, []);
+  
+  // Get a sender info
+  useEffect(() => {
+    getUserById(conInfo.senderId);
+  }, []);
+ 
   const createMessage = e => {
     e.preventDefault();
     const newMsg = {
@@ -81,33 +56,32 @@ const MessageDetail = (props) => {
     setMessage("");
   }
 
-  
-    const newMsg = newMessage.map((message, i) => (
-                      <div className="message" key={i}>
-                        <div className="talk-bubble-right float-right"> 
-                          <span>{message}</span>
-                        </div>
-                        <span className="float-right message-date"><Moment format="MM/DD/YYYY"></Moment></span>
+  const newMsg = newMessage.map((message, i) => (
+                    <div className="message" key={i}>
+                      <div className="talk-bubble-right float-right"> 
+                        <span>{message}</span>
                       </div>
-    ));  
+                      <span className="float-right message-date"><Moment format="MM/DD/YYYY"></Moment></span>
+                    </div>
+  ));  
 
-    const recievedMessage = messages.map((item) => {
-      if (parseInt(item.userId) === parseInt(userId)) {
-        return  <div className="message" key={item.id}>
-                  <div className="talk-bubble-right float-right"> 
-                    <span>{item.text}</span>
-                  </div>
-                  <span className="float-right message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
-                </div>
-      } else {
-        return <div className="message" key={item.id}>
-                <div className="talk-bubble-left float-left"> 
+  const recievedMessage = messages.map((item) => {
+    if (parseInt(item.userId) === parseInt(userId)) {
+      return  <div className="message" key={item.id}>
+                <div className="talk-bubble-right float-right"> 
                   <span>{item.text}</span>
                 </div>
-                <span className="float-left message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
-              </div> 
-      }
-    })
+                <span className="float-right message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
+              </div>
+    } else {
+      return <div className="message" key={item.id}>
+              <div className="talk-bubble-left float-left"> 
+                <span>{item.text}</span>
+              </div>
+              <span className="float-left message-date"><Moment format="MM/DD/YYYY">{item.createdAt}</Moment></span>
+            </div> 
+    }
+  });
 
   return (
     <div>
@@ -119,8 +93,8 @@ const MessageDetail = (props) => {
               <div className="card message-card" >
                 <div className="row message-card-row">
                   <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
-                    {item ? (
-                      <img src={item.image[0]} alt="..." className="rounded message-list-item-img" />
+                    {conInfo.item ? (
+                      <img src={conInfo.item.image[0]} alt="..." className="rounded message-list-item-img" />
                     ) : (
                       <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
                     )}
@@ -129,13 +103,13 @@ const MessageDetail = (props) => {
                     
                     <div className="row message-inside-row">
                       <div className="col-lg-9 col-md-9 col-sm-9 col-9">
-                      <p className="message-item-title"><b>{item.name}</b></p> 
+                      <p className="message-item-title"><b>{conInfo.item.name}</b></p> 
                       </div>
                       <div className="col-lg-3 col-md-3 col-sm-3 col-3">
-                        <p className="message-date"><Moment fromNow ago>{con.createdAt}</Moment>&nbsp;ago</p>
+                        <p className="message-date"><Moment fromNow ago>{conInfo.conversation.createdAt}</Moment>&nbsp;ago</p>
                       </div>
                     </div>
-                    <p className="message-username">$ {item.price}</p>
+                    <p className="message-username">$ {conInfo.item.price}</p>
                       
                   </div>
                 </div>
@@ -166,13 +140,13 @@ const MessageDetail = (props) => {
           </div>
 
           {/* Posted User's info */}
-          {parseInt(senderId) === parseInt(userId) ? (
+          {parseInt(conInfo.senderId) === parseInt(userId) ? (
             <div className="col-lg-3 col-md-3">
-              <LoginUserCard user={receiver} />
+              <LoginUserCard user={conInfo.receiver} />
             </div>
           ) : (
             <div className="col-lg-3 col-md-3">
-              <LoginUserCard user={sender} />
+              <LoginUserCard user={user} />
             </div>
           )}
           
