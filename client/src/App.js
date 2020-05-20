@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ItemContextProvider from './contexts/ItemContext';
 import AuthContextProvider from './contexts/AuthContext';
 import UserContextProvider from './contexts/UserContext';
+import MessageContextProvider from './contexts/MessageContext';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <AuthContextProvider>
           <UserContextProvider>
           <ItemContextProvider>
+          <MessageContextProvider> 
             <PrivateRoute path="/create" component={Form} /> 
             <PrivateRoute path="/update/:id" component={Update} /> 
             <PrivateRoute path="/profile-image" component={Avatar} /> 
@@ -36,6 +38,7 @@ function App() {
             <Route path="/signup" component={Signup} />
             <Route path="/detail/:id" component={Detail} /> 
             <Route path="/items-by-user/:id" component={MyPost} /> 
+          </MessageContextProvider>   
           </ItemContextProvider>
           </UserContextProvider>
         </AuthContextProvider>

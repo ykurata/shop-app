@@ -13,7 +13,7 @@ const Detail = (props) => {
   const [user, setUser] = useState("");
   const [image, setImage] = useState([]);
   const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("token"));
+  const [token] = useState(localStorage.getItem("jwtToken"));
   const [itemUserId, setItemUserId] = useState("");
   const [message, setMessage] = useState("");
   const [validationError, setValidationError] = useState("");

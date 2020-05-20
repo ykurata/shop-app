@@ -1,58 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Moment from 'react-moment';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-
+import { MessageContext } from '../contexts/MessageContext';
+import { UserContext } from '../contexts/UserContext';
 import Navbar from "../components/Navbar";
 import LoginUserCard from '../components/LoginUserCard';
 
 const Message = (props) => {
-  const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("jwtToken"));
-  const [user, setUser] = useState("");
-  const [conversations, setConversations] = useState([]);
-  const [loading, setLoading] = useState(false);
-  
-  // Get conversations
-  useEffect(() => {
-    axios.get(`/message/get-conversations/${userId}`, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        setConversations(res.data);
-        setLoading(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [token, userId]);
- 
-  useEffect(() => {
-    axios.get(`/user/get/${userId}`)
-      .then(res => {
-        setUser(res.data);
-        setLoading(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [userId]);
+  const { user } = useContext(UserContext);
+  const { conversations, loading, deleteConversation } = useContext(MessageContext);
 
-  const deleteConversation = e => {
-    axios.delete(`/message/delete-conversation/${e.target.id}`, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        toast("Successfully Deleted!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-        window.location = '/message'
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  const onClick = e => {
+    deleteConversation(e.target.value);
   }
-
+  
   let conversationList;
 
   conversationList = conversations.map(con => (
@@ -73,7 +35,6 @@ const Message = (props) => {
             </div>
             <div className="col-lg-2 col-md-2 col-sm-2 col-3 p-0">
               <p className="message-date" ><Moment fromNow ago>{con.createdAt}</Moment>&nbsp;ago</p>
-              <ToastContainer autoClose={2000} />
               <button 
                 id={con.id} 
                 className="btn btn-link delete-conversation pt-3"
