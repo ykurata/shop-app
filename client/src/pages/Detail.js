@@ -9,14 +9,10 @@ import UserInfoCard from "../components/UserInfoCard";
 import { ItemContext } from '../contexts/ItemContext';
 
 const Detail = (props) => {
-  const { getItemById, getItemsByUserId, itemUserId, byUserItems, itemInfo } = useContext(ItemContext);
+  const { getItemById, getItemsByUserId, itemUserId, postedUser, byUserItems, itemInfo } = useContext(ItemContext);
   const [item, setItem] = useState("");
-  const [items, setItems] = useState([]);
-  const [user, setUser] = useState("");
-  const [image, setImage] = useState([]);
   const [userId] = useState(localStorage.getItem("userId"));
   const [token] = useState(localStorage.getItem("jwtToken"));
-  // const [itemUserId, setItemUserId] = useState("");
   const [message, setMessage] = useState("");
   const [validationError, setValidationError] = useState("");
   
@@ -24,8 +20,6 @@ const Detail = (props) => {
     setMessage(e.target.value);
   }
   
-  console.log(itemInfo)
-
   useEffect(() => {
     getItemById(props.match.params.id);
   }, []);
@@ -33,29 +27,6 @@ const Detail = (props) => {
   useEffect(() => {
     getItemsByUserId(itemUserId);
   }, [itemUserId]);
-
-  useEffect(() => {
-    axios.get(`/item/get/${props.match.params.id}`) 
-      .then(res => {
-        setItem(res.data);
-        setImage(res.data.image);
-        // setItemUserId(res.data.userId);
-        axios.all([
-          axios.get(`/item/get/by-user/${res.data.userId}`),
-          axios.get(`/user/get/${res.data.userId}`)
-        ])
-        .then(axios.spread((item, user) => {
-          setItems(item.data);
-          setUser(user.data);
-        }))
-        .catch(err => {
-          console.log(err);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [props.match.params.id]);
 
   const sendMessage = e => {
     e.preventDefault();
@@ -91,9 +62,9 @@ const Detail = (props) => {
   }
   
   let data = {
-    itemData: item,
-    itemsData: items,
-    userData: user
+    itemData: itemInfo,
+    itemsData: byUserItems,
+    userData: postedUser
   }
   
   return (
@@ -103,16 +74,16 @@ const Detail = (props) => {
       <div className="container main-detail">
         <div className="row detatil-row">
           <div className="col-lg-9">
-            <h3 className="title">{item.name}</h3>
-            <h5 className="detail-price">${item.price}</h5>
+            <h3 className="title">{itemInfo.name}</h3>
+            <h5 className="detail-price">${itemInfo.price}</h5>
 
             {/* Image container */}
             <div className="row image-row">
               <div className="col-lg-8 col-md-9 img-container">
                 <div className="img-outer-element">
                   <div className="img-inner-element">
-                    {image && image[0] ? (
-                      <img src={image[0]} alt="..." className="rounded item-img" />
+                    {itemInfo.image && itemInfo.image[0] ? (
+                      <img src={itemInfo.image[0]} alt="..." className="rounded item-img" />
                     ) : (
                       <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                     )}
@@ -122,27 +93,27 @@ const Detail = (props) => {
               {/* Side thumbnails */}
               <div className="col-lg-4 col-md-3">
                 <div className="thumbnail-container row">
-                  {image && image[1] ? (
-                    <img className="thumbnail" alt="item" src={image[1]}></img>
+                  {itemInfo.image && itemInfo.image[1] ? (
+                    <img className="thumbnail" alt="item" src={itemInfo.image[1]}></img>
                   ) : (
                     <div className="thumbnail"></div>
                   )}
 
-                  {image && image[2] ? (
-                    <img className="thumbnail-margin-top"  alt="item" src={image[2]}></img>
+                  {itemInfo.image && itemInfo.image[2] ? (
+                    <img className="thumbnail-margin-top"  alt="item" src={itemInfo.image[2]}></img>
                   ) : (
                     <div className="thumbnail-margin-top "></div>
                   )}
 
-                  {image && image[3] ? (
-                    <img className="thumbnail-margin-top" alt="item" src={image[3]}></img>
+                  {itemInfo.image && itemInfo.image[3] ? (
+                    <img className="thumbnail-margin-top" alt="item" src={itemInfo.image[3]}></img>
                   ) : (
                     <div className="thumbnail-margin-top "></div>
                   )}
                 </div>
                 {/* display Update Image button only for logged in user's post */}
                 {parseInt(userId) === parseInt(itemUserId) ? (
-                  <a href={`/image/${item.id}`} className="btn btn-primary mt-3 mb-2" role="button">Update Image</a>
+                  <a href={`/image/${itemInfo.id}`} className="btn btn-primary mt-3 mb-2" role="button">Update Image</a>
                 ) : (
                   null
                 )}      
@@ -151,17 +122,17 @@ const Detail = (props) => {
 
             <div className="detail-description">
               <h4>Description</h4>
-              <p>{item.description}</p>
+              <p>{itemInfo.description}</p>
               {/* display Edit Post button only for logged in user's post */}
               {parseInt(userId) === parseInt(itemUserId) ? (
-                <a href={`/update/${item.id}`} className="btn btn-primary mt-2 mb-3" role="button">Edit Post</a>
+                <a href={`/update/${itemInfo.id}`} className="btn btn-primary mt-2 mb-3" role="button">Edit Post</a>
               ) : (
                 null
               )}
             </div>
           </div>
           <div className="col-lg-3 align-items-center">
-            <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment></h6>
+            <h6 className="posted-date">Posted &nbsp;<Moment format="MM/DD/YYYY">{itemInfo.createdAt}</Moment></h6>
             
               <UserInfoCard {...data} />
             

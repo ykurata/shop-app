@@ -8,6 +8,7 @@ const ItemContextProvider = (props) => {
   const [byUserItems, setByUserItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [itemInfo, setItemInfo] = useState("");
+  const [postedUser, setPostedUser] = useState("");
   const [itemUserId, setItemUserId] = useState("");
   
   // Get a list of all items
@@ -27,21 +28,8 @@ const ItemContextProvider = (props) => {
     axios.get(`/item/get/${itemId}`) 
     .then(res => {
       setItemInfo(res.data);
+      setPostedUser(res.data.User);
       setItemUserId(res.data.userId);
-      // setItem(res.data);
-      // setImage(res.data.image);
-      // setItemUserId(res.data.userId);
-      // axios.all([
-      //   axios.get(`/item/get/by-user/${res.data.userId}`),
-      //   axios.get(`/user/get/${res.data.userId}`)
-      // ])
-      // .then(axios.spread((item, user) => {
-      //   setItems(item.data);
-      //   setUser(user.data);
-      // }))
-      // .catch(err => {
-      //   console.log(err);
-      // });
     })
     .catch(err => {
       console.log(err);
@@ -65,6 +53,7 @@ const ItemContextProvider = (props) => {
       byUserItems, 
       loading, 
       itemInfo,
+      postedUser,
       itemUserId,
       getItemById,
       getItemsByUserId 
