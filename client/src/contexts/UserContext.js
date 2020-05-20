@@ -18,8 +18,14 @@ const UserContextProvider = (props) => {
     });
   }, [userId]);
 
+  const logOut = e => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href="/"
+  }
+
   return (
-    <UserContext.Provider value={{ user, token, userId }}>
+    <UserContext.Provider value={{ user, token, userId, logOut }}>
       {props.children}
     </UserContext.Provider>
   );

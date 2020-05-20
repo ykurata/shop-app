@@ -3,13 +3,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 
 const Navbar = () => {
-  const { user, token, userId } = useContext(UserContext);
- 
-  const logOut = e => {
-    e.preventDefault();
-    localStorage.clear();
-    window.location.href="/"
-  }
+  const { user, token, userId, logOut } = useContext(UserContext);
 
   let navlist;
 
