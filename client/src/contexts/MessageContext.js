@@ -41,7 +41,7 @@ const MessageContextProvider = (props) => {
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
   
   // Get messages by conversation Id
@@ -52,7 +52,7 @@ const MessageContextProvider = (props) => {
       })
       .catch(err => {
         console.log(err);
-      })  
+      });
   }
   
   // Delete a selected conversation

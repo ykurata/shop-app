@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,28 +6,40 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
 import UserInfoCard from "../components/UserInfoCard";
+import { ItemContext } from '../contexts/ItemContext';
 
 const Detail = (props) => {
+  const { getItemById, getItemsByUserId, itemUserId, byUserItems, itemInfo } = useContext(ItemContext);
   const [item, setItem] = useState("");
   const [items, setItems] = useState([]);
   const [user, setUser] = useState("");
   const [image, setImage] = useState([]);
   const [userId] = useState(localStorage.getItem("userId"));
   const [token] = useState(localStorage.getItem("jwtToken"));
-  const [itemUserId, setItemUserId] = useState("");
+  // const [itemUserId, setItemUserId] = useState("");
   const [message, setMessage] = useState("");
   const [validationError, setValidationError] = useState("");
-
+  
   const changeMessage = e => {
     setMessage(e.target.value);
   }
   
+  console.log(itemInfo)
+
+  useEffect(() => {
+    getItemById(props.match.params.id);
+  }, []);
+
+  useEffect(() => {
+    getItemsByUserId(itemUserId);
+  }, [itemUserId]);
+
   useEffect(() => {
     axios.get(`/item/get/${props.match.params.id}`) 
       .then(res => {
         setItem(res.data);
         setImage(res.data.image);
-        setItemUserId(res.data.userId);
+        // setItemUserId(res.data.userId);
         axios.all([
           axios.get(`/item/get/by-user/${res.data.userId}`),
           axios.get(`/user/get/${res.data.userId}`)

@@ -4,6 +4,7 @@ const router = express.Router();
 const authentication = require("./middleware/auth");
 
 const Item = require('../models').Item;
+const User = require('../models').User;
 const validateItemInput = require("../validation/item");
 
 
@@ -71,7 +72,14 @@ router.get("/all", (req, res) => {
 
 // GET by item's id
 router.get("/get/:id", (req, res) => {
-  Item.findOne({ where: { id: req.params.id }})
+  Item.findOne({ 
+      where: { id: req.params.id },
+      include: [
+        {
+          model: User
+        }
+      ]
+    })
     .then(item => {
       res.status(200).json(item);
     })

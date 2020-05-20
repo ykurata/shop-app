@@ -5,8 +5,10 @@ export const ItemContext = createContext();
 
 const ItemContextProvider = (props) => {
   const [allItems, setAllItems] = useState([]);
-  const [items, setItems] = useState([]);
+  const [byUserItems, setByUserItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [itemInfo, setItemInfo] = useState("");
+  const [itemUserId, setItemUserId] = useState("");
   
   // Get a list of all items
   useEffect(() => {
@@ -20,10 +22,36 @@ const ItemContextProvider = (props) => {
       });
   }, []);
 
+  // Get a specific item by item's id 
+  const getItemById = (itemId) => {
+    axios.get(`/item/get/${itemId}`) 
+    .then(res => {
+      setItemInfo(res.data);
+      setItemUserId(res.data.userId);
+      // setItem(res.data);
+      // setImage(res.data.image);
+      // setItemUserId(res.data.userId);
+      // axios.all([
+      //   axios.get(`/item/get/by-user/${res.data.userId}`),
+      //   axios.get(`/user/get/${res.data.userId}`)
+      // ])
+      // .then(axios.spread((item, user) => {
+      //   setItems(item.data);
+      //   setUser(user.data);
+      // }))
+      // .catch(err => {
+      //   console.log(err);
+      // });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   const getItemsByUserId = (userId) => {
     axios.get(`/item/get/by-user/${userId}`) 
       .then(res => {
-        setItems(res.data);
+        setByUserItems(res.data);
         setLoading(true);
       })
       .catch(err => {
@@ -32,7 +60,15 @@ const ItemContextProvider = (props) => {
   }
 
   return (
-    <ItemContext.Provider value={{ allItems, items, loading, getItemsByUserId }}>
+    <ItemContext.Provider value={{ 
+      allItems, 
+      byUserItems, 
+      loading, 
+      itemInfo,
+      itemUserId,
+      getItemById,
+      getItemsByUserId 
+    }}>
       {props.children}
     </ItemContext.Provider>
   )
