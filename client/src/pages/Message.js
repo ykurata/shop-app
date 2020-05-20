@@ -5,6 +5,7 @@ import { UserContext } from '../contexts/UserContext';
 import Navbar from "../components/Navbar";
 import LoginUserCard from '../components/LoginUserCard';
 import MessageCard from '../components/MessageCard';
+import Loading from "../components/Loading";
 
 const Message = (props) => {
   const { user } = useContext(UserContext);
@@ -29,7 +30,7 @@ const Message = (props) => {
 
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
-              {/* display message if there is no items  */}
+              {/* display No Message if there is no items  */}
               {conversations.length === 0 && loading === true ? (
                 <div className="text-center mt-5">
                   <h5>No Message</h5>
@@ -40,13 +41,7 @@ const Message = (props) => {
 
               {/* Loading Message */}
               {loading === false ? (
-                <div className="text-center mt-5">
-                  <div className="d-flex justify-content-center">
-                    <div className="spinner-border text-primary" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                </div>  
+                <Loading />
               ) : (
                 null
               )}
