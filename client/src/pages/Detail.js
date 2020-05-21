@@ -72,7 +72,7 @@ const Detail = (props) => {
                     {item.image && item.image[0] ? (
                       <img src={item.image[0]} alt="..." className="rounded item-img" />
                     ) : (
-                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                      <div className="detail-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                     )}
                   </div>
                 </div>
