@@ -22,7 +22,7 @@ const MessageDetail = (props) => {
     setMessage(e.target.value);
   }
 
-  const socket = socketIOClient();
+  const socket = socketIOClient('https://yasuko-shop-app.herokuapp.com/');
 
   useEffect(() => {
     socket.on("newMessage", msg => {
