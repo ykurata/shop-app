@@ -57,7 +57,7 @@ const MessageContextProvider = (props) => {
       });
   }
 
-  // Create a new conversation and the first message
+  // Create a new conversation and the first message in the conversation 
   const createConversation = (itemId, newConversation, newMessage) => {
     axios.post(`/message/create-conversation/${itemId}`, newConversation, { headers: { Authorization: `Bearer ${token}`}})
         .then(res => {

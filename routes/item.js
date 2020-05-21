@@ -91,7 +91,11 @@ router.get("/get/:id", (req, res) => {
 
 // Get a list of items by userId
 router.get("/items/:userId", (req, res) => {
-  Item.findAll({ where: { userId: req.params.userId}})
+  Item.findAll(
+    { 
+      where: { userId: req.params.userId}, 
+      order: [[ "createdAt", "DESC"]]
+    })
     .then(items => {
       res.status(200).json(items);
     })

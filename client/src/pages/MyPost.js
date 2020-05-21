@@ -11,7 +11,7 @@ import { ItemContext } from '../contexts/ItemContext';
 
 const MyPost = (props) => {
   const { user, getUserById } = useContext(UserContext);
-  const { items, getItemsByUserId, loading } = useContext(ItemContext);
+  const { byUserItems, getItemsByUserId, loading } = useContext(ItemContext);
  
   useEffect(() => {
     getItemsByUserId(props.match.params.id);
@@ -21,7 +21,7 @@ const MyPost = (props) => {
     getUserById(props.match.params.id);
   });
   
-  const card = items.map((item, i) => (
+  const card = byUserItems.map((item, i) => (
     <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
       <Item data={item} />
     </Link>
@@ -35,8 +35,8 @@ const MyPost = (props) => {
         <div className="row">
           <div className="col-lg-3 col-md-3"></div>
           <div className="col-lg-9 col-md-9">
-            {items.length > 0 ? (
-              <p>Showing {items.length} items</p>
+            {byUserItems.length > 0 ? (
+              <p>Showing {byUserItems.length} items</p>
             ) : (
               null
             )} 
@@ -52,7 +52,7 @@ const MyPost = (props) => {
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
-              {items.length === 0 && loading === true ? (
+              {byUserItems.length === 0 && loading === true ? (
                 <NoItem />
               ) : (
                 null
