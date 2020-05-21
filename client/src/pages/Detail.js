@@ -13,7 +13,7 @@ const Detail = (props) => {
   const [user, setUser] = useState("");
   const [image, setImage] = useState([]);
   const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("token"));
+  const [token] = useState(localStorage.getItem("jwtToken"));
   const [itemUserId, setItemUserId] = useState("");
   const [message, setMessage] = useState("");
   const [validationError, setValidationError] = useState("");
@@ -102,7 +102,7 @@ const Detail = (props) => {
                     {image && image[0] ? (
                       <img src={image[0]} alt="..." className="rounded item-img" />
                     ) : (
-                      <div className="no-image text-center"><i className="fas fa-image fa-5x"></i></div>
+                      <div className="detail-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                     )}
                   </div>
                 </div>

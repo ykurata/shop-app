@@ -108,7 +108,6 @@ const MessageDetail = (props) => {
               </div> 
       }
     })
-
   return (
     <div>
       <Navbar></Navbar>
@@ -119,7 +118,7 @@ const MessageDetail = (props) => {
               <div className="card message-card" >
                 <div className="row message-card-row">
                   <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
-                    {item ? (
+                    {item.image ? (
                       <img src={item.image[0]} alt="..." className="rounded message-list-item-img" />
                     ) : (
                       <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
