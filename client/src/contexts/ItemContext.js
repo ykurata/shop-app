@@ -36,8 +36,9 @@ const ItemContextProvider = (props) => {
     });
   }
 
+  // Get a list of items by user Id
   const getItemsByUserId = (userId) => {
-    axios.get(`/item/get/by-user/${userId}`) 
+    axios.get(`/item/items/${userId}`) 
       .then(res => {
         setByUserItems(res.data);
         setLoading(true);

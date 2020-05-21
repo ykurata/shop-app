@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import Moment from 'react-moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
 import UserInfoCard from "../components/UserInfoCard";
 import { ItemContext } from '../contexts/ItemContext';
+import { MessageContext } from '../contexts/MessageContext';
 
 const Detail = (props) => {
-  const { getItemById, getItemsByUserId, itemUserId, postedUser, byUserItems, itemInfo } = useContext(ItemContext);
-  const [item, setItem] = useState("");
+  const { getItemById, 
+          getItemsByUserId, 
+          itemUserId, 
+          postedUser, 
+          byUserItems, 
+          itemInfo } = useContext(ItemContext);
+  const { validationError, createConversation } = useContext(MessageContext);      
   const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("jwtToken"));
   const [message, setMessage] = useState("");
-  const [validationError, setValidationError] = useState("");
+  const [error, setError] = useState("");
   
   const changeMessage = e => {
     setMessage(e.target.value);
@@ -23,7 +27,7 @@ const Detail = (props) => {
   useEffect(() => {
     getItemById(props.match.params.id);
   }, []);
-
+  
   useEffect(() => {
     getItemsByUserId(itemUserId);
   }, [itemUserId]);
@@ -31,7 +35,7 @@ const Detail = (props) => {
   const sendMessage = e => {
     e.preventDefault();
     if (message === "") {
-      setValidationError("Please enter a message");
+      setError("Please enter a message");
     } else {
       const newConversation = {
         receiverId: itemUserId
@@ -39,24 +43,7 @@ const Detail = (props) => {
       const newMessage = {
         text: message
       }
-    
-      axios.post(`/message/create-conversation/${props.match.params.id}`, newConversation, { headers: { Authorization: `Bearer ${token}`}})
-        .then(res => {
-          axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${token}`}})
-            .then(res => {
-              console.log(res.data);
-              toast("Successfully sent a message!", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 2000,
-              });
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        })
-        .catch(err => {
-          setValidationError(err.response.data.error);
-        }); 
+      createConversation(props.match.params.id, newConversation, newMessage);
     }
     setMessage("");
   }
@@ -143,6 +130,11 @@ const Detail = (props) => {
               <span>
                 {validationError? (
                   <p className="error">{validationError}</p>
+                ):(
+                  null
+                )}
+                {error? (
+                  <p className="error">{error}</p>
                 ):(
                   null
                 )}

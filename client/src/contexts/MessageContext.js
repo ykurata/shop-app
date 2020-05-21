@@ -1,5 +1,6 @@
 import React,  { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const MessageContext = createContext();
 
@@ -13,6 +14,7 @@ const MessageContextProvider = (props) => {
   });
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [validationError, setValidationError] = useState("");
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
   
@@ -54,6 +56,27 @@ const MessageContextProvider = (props) => {
         console.log(err);
       });
   }
+
+  // Create a new conversation and the first message
+  const createConversation = (itemId, newConversation, newMessage) => {
+    axios.post(`/message/create-conversation/${itemId}`, newConversation, { headers: { Authorization: `Bearer ${token}`}})
+        .then(res => {
+          axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${token}`}})
+            .then(res => {
+              console.log(res.data);
+              toast("Successfully sent a message!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+              });    
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+        .catch(err => {
+          setValidationError(err.response.data.error);
+        }); 
+  }
   
   // Delete a selected conversation
   const deleteConversation = (conId) => {
@@ -76,9 +99,11 @@ const MessageContextProvider = (props) => {
         token, 
         messages, 
         conInfo,
+        validationError,
         getMessages, 
         deleteConversation,
-        getConversation
+        getConversation,
+        createConversation,
       }}
       >
       {props.children}
