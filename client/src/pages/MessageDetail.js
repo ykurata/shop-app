@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import Moment from 'react-moment';
 import socketIOClient from "socket.io-client";
 
@@ -12,7 +11,6 @@ const MessageDetail = (props) => {
   const { getMessages, getConversation, createNewMessage, messages, conInfo } = useContext(MessageContext);
   const { getUserById, user } = useContext(UserContext);
   const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("jwtToken"));
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState([]);
 
