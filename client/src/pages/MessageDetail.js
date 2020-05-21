@@ -9,7 +9,7 @@ import { MessageContext } from '../contexts/MessageContext';
 import { UserContext } from '../contexts/UserContext';
 
 const MessageDetail = (props) => {
-  const { getMessages, getConversation, messages, conInfo } = useContext(MessageContext);
+  const { getMessages, getConversation, createNewMessage, messages, conInfo } = useContext(MessageContext);
   const { getUserById, user } = useContext(UserContext);
   const [userId] = useState(localStorage.getItem("userId"));
   const [token] = useState(localStorage.getItem("jwtToken"));
@@ -45,13 +45,7 @@ const MessageDetail = (props) => {
       userId: userId,
       text: message
     }
-    axios.post(`/message/${props.match.params.id}`, newMsg, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    createNewMessage(props.match.params.id, newMsg);
     socket.emit("newMessage", message);
     setMessage("");
   }

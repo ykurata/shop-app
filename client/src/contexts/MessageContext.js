@@ -77,6 +77,17 @@ const MessageContextProvider = (props) => {
           setValidationError(err.response.data.error);
         }); 
   }
+
+  // Create a new message by conversation Id
+  const createNewMessage = (conId, newMsg) => {
+    axios.post(`/message/${conId}`, newMsg, { headers: { Authorization: `Bearer ${token}`}})
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   
   // Delete a selected conversation
   const deleteConversation = (conId) => {
@@ -104,6 +115,7 @@ const MessageContextProvider = (props) => {
         deleteConversation,
         getConversation,
         createConversation,
+        createNewMessage
       }}
       >
       {props.children}
