@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
+import { ItemContext } from '../contexts/ItemContext';
 
 const Update = (props) => {
+  const { updateItem, errors } = useContext(ItemContext);
   const [item, setItem] = useState({
     name: "",
     category: "",
@@ -13,15 +15,13 @@ const Update = (props) => {
     description: "",
     itemId: ""
   })
-  const [errors, setErrors] = useState([]);
-  const [token] = useState(localStorage.getItem("jwtToken"));
-
+  
   const onChange = e => {
     setItem({
       ...item, [e.target.name]: e.target.value
     });
   }
-
+  
   useEffect(() => {
     axios.get(`/item/get/${props.match.params.id}`)
       .then(res => {
@@ -40,24 +40,9 @@ const Update = (props) => {
 
   const onSubmit = e => {
     e.preventDefault();
+    const updatedItem = item;
 
-    const updatedItem = {
-      name: item.name,
-      category: item.category,
-      price: item.price,
-      description: item.description
-    }
-
-    axios.put(`/item/update/${props.match.params.id}`, updatedItem, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        toast("Successfully Updated!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-      })
-      .catch(err => {
-        setErrors(err.response.data);
-      });
+    updateItem(props.match.params.id, updatedItem);
   }
 
   return (

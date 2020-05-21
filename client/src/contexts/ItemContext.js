@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const ItemContext = createContext();
 
@@ -7,9 +8,11 @@ const ItemContextProvider = (props) => {
   const [allItems, setAllItems] = useState([]);
   const [byUserItems, setByUserItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [itemInfo, setItemInfo] = useState("");
+  const [item, setItem] = useState({});
   const [postedUser, setPostedUser] = useState("");
   const [itemUserId, setItemUserId] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [token] = useState(localStorage.getItem("jwtToken"));
   
   // Get a list of all items
   useEffect(() => {
@@ -27,7 +30,7 @@ const ItemContextProvider = (props) => {
   const getItemById = (itemId) => {
     axios.get(`/item/get/${itemId}`) 
     .then(res => {
-      setItemInfo(res.data);
+      setItem(res.data);
       setPostedUser(res.data.User);
       setItemUserId(res.data.userId);
     })
@@ -48,16 +51,32 @@ const ItemContextProvider = (props) => {
       });
   }
 
+  // Updated an item 
+  const updateItem = (itemId, updatedItem) => {
+    axios.put(`/item/update/${itemId}`, updatedItem, { headers: { Authorization: `Bearer ${token}`}})
+    .then(res => {
+      toast("Successfully Updated!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+    })
+    .catch(err => {
+      setErrors(err.response.data);
+    });
+  }
+
   return (
     <ItemContext.Provider value={{ 
       allItems, 
       byUserItems, 
       loading, 
-      itemInfo,
+      item,
       postedUser,
       itemUserId,
+      errors,
       getItemById,
-      getItemsByUserId 
+      getItemsByUserId,
+      updateItem,
     }}>
       {props.children}
     </ItemContext.Provider>
