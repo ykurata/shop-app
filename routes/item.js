@@ -60,7 +60,8 @@ router.put("/update/:id", authentication, (req, res) => {
 
 // GET all items 
 router.get("/all", (req, res) => {
-  Item.findAll({ order: [[ "createdAt", "DESC"]]})
+  Item.findAll({ 
+    order: [[ "createdAt", "DESC"]]})
     .then(items => {
       res.status(200).json(items);
     })
@@ -94,7 +95,12 @@ router.get("/items/:userId", (req, res) => {
   Item.findAll(
     { 
       where: { userId: req.params.userId}, 
-      order: [[ "createdAt", "DESC"]]
+      order: [[ "createdAt", "DESC"]],
+      include: [
+        {
+          model: User
+        }
+      ]
     })
     .then(items => {
       res.status(200).json(items);

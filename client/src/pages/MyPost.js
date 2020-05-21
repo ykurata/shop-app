@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navbar from "../components/Navbar";
@@ -10,22 +10,41 @@ import { UserContext } from '../contexts/UserContext';
 import { ItemContext } from '../contexts/ItemContext';
 
 const MyPost = (props) => {
-  const { user, getUserById } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { byUserItems, getItemsByUserId, loading } = useContext(ItemContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+
+  const handleClick = e => {
+    setCurrentPage(Number(e.target.id));
+  }
  
   useEffect(() => {
     getItemsByUserId(props.match.params.id);
-  });
+  }, []); 
 
-  useEffect(() => {
-    getUserById(props.match.params.id);
-  });
+  // Logic for displaying items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = byUserItems.slice(indexOfFirstItem, indexOfLastItem);
   
-  const card = byUserItems.map((item, i) => (
+  const card = currentItems.map((item, i) => (
     <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
       <Item data={item} />
     </Link>
   ));
+
+  // Logic for displaying page numbers
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(byUserItems.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+    
+  const renderPageNumbers = pageNumbers.map(number => {
+    return (
+      <li key={number} id={number} onClick={handleClick}>{number}</li>
+    );
+  });
 
   return (
     <div>
@@ -69,6 +88,11 @@ const MyPost = (props) => {
             </div>
           </div>
         </div>
+        <div className="container-fluid text-center">
+          <ul className="pagination justify-content-center">
+            {renderPageNumbers}
+          </ul>
+        </div>  
       </div>
     </div>
   );
