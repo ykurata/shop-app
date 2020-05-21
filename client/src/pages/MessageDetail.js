@@ -18,7 +18,7 @@ const MessageDetail = (props) => {
     setMessage(e.target.value);
   }
 
-  const socket = socketIOClient("http://localhost:5000");
+  const socket = socketIOClient('http://localhost:5000');
 
   useEffect(() => {
     socket.on("newMessage", msg => {

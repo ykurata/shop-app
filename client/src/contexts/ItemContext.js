@@ -51,6 +51,22 @@ const ItemContextProvider = (props) => {
       });
   }
 
+  // Create a new item
+  const createItem = (item) => {
+    axios.post("/item", item, { headers: { Authorization: `Bearer ${token}`}})
+      .then(res => {
+        console.log(res.data);
+        window.location = `/image/${res.data.id}`;
+        toast("Successfully Submitted!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+        });
+      })
+      .catch(err => {
+        setErrors(err.response.data);
+      });
+  }
+
   // Updated an item 
   const updateItem = (itemId, updatedItem) => {
     axios.put(`/item/update/${itemId}`, updatedItem, { headers: { Authorization: `Bearer ${token}`}})
@@ -76,6 +92,7 @@ const ItemContextProvider = (props) => {
       errors,
       getItemById,
       getItemsByUserId,
+      createItem,
       updateItem,
     }}>
       {props.children}
