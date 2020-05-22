@@ -1,17 +1,27 @@
-import React,  { createContext, useState } from 'react';
+import React,  { createContext, useState, useReducer } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
+import { UserReducer } from '../reducers/UserReducer';
 
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
-  const [user, setUser] = useState("");
+  const initialState = {
+    user: ""
+  }
+  const [state, dispatch] = useReducer(UserReducer, initialState);
+  const [loading, setLoading] = useState(false);
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
 
   const getUserById = (userId) => {
     axios.get(`/user/get/${userId}`)
     .then(res => {
-      setUser(res.data);
+      dispatch({
+        type: 'GET_USER_BY_ID',
+        payload: res.data,
+      });
     })
     .catch(err => {
       console.log(err);
@@ -19,9 +29,18 @@ const UserContextProvider = (props) => {
   }
 
   const postAvatar = (formData) => {
+    setLoading(true);
     axios.post("/user/image", formData, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        console.log(res.data);
+        dispatch({
+          type: 'POST_AVATAR',
+          payload: res.data,
+        });
+        setLoading(false);
+        toast("Successfully Submitted!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+        });
       })
       .catch(err => {
         console.log(err);
@@ -29,7 +48,14 @@ const UserContextProvider = (props) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, token, userId, getUserById, postAvatar }}>
+    <UserContext.Provider 
+      value={{ 
+        user: state.user, 
+        loading,
+        token, 
+        userId, 
+        getUserById, 
+        postAvatar }}>
       {props.children}
     </UserContext.Provider>
   );

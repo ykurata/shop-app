@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
+import { UserContext } from '../contexts/UserContext';
 
 const Avatar = () => {
+  const { postAvatar, loading } = useContext(UserContext);
   const [image, setImage] = useState(null);
   const [sendImage, setSendImage] = useState(null);
-  const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  
+  // const [setIsLoading] = useState(false);
+
   const imageChange = e => {
     setImage(URL.createObjectURL(e.target.files[0]));
     setSendImage( e.target.files[0]);
@@ -34,24 +35,10 @@ const Avatar = () => {
     if (sendImage === null) {
       setError("Please select an image");
     }
-    
-    setIsLoading(true);
 
     const formData = new FormData();
     formData.append("image", sendImage);
-
-    axios.post("/user/image", formData, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        setIsLoading(false);
-        console.log(res.data);
-        toast("Successfully Submitted!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    postAvatar(formData);
   }
 
   return (
@@ -92,13 +79,13 @@ const Avatar = () => {
                   </label>
                 </div>
                 <div className="mt-3">
-                  {isLoading === false ? (
-                    <button className="btn btn-primary" type="submit" style={{ width: "200px"}}>Submit</button>
-                  ) : (
+                  {loading === true ? (
                     <button className="btn btn-primary" type="button" disabled style={{ width: "200px"}}>
                     <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       Loading...
                     </button>
+                  ) : (
+                    <button className="btn btn-primary" type="submit" style={{ width: "200px"}}>Submit</button>
                   )}
                 </div>
                 <ToastContainer autoClose={2000} />
