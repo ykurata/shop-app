@@ -75,6 +75,7 @@ const MessageDetail = (props) => {
     }
   });
 
+
   return (
     <div>
       <Navbar></Navbar>
