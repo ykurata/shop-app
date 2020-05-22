@@ -7,7 +7,7 @@ const Navbar = () => {
   
   useEffect(() => {
     getUserById(userId);
-  }, [])
+  }, []);
 
   let navlist;
 

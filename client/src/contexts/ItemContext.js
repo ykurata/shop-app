@@ -15,7 +15,7 @@ const ItemContextProvider = (props) => {
     itemUserId: "",
     byUserItems: []
   }
-  const [state, dispatch] = useReducer(itemReducer, initialState)
+  const [state, dispatch] = useReducer(itemReducer, initialState);
   const [errors, setErrors] = useState([]);
   const [token] = useState(localStorage.getItem("jwtToken"));
   
