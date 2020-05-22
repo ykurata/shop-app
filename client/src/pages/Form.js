@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import React, { useState, useContext } from 'react';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
+import { ItemContext } from '../contexts/ItemContext';
 
 const Form = () => {
+  const { createItem, errors } = useContext(ItemContext);
   const [newItem, setNewItem] = useState({
     name: "",
     category: "",
     price: "",
     description: ""
   });
-  const [errors, setErrors] = useState([]);
-  const [token] = useState(localStorage.getItem("jwtToken"));
 
   const onChange = e => {
     setNewItem({
@@ -30,19 +29,7 @@ const Form = () => {
       price: newItem.price,
       description: newItem.description
     }
-
-    axios.post("/item", item, { headers: { Authorization: `Bearer ${token}`}})
-      .then(res => {
-        console.log(res.data);
-        window.location = `/image/${res.data.id}`;
-        toast("Successfully Submitted!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-      })
-      .catch(err => {
-        setErrors(err.response.data);
-      });
+    createItem(item);
   }
 
 

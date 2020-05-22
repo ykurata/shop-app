@@ -1,54 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import Moment from 'react-moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from "../components/Navbar";
 import UserInfoCard from "../components/UserInfoCard";
+import { ItemContext } from '../contexts/ItemContext';
+import { MessageContext } from '../contexts/MessageContext';
 
 const Detail = (props) => {
-  const [item, setItem] = useState("");
-  const [items, setItems] = useState([]);
-  const [user, setUser] = useState("");
-  const [image, setImage] = useState([]);
+  const { getItemById, 
+          getItemsByUserId, 
+          itemUserId, 
+          postedUser, 
+          byUserItems, 
+          item } = useContext(ItemContext);
+  const { validationError, createConversation } = useContext(MessageContext);      
   const [userId] = useState(localStorage.getItem("userId"));
-  const [token] = useState(localStorage.getItem("jwtToken"));
-  const [itemUserId, setItemUserId] = useState("");
   const [message, setMessage] = useState("");
-  const [validationError, setValidationError] = useState("");
-
+  const [error, setError] = useState("");
+  
   const changeMessage = e => {
     setMessage(e.target.value);
   }
   
   useEffect(() => {
-    axios.get(`/item/get/${props.match.params.id}`) 
-      .then(res => {
-        setItem(res.data);
-        setImage(res.data.image);
-        setItemUserId(res.data.userId);
-        axios.all([
-          axios.get(`/item/get/by-user/${res.data.userId}`),
-          axios.get(`/user/get/${res.data.userId}`)
-        ])
-        .then(axios.spread((item, user) => {
-          setItems(item.data);
-          setUser(user.data);
-        }))
-        .catch(err => {
-          console.log(err);
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [props.match.params.id]);
+    getItemById(props.match.params.id);
+  }, []);
+  
+  useEffect(() => {
+    getItemsByUserId(itemUserId);
+  }, [itemUserId]);
 
   const sendMessage = e => {
     e.preventDefault();
     if (message === "") {
-      setValidationError("Please enter a message");
+      setError("Please enter a message");
     } else {
       const newConversation = {
         receiverId: itemUserId
@@ -56,32 +43,15 @@ const Detail = (props) => {
       const newMessage = {
         text: message
       }
-    
-      axios.post(`/message/create-conversation/${props.match.params.id}`, newConversation, { headers: { Authorization: `Bearer ${token}`}})
-        .then(res => {
-          axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${token}`}})
-            .then(res => {
-              console.log(res.data);
-              toast("Successfully sent a message!", {
-                position: toast.POSITION.TOP_RIGHT,
-                autoClose: 2000,
-              });
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        })
-        .catch(err => {
-          setValidationError(err.response.data.error);
-        }); 
+      createConversation(props.match.params.id, newConversation, newMessage);
     }
     setMessage("");
   }
   
   let data = {
     itemData: item,
-    itemsData: items,
-    userData: user
+    itemsData: byUserItems,
+    userData: postedUser
   }
   
   return (
@@ -99,8 +69,8 @@ const Detail = (props) => {
               <div className="col-lg-8 col-md-9 img-container">
                 <div className="img-outer-element">
                   <div className="img-inner-element">
-                    {image && image[0] ? (
-                      <img src={image[0]} alt="..." className="rounded item-img" />
+                    {item.image && item.image[0] ? (
+                      <img src={item.image[0]} alt="..." className="rounded item-img" />
                     ) : (
                       <div className="detail-no-image text-center"><i className="fas fa-image fa-5x"></i></div>
                     )}
@@ -110,20 +80,20 @@ const Detail = (props) => {
               {/* Side thumbnails */}
               <div className="col-lg-4 col-md-3">
                 <div className="thumbnail-container row">
-                  {image && image[1] ? (
-                    <img className="thumbnail" alt="item" src={image[1]}></img>
+                  {item.image && item.image[1] ? (
+                    <img className="thumbnail" alt="item" src={item.image[1]}></img>
                   ) : (
                     <div className="thumbnail"></div>
                   )}
 
-                  {image && image[2] ? (
-                    <img className="thumbnail-margin-top"  alt="item" src={image[2]}></img>
+                  {item.image && item.image[2] ? (
+                    <img className="thumbnail-margin-top"  alt="item" src={item.image[2]}></img>
                   ) : (
                     <div className="thumbnail-margin-top "></div>
                   )}
 
-                  {image && image[3] ? (
-                    <img className="thumbnail-margin-top" alt="item" src={image[3]}></img>
+                  {item.image && item.image[3] ? (
+                    <img className="thumbnail-margin-top" alt="item" src={item.image[3]}></img>
                   ) : (
                     <div className="thumbnail-margin-top "></div>
                   )}
@@ -160,6 +130,11 @@ const Detail = (props) => {
               <span>
                 {validationError? (
                   <p className="error">{validationError}</p>
+                ):(
+                  null
+                )}
+                {error? (
+                  <p className="error">{error}</p>
                 ):(
                   null
                 )}

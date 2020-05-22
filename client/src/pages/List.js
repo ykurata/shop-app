@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import Navbar from "../components/Navbar";
 import Item from '../components/Item';
 import Loading from '../components/Loading';
 import NoItem from '../components/NoItem';
+import { ItemContext } from '../contexts/ItemContext';
 
 const List = () => {
-  const [items, setItems] = useState([]);
+  const { allItems, loading } = useContext(ItemContext);
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
-
+  
   const onChange = e => {
     setSearch(e.target.value);
   }
@@ -22,18 +21,7 @@ const List = () => {
     setCurrentPage(Number(e.target.id));
   }
 
-  useEffect(() =>{
-    axios.get("/item/all") 
-      .then(res => {
-        setItems(res.data);
-        setLoading(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
-  const filteredItems = items.filter((item) => {
+  const filteredItems = allItems.filter((item) => {
     const query = search.toLowerCase();
     return (
       item.name.toLowerCase().indexOf(query) >= 0 ||

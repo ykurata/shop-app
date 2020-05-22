@@ -4,6 +4,7 @@ const router = express.Router();
 const authentication = require("./middleware/auth");
 
 const Item = require('../models').Item;
+const User = require('../models').User;
 const validateItemInput = require("../validation/item");
 
 
@@ -59,7 +60,8 @@ router.put("/update/:id", authentication, (req, res) => {
 
 // GET all items 
 router.get("/all", (req, res) => {
-  Item.findAll({ order: [[ "createdAt", "DESC"]]})
+  Item.findAll({ 
+    order: [[ "createdAt", "DESC"]]})
     .then(items => {
       res.status(200).json(items);
     })
@@ -71,7 +73,14 @@ router.get("/all", (req, res) => {
 
 // GET by item's id
 router.get("/get/:id", (req, res) => {
-  Item.findOne({ where: { id: req.params.id }})
+  Item.findOne({ 
+      where: { id: req.params.id },
+      include: [
+        {
+          model: User
+        }
+      ]
+    })
     .then(item => {
       res.status(200).json(item);
     })
@@ -81,9 +90,18 @@ router.get("/get/:id", (req, res) => {
 });
 
 
-// Get list of items by userId
-router.get("/get/by-user/:id", (req, res) => {
-  Item.findAll({ where: { userId: req.params.id}})
+// Get a list of items by userId
+router.get("/items/:userId", (req, res) => {
+  Item.findAll(
+    { 
+      where: { userId: req.params.userId}, 
+      order: [[ "createdAt", "DESC"]],
+      include: [
+        {
+          model: User
+        }
+      ]
+    })
     .then(items => {
       res.status(200).json(items);
     })
