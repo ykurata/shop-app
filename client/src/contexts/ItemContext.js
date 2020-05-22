@@ -1,42 +1,57 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
+import { itemReducer } from '../reducers/ItemReducer';
 
 export const ItemContext = createContext();
 
 const ItemContextProvider = (props) => {
-  const [allItems, setAllItems] = useState([]);
+  const initialState = {
+    allItems: [],
+    loading: false, 
+    item: "",
+    postedUser: "",
+    itemUserId: ""
+  }
+  const [state, dispatch] = useReducer(itemReducer, initialState)
   const [byUserItems, setByUserItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [item, setItem] = useState({});
-  const [postedUser, setPostedUser] = useState("");
-  const [itemUserId, setItemUserId] = useState("");
   const [errors, setErrors] = useState([]);
   const [token] = useState(localStorage.getItem("jwtToken"));
-  
+
   // Get a list of all items
   useEffect(() => {
     axios.get("/item/all") 
       .then(res => {
-        setAllItems(res.data);
-        setLoading(true);
+        dispatch({
+          type: 'GET_ALL_ITEMS',
+          payload: res.data,
+        })
       })
       .catch(err => {
-        console.log(err);
+        dispatch({
+          type: 'ITEM_ERROR',
+          payload: 'Somwthing went wrong'
+        });
       });
   }, []);
 
   // Get a specific item by item's id 
   const getItemById = (itemId) => {
     axios.get(`/item/get/${itemId}`) 
-    .then(res => {
-      setItem(res.data);
-      setPostedUser(res.data.User);
-      setItemUserId(res.data.userId);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .then(res => {
+        dispatch({
+          type: 'GET_ITEM_BY_ID',
+          payload: res.data
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: 'ITEM_ERROR',
+          payload: 'Somwthing went wrong'
+        });
+      });
   }
 
   // Get a list of items by user Id
@@ -83,12 +98,12 @@ const ItemContextProvider = (props) => {
 
   return (
     <ItemContext.Provider value={{ 
-      allItems, 
+      allItems: state.allItems, 
+      loading: state.loading,
       byUserItems, 
-      loading, 
-      item,
-      postedUser,
-      itemUserId,
+      item: state.item,
+      postedUser: state.postedUser,
+      itemUserId: state.itemUserId,
       errors,
       getItemById,
       getItemsByUserId,
