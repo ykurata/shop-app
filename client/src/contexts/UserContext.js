@@ -18,12 +18,6 @@ const UserContextProvider = (props) => {
     });
   }
 
-  const logOut = e => {
-    e.preventDefault();
-    localStorage.clear();
-    window.location.href="/"
-  }
-
   const postAvatar = (formData) => {
     axios.post("/user/image", formData, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
@@ -35,7 +29,7 @@ const UserContextProvider = (props) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, token, userId, getUserById, logOut, postAvatar }}>
+    <UserContext.Provider value={{ user, token, userId, getUserById, postAvatar }}>
       {props.children}
     </UserContext.Provider>
   );

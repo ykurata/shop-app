@@ -47,6 +47,12 @@ const AuthContextProvider = (props) => {
         });
       });
   }
+
+  const logOut = e => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href="/"
+  }
   
   return (
     <AuthContext.Provider 
@@ -54,7 +60,8 @@ const AuthContextProvider = (props) => {
         validationErrors: state.validationErrors, 
         error: state.error, 
         login, 
-        signup }}>
+        signup,
+        logOut }}>
       {props.children}
     </AuthContext.Provider>
   );
