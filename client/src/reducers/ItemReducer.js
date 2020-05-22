@@ -13,6 +13,22 @@ export const itemReducer = (state, action) => {
         postedUser: action.payload.User,
         itemUserId: action.payload.userId,
       }
+    case 'GET_ITEMS_BY_USERID':
+      return {
+        ...state, 
+        byUserItems: action.payload,
+        loading: true
+      }  
+    case 'ADD_ITEM':
+      return {
+        ...state, 
+        item: action.payload,
+      }   
+    case 'UPDATE_ITEM':
+      return {
+        ...state, 
+        item: action.payload,
+      }      
     case 'ITEM_ERROR':
       return {
         ...state,
