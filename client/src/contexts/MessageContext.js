@@ -22,7 +22,7 @@ const MessageContextProvider = (props) => {
   const [state, dispatch] = useReducer(MessageReducer, initialState);
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
-  console.log(state)
+  
   // Get login user's conversations
   useEffect(() => {
     axios.get(`/message/get-conversations/${userId}`, { headers: { Authorization: `Bearer ${token}`}})
@@ -87,7 +87,7 @@ const MessageContextProvider = (props) => {
         .catch(err => {
           dispatch({
             type: 'MESSAGE_ERROR',
-            payload: err.response.data
+            payload: err.response.data.error
           })
         }); 
   }
@@ -104,7 +104,7 @@ const MessageContextProvider = (props) => {
       .catch(err => {
         dispatch({
           type: 'MESSAGE_ERROR',
-          payload: err.response.data
+          payload: "Something went wrong"
         })
       });
   }
