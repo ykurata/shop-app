@@ -1,48 +1,67 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useReducer } from 'react';
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
+
+import { AuthReducer } from '../reducers/AuthReducer';
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
+  const initialState = {
+    token: "",
+    userId: "",
+    validationErrors: [],
+    error: ""
+  }
+  const [state, dispatch] = useReducer(AuthReducer, initialState);
   
-  const [validationErrors, setValidationErrors ] = useState([]);
-  const [error, setError ] = useState("");
- 
   const login = (credentials) => {
     axios.post("/user/login", credentials)
       .then(res => {
-        const { token } = res.data;
-        const decoded = jwt_decode(token);
-        localStorage.setItem("jwtToken", token);
-        localStorage.setItem("name", decoded.name);
-        localStorage.setItem("userId", decoded.id);
+        dispatch({
+          type: 'LOG_IN',
+          payload: res.data,
+        });
         window.location = "/";
       })
       .catch(err => {
-        setValidationErrors(err.response.data);
-        setError(err.response.data.error);
-      });
-  }
-
-  const signup = (userInfo) => {
-    axios.post("/user/register", userInfo)
-      .then(res => {
-        const { token } = res.data;
-        const decoded = jwt_decode(token);
-        localStorage.setItem("jwtToken", token);
-        localStorage.setItem("name", decoded.name);
-        localStorage.setItem("userId", decoded.id);
-        window.location = "/";
-      })
-      .catch(err => {
-        setValidationErrors(err.response.data);
-        setError(err.response.data.error);
+        dispatch({
+          type: 'AUTH_ERROR',
+          payload: err.response
+        });
       });
   }
   
+  const signup = (userInfo) => {
+    axios.post("/user/register", userInfo)
+      .then(res => {
+        dispatch({
+          type: 'REGISTER',
+          payload: res.data,
+        });
+        window.location = "/";
+      })
+      .catch(err => {
+        dispatch({
+          type: 'AUTH_ERROR',
+          payload: err.response
+        });
+      });
+  }
+
+  const logOut = e => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.href="/"
+  }
+  
   return (
-    <AuthContext.Provider value={{ validationErrors, error, login, signup }}>
+    <AuthContext.Provider 
+      value={{ 
+        validationErrors: state.validationErrors, 
+        error: state.error, 
+        login, 
+        signup,
+        logOut }}>
       {props.children}
     </AuthContext.Provider>
   );

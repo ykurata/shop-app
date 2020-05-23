@@ -1,13 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 
 import { UserContext } from '../contexts/UserContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Navbar = () => {
-  const { user, token, userId, logOut, getUserById } = useContext(UserContext);
+  const { user, token, userId, getUserById } = useContext(UserContext);
+  const { logOut } = useContext(AuthContext);
   
   useEffect(() => {
     getUserById(userId);
-  }, [])
+  }, []);
 
   let navlist;
 
