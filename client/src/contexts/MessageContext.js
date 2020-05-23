@@ -15,8 +15,7 @@ const MessageContextProvider = (props) => {
     receiver: "",
     senderId: "",
     messages: [],
-    validationError: "",
-    messages: []
+    validationError: ""
   }
  
   const [state, dispatch] = useReducer(MessageReducer, initialState);
