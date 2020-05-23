@@ -1,29 +1,36 @@
-import React,  { createContext, useState, useEffect } from 'react';
+import React,  { createContext, useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
+import { MessageReducer } from '../reducers/MessageReducer';
 
 export const MessageContext = createContext();
 
 const MessageContextProvider = (props) => {
-  const [conversations, setConversations] = useState([]);
-  const [conInfo, setConInfo] = useState({
+  const initialState = {
+    conversations: [],
+    loading: false, 
     conversation: "",
     item: "",
     receiver: "",
-    senderId: ""
-  });
-  const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [validationError, setValidationError] = useState("");
+    senderId: "",
+    messages: [],
+    validationError: "",
+    messages: []
+  }
+ 
+  const [state, dispatch] = useReducer(MessageReducer, initialState);
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
-  
+  console.log(state)
   // Get login user's conversations
   useEffect(() => {
     axios.get(`/message/get-conversations/${userId}`, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        setConversations(res.data);
-        setLoading(true);
+        dispatch({
+          type: 'GET_CONS_BY_USERID',
+          payload: res.data,
+        });
       })
       .catch(err => {
         console.log(err);
@@ -34,11 +41,9 @@ const MessageContextProvider = (props) => {
   const getConversation = (conId) => {
     axios.get(`/message/get-conversation/${conId}`, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        setConInfo({
-          conversation: res.data,
-          item: res.data.Item,
-          receiver: res.data.Item.User,
-          senderId: res.data.senderId
+        dispatch({
+          type: 'GET_CON_BY_ID',
+          payload: res.data,
         });
       })
       .catch(err => {
@@ -50,7 +55,10 @@ const MessageContextProvider = (props) => {
   const getMessages = (conId) => {
     axios.get(`/message/get-message/${conId}`, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        setMessages(res.data);
+        dispatch({
+          type: 'GET_MESSAGES_BY_CONID',
+          payload: res.data,
+        });
       })
       .catch(err => {
         console.log(err);
@@ -63,7 +71,10 @@ const MessageContextProvider = (props) => {
         .then(res => {
           axios.post(`/message/${res.data.id}`, newMessage, { headers: { Authorization: `Bearer ${token}`}})
             .then(res => {
-              console.log(res.data);
+              dispatch({
+                type: 'CREATE_CON_AND_MESSAGE',
+                payload: res.data
+              })
               toast("Successfully sent a message!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
@@ -74,7 +85,10 @@ const MessageContextProvider = (props) => {
             });
         })
         .catch(err => {
-          setValidationError(err.response.data.error);
+          dispatch({
+            type: 'MESSAGE_ERROR',
+            payload: err.response.data
+          })
         }); 
   }
 
@@ -82,10 +96,16 @@ const MessageContextProvider = (props) => {
   const createNewMessage = (conId, newMsg) => {
     axios.post(`/message/${conId}`, newMsg, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        console.log(res.data);
+        dispatch({
+          type: 'CREATE_NEW_MESSAGE',
+          payload: res.data
+        })
       })
       .catch(err => {
-        console.log(err);
+        dispatch({
+          type: 'MESSAGE_ERROR',
+          payload: err.response.data
+        })
       });
   }
   
@@ -93,7 +113,10 @@ const MessageContextProvider = (props) => {
   const deleteConversation = (conId) => {
     axios.delete(`/message/delete-conversation/${conId}`, { headers: { Authorization: `Bearer ${token}`}})
       .then(res => {
-        console.log("deleted conversation");
+        dispatch({
+          type: 'DELETE_CON',
+          payload: "Deleted conversation"
+        })
         window.location = '/message'
       })
       .catch(err => {
@@ -104,13 +127,16 @@ const MessageContextProvider = (props) => {
   return (
     <MessageContext.Provider 
       value={{ 
-        conversations, 
-        loading, 
+        conversations: state.conversations, 
+        loading: state.loading, 
+        messages: state.messages, 
+        conversation: state.conversation,
+        item: state.item,
+        receiver: state.receiver,
+        senderId: state.senderId,
+        validationError: state.validationError,
         userId, 
         token, 
-        messages, 
-        conInfo,
-        validationError,
         getMessages, 
         deleteConversation,
         getConversation,

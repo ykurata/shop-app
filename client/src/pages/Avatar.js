@@ -12,7 +12,6 @@ const Avatar = () => {
   const [sendImage, setSendImage] = useState(null);
   const [userId] = useState(localStorage.getItem("userId"));
   const [error, setError] = useState('');
-  // const [setIsLoading] = useState(false);
 
   const imageChange = e => {
     setImage(URL.createObjectURL(e.target.files[0]));

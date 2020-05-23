@@ -8,7 +8,7 @@ import { MessageContext } from '../contexts/MessageContext';
 import { UserContext } from '../contexts/UserContext';
 
 const MessageDetail = (props) => {
-  const { getMessages, getConversation, createNewMessage, messages, conInfo } = useContext(MessageContext);
+  const { getMessages, getConversation, createNewMessage, messages, conversation, item, receiver, senderId } = useContext(MessageContext);
   const { getUserById, user } = useContext(UserContext);
   const [userId] = useState(localStorage.getItem("userId"));
   const [message, setMessage] = useState("");
@@ -17,7 +17,7 @@ const MessageDetail = (props) => {
   const messageChange = e => {
     setMessage(e.target.value);
   }
-
+  
   const socket = socketIOClient('http://localhost:5000');
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const MessageDetail = (props) => {
   
   // Get a sender info
   useEffect(() => {
-    getUserById(conInfo.senderId);
+    getUserById(senderId);
   }, []);
  
   const createMessage = e => {
@@ -86,8 +86,8 @@ const MessageDetail = (props) => {
               <div className="card message-card" >
                 <div className="row message-card-row">
                   <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
-                    {conInfo.item.image ? (
-                      <img src={conInfo.item.image[0]} alt="..." className="rounded message-list-item-img" />
+                    {item.image ? (
+                      <img src={item.image[0]} alt="..." className="rounded message-list-item-img" />
                     ) : (
                       <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
                     )}
@@ -96,13 +96,13 @@ const MessageDetail = (props) => {
                     
                     <div className="row message-inside-row">
                       <div className="col-lg-9 col-md-9 col-sm-9 col-9">
-                      <p className="message-item-title"><b>{conInfo.item.name}</b></p> 
+                      <p className="message-item-title"><b>{item.name}</b></p> 
                       </div>
                       <div className="col-lg-3 col-md-3 col-sm-3 col-3">
-                        <p className="message-date"><Moment fromNow ago>{conInfo.conversation.createdAt}</Moment>&nbsp;ago</p>
+                        <p className="message-date"><Moment fromNow ago>{conversation.createdAt}</Moment>&nbsp;ago</p>
                       </div>
                     </div>
-                    <p className="message-username">$ {conInfo.item.price}</p>
+                    <p className="message-username">$ {item.price}</p>
                       
                   </div>
                 </div>
@@ -133,9 +133,9 @@ const MessageDetail = (props) => {
           </div>
 
           {/* Posted User's info */}
-          {parseInt(conInfo.senderId) === parseInt(userId) ? (
+          {parseInt(senderId) === parseInt(userId) ? (
             <div className="col-lg-3 col-md-3">
-              <LoginUserCard user={conInfo.receiver} />
+              <LoginUserCard user={receiver} />
             </div>
           ) : (
             <div className="col-lg-3 col-md-3">

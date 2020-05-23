@@ -13,10 +13,10 @@ const ItemContextProvider = (props) => {
     item: "",
     postedUser: "",
     itemUserId: "",
-    byUserItems: []
+    byUserItems: [],
+    erros: ""
   }
   const [state, dispatch] = useReducer(itemReducer, initialState);
-  const [errors, setErrors] = useState([]);
   const [token] = useState(localStorage.getItem("jwtToken"));
   
   // Get a list of all items
@@ -85,7 +85,10 @@ const ItemContextProvider = (props) => {
         });
       })
       .catch(err => {
-        setErrors(err.response.data);
+        dispatch({
+          type: 'ITEM_ERROR',
+          payload: err.response.data
+        });
       });
   }
 
@@ -103,7 +106,10 @@ const ItemContextProvider = (props) => {
       });
     })
     .catch(err => {
-      setErrors(err.response.data);
+      dispatch({
+        type: 'ITEM_ERROR',
+        payload: err.response.data
+      });
     });
   }
 
@@ -115,7 +121,7 @@ const ItemContextProvider = (props) => {
       item: state.item,
       postedUser: state.postedUser,
       itemUserId: state.itemUserId,
-      errors,
+      errors: state.errors,
       getItemById,
       getItemsByUserId,
       createItem,
