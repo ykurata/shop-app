@@ -12,6 +12,7 @@ import Avatar from "./pages/Avatar";
 import Photo from "./pages/Photo";
 import Message from "./pages/Message";
 import MessageDetail from "./pages/MessageDetail";
+import PageNotFound from "./pages/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
 
 import ItemContextProvider from './contexts/ItemContext';
@@ -22,27 +23,28 @@ import MessageContextProvider from './contexts/MessageContext';
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <AuthContextProvider>
-          <UserContextProvider>
+      <AuthContextProvider>
+        <UserContextProvider>
           <ItemContextProvider>
-          <MessageContextProvider> 
-            <PrivateRoute path="/create" component={Form} /> 
-            <PrivateRoute path="/update/:id" component={Update} /> 
-            <PrivateRoute path="/profile-image" component={Avatar} /> 
-            <PrivateRoute path="/image/:id" component={Photo} /> 
-            <PrivateRoute path="/message" component={Message} />
-            <PrivateRoute path="/message-detail/:id" component={MessageDetail} />
-            <Route exact path="/" component={List} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/detail/:id" component={Detail} /> 
-            <Route path="/items-by-user/:id" component={MyPost} /> 
-          </MessageContextProvider>   
+            <MessageContextProvider>   
+              <Switch> 
+                <Route exact path="/" component={List} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/detail/:id" component={Detail} /> 
+                <Route exact path="/items-by-user/:id" component={MyPost} /> 
+                <PrivateRoute exact path="/create" component={Form} /> 
+                <PrivateRoute exact path="/update/:id" component={Update} /> 
+                <PrivateRoute exact path="/profile-image" component={Avatar} /> 
+                <PrivateRoute exact path="/image/:id" component={Photo} /> 
+                <PrivateRoute exact path="/message" component={Message} />
+                <PrivateRoute exact path="/message-detail/:id" component={MessageDetail} />
+                <Route component={PageNotFound} />
+              </Switch>
+            </MessageContextProvider>   
           </ItemContextProvider>
-          </UserContextProvider>
-        </AuthContextProvider>
-      </Switch>
+        </UserContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }
