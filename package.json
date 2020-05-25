@@ -8,7 +8,7 @@
     "npm": "6.14.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 10000",
     "start": "node app.js",
     "server": "nodemon app.js",
     "heroku-postbuild": "npm install && cd client && npm install --only-dev && npm install && npm run build"
@@ -36,6 +36,11 @@
     "validator": "^13.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "faker": "^4.1.0",
+    "jwt-decode": "^2.2.0",
+    "mocha": "^7.2.0",
     "nodemon": "^2.0.2"
   }
 }
