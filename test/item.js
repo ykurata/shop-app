@@ -1,6 +1,5 @@
 const chai = require('chai');
 const should = chai.should();
-const expect = chai.expect;
 const jwt_decode = require("jwt-decode");
 const chaiHttp = require('chai-http');
 const request = require('supertest')
@@ -32,6 +31,7 @@ describe('Item', () => {
     request(server)
         .get('/item/all')
         .end((err, res) => {
+          if (err) throw err;
           res.should.have.status(200);
           res.body.should.be.a('array');
           done();
@@ -51,8 +51,8 @@ describe('Item', () => {
       .set({ Authorization: `Bearer ${token}` })
       .send(item)
       .end((err, res) => {
+        if (err) throw err;
         itemId = res.body.id;
-        console.log(itemId)
         res.should.have.status(200);
         res.body.should.be.a('object');
         res.body.should.have.property('name');
@@ -76,6 +76,7 @@ describe('Item', () => {
       .set({ Authorization: `Bearer ${token}` })
       .send(item)
       .end((err, res) => {
+        if (err) throw err;
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
@@ -86,6 +87,7 @@ describe('Item', () => {
     request(server)
       .get(`/item/get/${itemId}`)
       .end((err, res) => {
+        if (err) throw err;
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
@@ -96,6 +98,7 @@ describe('Item', () => {
     request(server)
       .get('/item/items/1')
       .end((err, res) => {
+        if (err) throw err;
         res.should.have.status(200);
         res.body.should.be.a('array');
         done();
@@ -107,6 +110,7 @@ describe('Item', () => {
       .delete(`/item/delete/${itemId}`)
       .set({ Authorization: `Bearer ${token}` })
       .end((err, res) => {
+        if (err) throw err;
         res.should.have.status(200);
         done();
       });

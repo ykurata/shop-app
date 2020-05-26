@@ -125,4 +125,18 @@ router.get("/get/:id", (req, res, next) => {
     });
 });
 
+
+// DELETE a user by userId
+router.delete("/delete/:id", authentication, (req, res) => {
+  User.findOne({ where: { id: req.params.id }})
+    .then(user => {
+      user.destroy();
+      return res.json({ message: "Successfully deleted"});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+
 module.exports = router;
