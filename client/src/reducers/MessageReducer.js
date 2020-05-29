@@ -12,7 +12,8 @@ export const MessageReducer = (state, action) => {
         conversation: action.payload,
         item: action.payload.Item,
         receiver: action.payload.Item.User,
-        senderId: action.payload.senderId
+        senderId: action.payload.senderId,
+        sender: action.payload
       }
     case 'GET_MESSAGES_BY_CONID':
       return {

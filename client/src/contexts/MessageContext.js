@@ -13,6 +13,7 @@ const MessageContextProvider = (props) => {
     conversation: "",
     item: "",
     receiver: "",
+    sender: "",
     senderId: "",
     messages: [],
     validationError: ""
@@ -21,6 +22,7 @@ const MessageContextProvider = (props) => {
   const [state, dispatch] = useReducer(MessageReducer, initialState);
   const [token] = useState(localStorage.getItem("jwtToken"));
   const [userId] = useState(localStorage.getItem("userId"));
+  const [sender, setSender] = useState("");
   
   // Get login user's conversations
   useEffect(() => {
@@ -44,6 +46,13 @@ const MessageContextProvider = (props) => {
           type: 'GET_CON_BY_ID',
           payload: res.data,
         });
+        axios.get(`/user/get/${res.data.senderId}`)
+          .then(res => {
+            setSender(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+          })
       })
       .catch(err => {
         console.log(err);
@@ -132,6 +141,7 @@ const MessageContextProvider = (props) => {
         conversation: state.conversation,
         item: state.item,
         receiver: state.receiver,
+        sender,
         senderId: state.senderId,
         validationError: state.validationError,
         userId, 
