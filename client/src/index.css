@@ -692,6 +692,23 @@ p {
   }
 }
 
+@media screen and (min-width: 650px) and (max-width:760px){
+  .thumbnail {
+    width: 140px;
+    height: 120px;
+    border: 1px solid #dcdee0;
+    object-fit: cover;
+  }
+  .thumbnail-margin-top {
+    width: 140px;
+    height: 120px;
+    margin-top: 0;
+    margin-left: 0;
+    border: 1px solid #dcdee0;
+    object-fit: cover;
+  }
+}
+
 @media screen and (min-width: 651px) and (max-width: 900px){
   /* List Items Style */
   .col-lg-2 {
@@ -733,16 +750,9 @@ p {
   .thumbnail-container {
     padding: 1rem;
   }
-  .thumbnail {
-    width: 95px;
-    height: 80px;
-    margin-right: 1rem
-  }
   .thumbnail-margin-top {
-    width: 95px;
-    height: 80px;
     margin-top: 0;
-    margin-right: 1rem;
+    /* margin-left: 0.5rem; */
   }
   .detail-description {
     padding-top: 1rem;
@@ -799,6 +809,10 @@ p {
   /* Item's Detail Styles  */
   .detail-description {
     padding-top: 3rem;
+  }
+  .thumbnail-margin-top {
+    margin-top: 1rem;
+    /* margin-left: 0.5rem; */
   }
 
   /* Form Styles */
