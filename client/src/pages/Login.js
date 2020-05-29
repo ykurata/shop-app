@@ -28,6 +28,15 @@ const Login = (props) =>  {
     login(user);
   }
 
+  const demoLogin = e => {
+    e.preventDefault();
+    const demoUser = {
+      email: "yasuko@gmail.com",
+      password: "password"
+    }
+    login(demoUser);
+  }
+
   return(
     <div>
       <Navbar></Navbar>
@@ -49,6 +58,9 @@ const Login = (props) =>  {
               <p>Not a member?
                   <a href="/signup">Register</a>
               </p>
+          </form>
+          <form className="text-center" onSubmit={demoLogin}>
+            <button className="btn btn-primary btn-lg my-4" type="submit">Demo Login</button>
           </form>
         </div>   
     </div>
