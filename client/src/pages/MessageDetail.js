@@ -5,11 +5,9 @@ import socketIOClient from "socket.io-client";
 import Navbar from "../components/Navbar";
 import LoginUserCard from '../components/LoginUserCard';
 import { MessageContext } from '../contexts/MessageContext';
-import { UserContext } from '../contexts/UserContext';
 
 const MessageDetail = (props) => {
-  const { getMessages, getConversation, createNewMessage, messages, conversation, item, receiver, senderId } = useContext(MessageContext);
-  const { getUserById, user } = useContext(UserContext);
+  const { getMessages, getConversation, createNewMessage, messages, conversation, item, receiver, sender, senderId } = useContext(MessageContext);
   const [userId] = useState(localStorage.getItem("userId"));
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState([]);
@@ -29,11 +27,6 @@ const MessageDetail = (props) => {
   useEffect(() => {
     getMessages(props.match.params.id);
     getConversation(props.match.params.id);
-  }, []);
-  
-  // Get a sender info
-  useEffect(() => {
-    getUserById(senderId);
   }, []);
  
   const createMessage = e => {
@@ -132,14 +125,14 @@ const MessageDetail = (props) => {
               </div>
           </div>
 
-          {/* Posted User's info */}
+          {/* Display reciever or sender info*/}
           {parseInt(senderId) === parseInt(userId) ? (
             <div className="col-lg-3 col-md-3">
               <LoginUserCard user={receiver} />
             </div>
           ) : (
             <div className="col-lg-3 col-md-3">
-              <LoginUserCard user={user} />
+              <LoginUserCard user={sender} />
             </div>
           )}
           
