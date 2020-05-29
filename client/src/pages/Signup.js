@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import Navbar from "../components/Navbar";
 
 const Signup = (props) => {
-  const { validationErrors, error, signup } = useContext(AuthContext);
+  const { validationErrors, error, signup, login } = useContext(AuthContext);
   const [userInput, setUserInput] = useState({
     username: "",
     email: "",
@@ -31,6 +31,15 @@ const Signup = (props) => {
     };
 
     signup(newUser);
+  }
+
+  const demoLogin = e => {
+    e.preventDefault();
+    const demoUser = {
+      email: "yasuko@gmail.com",
+      password: "password"
+    }
+    login(demoUser);
   }
 
   return (
@@ -69,6 +78,10 @@ const Signup = (props) => {
               <a href="/login">Log In</a>
           </p>
         </form>
+        <form className="text-center" onSubmit={demoLogin}>
+          <button className="btn btn-primary btn-lg my-4" type="submit">Demo Login</button>
+        </form>
+
       </div>
     </div>
   );
