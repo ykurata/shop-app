@@ -33,6 +33,10 @@ textarea {
 /* Navbar Styles */
 nav {
   background-color: #31257d;
+  min-height: 4.5rem;
+}
+.nav-item {
+  font-size: 1.1rem;
 }
 .navbar-img {
   width: 40px;
