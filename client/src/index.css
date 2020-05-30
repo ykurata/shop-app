@@ -515,6 +515,27 @@ p {
   .item-description {
     padding-left: 1.5rem;
   }
+  .thumbnail {
+    width: 130px;
+    height: 110px;
+  }
+  .thumbnail-margin-top {
+    width: 130px;
+    height: 110px;
+    margin-left: .8rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .thumbnail {
+    width: 110px;
+    height: 110px;
+  }
+  .thumbnail-margin-top {
+    width: 110px;
+    height: 110px;
+    margin-left: .5rem;
+  }
 }
 
 @media screen and (max-width: 430px) {
@@ -532,6 +553,15 @@ p {
     font-size: 2rem;
     margin-top: 1.2rem;
   }
+  .thumbnail {
+    width: 90px;
+    height: 90px;
+  }
+  .thumbnail-margin-top {
+    width: 90px;
+    height: 90px;
+    margin-left: .5rem;
+  }
 }
 
 @media screen and (max-width: 370px) {
@@ -542,5 +572,19 @@ p {
   .list-no-image i {
     font-size: 1.5rem;
     margin-top: 1.2rem;
+  }
+  .thumbnail-container {
+    padding: .2rem;
+    margin-top: .3rem;
+  }
+  .thumbnail {
+    width: 80px;
+    height: 70px;
+  }
+  .thumbnail-margin-top {
+    width: 80px;
+    height: 70px;
+    margin-left: .2rem;
+    margin-right: .2rem;
   }
 }
