@@ -479,6 +479,10 @@ p {
     width: 110px;
     height: 110px;
   }
+  .list-no-image i {
+    font-size: 4rem;
+    margin-top: 1.2rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -488,6 +492,10 @@ p {
   }
   .item-description {
     padding: 0;
+  }
+  .list-no-image i {
+    font-size: 3rem;
+    margin-top: 1.2rem;
   }
 }
 
@@ -512,11 +520,19 @@ p {
   .card-body {
     padding: .5rem;
   }
+  .list-no-image i {
+    font-size: 2rem;
+    margin-top: 1.2rem;
+  }
 }
 
 @media screen and (max-width: 370px) {
   .list-item-img, .list-no-image {
     width: 60px;
     height: 60px;
+  }
+  .list-no-image i {
+    font-size: 1.5rem;
+    margin-top: 1.2rem;
   }
 }
