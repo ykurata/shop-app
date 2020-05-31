@@ -367,6 +367,9 @@ p {
 }
 
 @media screen and (max-width: 960px) {
+  .form {
+    width: 80%;
+  }
   .list-item-img, .list-no-image {
     width: 110px;
     height: 110px;
@@ -481,6 +484,9 @@ p {
 }
 
 @media screen and (max-width: 430px) {
+  .form {
+    width: 90%;
+  }
   .list-item-img, .list-no-image {
     width: 70px;
     height: 70px;
