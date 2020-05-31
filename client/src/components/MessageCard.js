@@ -14,7 +14,7 @@ const MessageCard = (props) => {
           {props.data.Item.image ? (
             <img src={props.data.Item.image[0]} alt="..." className="rounded message-list-item-img" />
           ) : (
-            <div className="no-image text-center"><i className="fas fa-image fa-3x icon-image"></i></div>
+            <div className="message-list-item-no-image text-center"><i className="fas fa-image fa-3x icon-message-list-no-image"></i></div>
           )}  
         </div>
         <div className="col-lg-10 col-md-10 col-md-10 col-10">
