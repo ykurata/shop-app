@@ -299,7 +299,7 @@ p {
 .message-list-item-no-image i {
   color: #dcdee0;  
 }
-.fas.icon-image {
+.icon-message-list-no-image {
   margin-top: 1rem;
 }
 .text {
@@ -532,6 +532,9 @@ p {
     width: 70px;
     height: 70px;
   }
+  .icon-message-list-no-image {
+    margin-top: .7rem;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -555,6 +558,9 @@ p {
   .message-list-item-no-image i {
     color: #dcdee0;  
     font-size: 1.5rem;
+  }
+  .icon-message-list-no-image {
+    margin-top: 1.2rem;
   }
 }
 
@@ -589,6 +595,9 @@ p {
   .message-list-item-no-image {
     width: 55px;
     height: 55px;
+  }
+  .icon-message-list-no-image {
+    margin-top: 1rem;
   }
 }
 
