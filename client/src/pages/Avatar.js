@@ -6,12 +6,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "../components/Navbar";
 import { UserContext } from '../contexts/UserContext';
 
-const Avatar = () => {
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const Avatar = (props) => {
   const { postAvatar, loading } = useContext(UserContext);
   const [image, setImage] = useState(null);
   const [sendImage, setSendImage] = useState(null);
   const [userId] = useState(localStorage.getItem("userId"));
   const [error, setError] = useState('');
+
+  const [show, setShow] = useState(props.show);
+
+  const handleClose = () => setShow(false);
 
   const imageChange = e => {
     setImage(URL.createObjectURL(e.target.files[0]));
@@ -41,60 +49,21 @@ const Avatar = () => {
   }
 
   return (
-    <div className="main-avatar">
-      <Navbar></Navbar>
-
-      <div className="container">
-        <div className="row">
-          <div className="col">
-          </div>
-          <div className="col-lg-6 col-md-12">
-            <form onSubmit={submitAvatar}> 
-              <div style={{ height: "70px"}}></div>
-              <div className="outer-avatar text-center">
-                {image ? ( 
-                  <img className="rounded-circle preview-avatar" src={image} alt="avatar"></img>      
-                ) : (
-                  <span className="fa-span">
-                    <i className="fas fa-user-circle fa-10x preview-avatar"></i>
-                  </span> 
-                )}
-                
-                {error? (
-                  <p className="error text-center">{error}</p>
-                ) : (
-                  null
-                )}
-
-                <div className="mt-3">
-                  <label className="btn btn-outline-info">
-                    Select Image
-                    <input
-                      type="file"
-                      name="image"
-                      hidden
-                      onChange={imageChange}
-                    />
-                  </label>
-                </div>
-                <div className="mt-3">
-                  {loading === true ? (
-                    <button className="btn btn-primary" type="button" disabled style={{ width: "200px"}}>
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      Loading...
-                    </button>
-                  ) : (
-                    <button className="btn btn-primary" type="submit" style={{ width: "200px"}}>Submit</button>
-                  )}
-                </div>
-                <ToastContainer autoClose={2000} />
-              </div>
-            </form> 
-          </div>
-          <div className="col">
-          </div>
-        </div>
-      </div>
+    <div>
+      <Modal show={props.show} >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

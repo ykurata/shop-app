@@ -1,16 +1,25 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { UserContext } from '../contexts/UserContext';
 import { AuthContext } from '../contexts/AuthContext';
 
+import Avatar from "../pages/Avatar";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const Navbar = () => {
   const { user, token, userId, getUserById } = useContext(UserContext);
   const { logOut } = useContext(AuthContext);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   
   useEffect(() => {
     getUserById(userId);
   }, []);
-
+  
   let navlist;
 
   if (token) { 
@@ -34,7 +43,7 @@ const Navbar = () => {
                 </div>
                 <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                   aria-labelledby="navbarDropdownMenuLink-55">
-                  <a className="dropdown-item" href="/profile-image">Profile Image</a>
+                  <a className="dropdown-item" onClick={handleShow} data-toggle="modal">Profile Image</a>
                   <a className="dropdown-item" href={`/items-by-user/${userId}`}>My Post</a>
                   <a className="dropdown-item" onClick={logOut} href="/logout">Log Out</a>
                 </div>
@@ -72,6 +81,21 @@ const Navbar = () => {
           </ul>
           {navlist}
         </div>
+        <Avatar show={show} onHide={handleClose}/>
+        {/* <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal> */}
       </nav>
     </div>  
   );
