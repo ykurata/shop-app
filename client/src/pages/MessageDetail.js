@@ -101,7 +101,7 @@ const MessageDetail = (props) => {
                 </div>
               </div>
               {/* Message input and display area */}
-              <div className="card text-area p-2">
+              <div className="card text-area p-2 mb-3">
                 <div className="row">
                   <div className="col-md-12 mb-2 display-message">
                     {recievedMessage}
