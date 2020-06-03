@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "../components/Navbar";
 import { UserContext } from '../contexts/UserContext';
 
-const Avatar = () => {
+const Avatar = (props) => {
   const { postAvatar, loading } = useContext(UserContext);
   const [image, setImage] = useState(null);
   const [sendImage, setSendImage] = useState(null);
@@ -41,16 +41,12 @@ const Avatar = () => {
   }
 
   return (
-    <div className="main-avatar">
-      <Navbar></Navbar>
-
       <div className="container">
-        <div className="row">
-          <div className="col">
-          </div>
-          <div className="col-lg-6 col-md-12">
+        
+         
             <form onSubmit={submitAvatar}> 
-              <div style={{ height: "70px"}}></div>
+              
+  
               <div className="outer-avatar text-center">
                 {image ? ( 
                   <img className="rounded-circle preview-avatar" src={image} alt="avatar"></img>      
@@ -90,12 +86,10 @@ const Avatar = () => {
                 <ToastContainer autoClose={2000} />
               </div>
             </form> 
-          </div>
-          <div className="col">
-          </div>
-        </div>
+       
+         
+       
       </div>
-    </div>
   );
 }
 
