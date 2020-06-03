@@ -257,12 +257,6 @@ p {
   background-color: #dcdee0;
   height: 100vh;
 }
-/* .outer-avatar {
-  width: 500px;
-  height: 600px;
-  background-color: white;
-  margin: auto;
-} */
 .fa-span {
   font-size: 35px;
   color: grey;
@@ -273,13 +267,13 @@ p {
   object-fit: cover;
   margin-top: 2rem;
 }
-
 .modal-dialog {
   margin: auto;
   margin-top: 3rem;
 }
 .modal-content {
   margin: auto;
+  height: 630px;
 }
 
 /* Message list Page Styles */
@@ -410,8 +404,8 @@ p {
     margin-left: .2rem;
   }
   .modal-content {
-    width: 500px;
-    height: 650px;
+    width: 450px;
+    height: 570px;
   }
   .fa-span {
     font-size: 30px;
@@ -452,8 +446,8 @@ p {
     margin-top: .7rem;
   }
   .modal-content {
-    width: 450px;
-    height: 650px;
+    width: 400px;
+    height: 570px;
   }
 }
 
@@ -482,10 +476,6 @@ p {
   .icon-message-list-no-image {
     margin-top: 1.2rem;
   }
-  .modal-content {
-    width: 300px;
-    height: 500px;
-  }
   .fa-span {
     font-size: 20px;
     color: grey;
@@ -495,8 +485,8 @@ p {
     height: 200px;
   }
   .modal-content {
-    width: 400px;
-    height: 550px;
+    width: 350px;
+    height: 480px;
   }
 }
 
@@ -540,7 +530,7 @@ p {
   }
   .modal-content {
     width: 350px;
-    height: 500px;
+    height: 470px;
   }
 }
 
@@ -576,8 +566,8 @@ p {
     height: 50px;
   }
   .modal-content {
-    width: 250px;
-    height: 450px;
+    width: 300px;
+    height: 420px;
   }
   .fa-span {
     font-size: 15px;
