@@ -40,6 +40,9 @@ nav {
   border: 1px solid white;
   object-fit: cover;
 }
+.dropdown-item {
+  padding: .5rem;
+}
 .dropdown-item:hover {
   background-color: #ebeff2;
 }
