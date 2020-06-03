@@ -75,7 +75,7 @@ Responsive for both web and mobile.<br></br>
 
 * ### Search items through items's name and category.
 <div align="center">
-  <img src="./readme-assets/list-items.gif" width="700" heigt="500">
+  <img src="./readme-assets/filter-item.gif" width="700" heigt="500">
 </div>  
 <br />
 <br />
