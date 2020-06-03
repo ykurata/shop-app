@@ -80,6 +80,13 @@ Responsive for both web and mobile.<br></br>
 <br />
 <br />
 
+* ### Add profile image
+<div align="center">
+  <img src="./readme-assets/avatar-modal.jpg" width="700" heigt="500">
+</div>  
+<br />
+<br />
+
 * ### Sending messages to other users.
 <div align="center">
   <img src="./readme-assets/sending-message.gif" width="700" heigt="500">
