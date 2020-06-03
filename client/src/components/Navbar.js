@@ -34,7 +34,7 @@ const Navbar = () => {
                       </span> 
                     }
                 </div>
-                <div className="dropdown-menu"
+                <div className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                   aria-labelledby="navbarDropdownMenuLink-55">
                   <a className="dropdown-item" href="/profile-image" data-toggle="modal" data-target="#avatarModal" >Profile Image</a>
                   <a className="dropdown-item" href={`/items-by-user/${userId}`}>My Post</a>
