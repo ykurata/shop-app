@@ -9,52 +9,49 @@ const validateItemInput = require("../validation/item");
 
 
 // Post a new item 
-router.post("/", authentication, (req, res) => {
+router.post("/", authentication, async(req, res) => {
   // form validation 
   const { errors, isValid } = validateItemInput(req.body);
   // check validation 
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  Item.create({
-    userId: req.user,
-    name: req.body.name,
-    description: req.body.description,
-    category: req.body.category,
-    price: req.body.price
-  })
-  .then(item => {
+  try {
+    const newItem = {
+      userId: req.user,
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price
+    }
+    const item = await Item.create(newItem);
     res.json(item);
-  })
-  .catch(err => {
+  } catch(err) {
     console.log(err);
-  });
+  }
 });
 
 
 // Upadate a posted item
-router.put("/update/:id", authentication, (req, res) => {
+router.put("/update/:id", authentication, async (req, res) => {
   // form validation 
   const { errors, isValid } = validateItemInput(req.body);
   // check validation 
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  Item.findOne({ where: { id: req.params.id }})
-    .then(item => {
-      item.update({
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        price: req.body.price
-      })
-      res.status(200).json(item);
-    })
-    .catch(err => {
-      console.log(err);
+  try {
+    const item = await Item.findOne({ where: { id: req.params.id }})
+    const updatedItem = await item.update({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price
     });
+    res.json(updatedItem);
+  } catch(err) {
+    console.log(err);
+  }
 });
 
 
