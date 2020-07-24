@@ -9,14 +9,14 @@ Responsive for both web and mobile.<br></br>
 ## Built With 
 
 * Backend
-  * [NodeJS](https://nodejs.org/en/download/)
-  * [Express](https://expressjs.com/)
-  * [Postgres](https://www.postgresql.org/download/)
-
+  * NodeJS
+  * Express
+  * Postgres
+  * AWS S3 
 
 * Frondend
-  * [React](https://reactjs.org/)
-  * [Bootstrap](https://getbootstrap.com/)
+  * React (Context)
+  * Bootstrap
 
 
 ## Requirements
@@ -39,7 +39,7 @@ Responsive for both web and mobile.<br></br>
     
     * Run `sequelize db:migrate`
 
-    * To start server, run `nodemon` or `npm start`.
+    * To start server, run `npm start`.
 
 
     **Frontend (Client)**
