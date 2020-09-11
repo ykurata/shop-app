@@ -12,8 +12,6 @@ const List = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
-  const [filteredItems, setFilteredItems] = useState([]);
-  let card;
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -23,25 +21,25 @@ const List = () => {
     setCurrentPage(Number(e.target.id));
   };
 
+  const filteredItems = allItems.filter((item) => {
+    const query = search.toLowerCase();
+    return (
+      item.name.toLowerCase().indexOf(query) >= 0 ||
+      item.category.toLowerCase().indexOf(query) >= 0
+    );
+  });
+
   // Logic for displaying items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
   // Map each items to Item component
-  if (filteredItems.length > 0) {
-    card = filteredItems.map((item, i) => (
-      <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-        <Item data={item} />
-      </Link>
-    ));
-  } else {
-    card = allItems.map((item, i) => (
-      <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-        <Item data={item} />
-      </Link>
-    ));
-  }
+  const card = currentItems.map((item, i) => (
+    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
+      <Item data={item} />
+    </Link>
+  ));
 
   // Logic for displaying page numbers
   const pageNumbers = [];
@@ -56,19 +54,6 @@ const List = () => {
       </li>
     );
   });
-
-  // function to filter the item by userInput
-  const filterData = () => {
-    setFilteredItems(
-      allItems.filter((item) => {
-        const query = search.toLowerCase();
-        return (
-          item.name.toLowerCase().indexOf(query) >= 0 ||
-          item.category.toLowerCase().indexOf(query) >= 0
-        );
-      })
-    );
-  };
 
   let numberOfItems;
   if (filteredItems.length === 0) {
@@ -104,6 +89,17 @@ const List = () => {
           {/* Search input and select form category */}
           <div className="col-lg-3 col-md-3">
             <div className="input-group md-form form-sm form-1 pl-0 mb-5 search-form">
+              <div className="input-group-prepend">
+                <span
+                  className="input-group-text purple lighten-3"
+                  id="basic-text1"
+                >
+                  <i
+                    className="fas fa-search text-white"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+              </div>
               <input
                 onChange={onChange}
                 name="search"
@@ -113,18 +109,6 @@ const List = () => {
                 placeholder="Search item..."
                 aria-label="Search"
               />
-              <div className="input-group-append">
-                <button
-                  onClick={filterData}
-                  className="btn btn-secondary"
-                  type="button"
-                >
-                  <i
-                    className="fas fa-search text-white"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
             </div>
             <select
               onChange={onChange}
@@ -143,7 +127,9 @@ const List = () => {
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
-              {allItems.length < 0 && loading === true ? <NoItem /> : null}
+              {filteredItems.length === 0 && loading === true ? (
+                <NoItem />
+              ) : null}
 
               {/* Loading Message */}
               {loading === false ? <Loading /> : null}
