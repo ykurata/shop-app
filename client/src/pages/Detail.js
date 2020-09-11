@@ -12,6 +12,7 @@ const Detail = (props) => {
   const {
     getItemById,
     getItemsByUserId,
+    deleteItem,
     itemUserId,
     postedUser,
     byUserItems,
@@ -50,6 +51,11 @@ const Detail = (props) => {
     setMessage("");
   };
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteItem(props.match.params.id);
+  };
+
   let data = {
     itemData: item,
     itemsData: byUserItems,
@@ -58,7 +64,7 @@ const Detail = (props) => {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
 
       <div className="container main-detail">
         <div className="row detatil-row">
@@ -144,13 +150,20 @@ const Detail = (props) => {
                   >
                     Edit Post
                   </a>
-                  <a
-                    href={`/update/${item.id}`}
+                  <button
                     className="btn btn-outline-danger mt-2 mb-3 ml-3"
                     role="button"
+                    onClick={(e) => {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to delete this post?"
+                        )
+                      )
+                        handleDelete(e);
+                    }}
                   >
                     Delete Post
-                  </a>
+                  </button>
                 </div>
               ) : null}
             </div>
