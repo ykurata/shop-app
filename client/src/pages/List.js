@@ -12,6 +12,8 @@ const List = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  const [filteredItems, setFilteredItems] = useState([]);
+  let card;
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -21,25 +23,25 @@ const List = () => {
     setCurrentPage(Number(e.target.id));
   };
 
-  const filteredItems = allItems.filter((item) => {
-    const query = search.toLowerCase();
-    return (
-      item.name.toLowerCase().indexOf(query) >= 0 ||
-      item.category.toLowerCase().indexOf(query) >= 0
-    );
-  });
-
   // Logic for displaying items
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
   // Map each items to Item component
-  const card = currentItems.map((item, i) => (
-    <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
-      <Item data={item} />
-    </Link>
-  ));
+  if (filteredItems.length > 0) {
+    card = filteredItems.map((item, i) => (
+      <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
+        <Item data={item} />
+      </Link>
+    ));
+  } else {
+    card = allItems.map((item, i) => (
+      <Link to={`/detail/${item.id}`} className="card item-card" key={i}>
+        <Item data={item} />
+      </Link>
+    ));
+  }
 
   // Logic for displaying page numbers
   const pageNumbers = [];
@@ -54,6 +56,19 @@ const List = () => {
       </li>
     );
   });
+
+  // function to filter the item by userInput
+  const filterData = () => {
+    setFilteredItems(
+      allItems.filter((item) => {
+        const query = search.toLowerCase();
+        return (
+          item.name.toLowerCase().indexOf(query) >= 0 ||
+          item.category.toLowerCase().indexOf(query) >= 0
+        );
+      })
+    );
+  };
 
   let numberOfItems;
   if (filteredItems.length === 0) {
@@ -99,7 +114,11 @@ const List = () => {
                 aria-label="Search"
               />
               <div className="input-group-append">
-                <button className="btn btn-primary" type="button">
+                <button
+                  onClick={filterData}
+                  className="btn btn-secondary"
+                  type="button"
+                >
                   <i
                     className="fas fa-search text-white"
                     aria-hidden="true"
@@ -124,9 +143,7 @@ const List = () => {
           <div className="col-lg-9 col-md-9">
             <div className="list-group">
               {/* display message if there is no items  */}
-              {filteredItems.length === 0 && loading === true ? (
-                <NoItem />
-              ) : null}
+              {allItems.length < 0 && loading === true ? <NoItem /> : null}
 
               {/* Loading Message */}
               {loading === false ? <Loading /> : null}
