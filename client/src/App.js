@@ -14,7 +14,7 @@ import Message from "./pages/Message";
 import MessageDetail from "./pages/MessageDetail";
 import PageNotFound from "./pages/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute";
-import Map from "./components/MapContainer";
+import MapContainer from "./components/MapContainer";
 
 import ItemContextProvider from "./contexts/ItemContext";
 import AuthContextProvider from "./contexts/AuthContext";
@@ -29,8 +29,8 @@ function App() {
           <ItemContextProvider>
             <MessageContextProvider>
               <Switch>
-                <Route exact path="/map" component={Map} />
                 <Route exact path="/" component={List} />
+                <Route exact path="/map" component={MapContainer} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/detail/:id" component={Detail} />
