@@ -6,12 +6,12 @@ import { MessageContext } from '../contexts/MessageContext';
 
 const MessageCard = (props) => {
   const { deleteConversation } = useContext(MessageContext);
-  console.log(props.data.Item.image)
+
   return (
     <Link to={`/message-detail/${props.data.id}`} id={props.data.id} className="card item-card message-card" >
       <div className="row message-card-row" id={props.data.id}>
         <div className="col-lg-2 col-md-2 col-sm-2 col-2 message-image">
-          {props.data.Item.image ? (
+          {props.data.Item ? (
             <img src={props.data.Item.image[0]} alt="..." className="rounded message-list-item-img" />
           ) : (
               <div className="message-list-item-no-image text-center"><i className="fas fa-image fa-3x icon-message-list-no-image"></i></div>
