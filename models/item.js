@@ -8,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL(10, 2),
     image: DataTypes.ARRAY(DataTypes.STRING)
   }, {});
-  Item.associate = function(models) {
+  Item.associate = function (models) {
     Item.belongsTo(models.User, {
       onDelete: "CASCADE",
-      foreignKey: 'userId' 
+      foreignKey: 'userId'
     });
-    Item.hasMany(models.Conversation, {foreignKey: 'itemId'});
+    Item.hasMany(models.Conversation, { onDelete: "CASCADE", foreignKey: 'itemId' });
   };
   return Item;
 };
