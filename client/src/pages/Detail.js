@@ -84,10 +84,10 @@ const Detail = (props) => {
                         className="rounded item-img"
                       />
                     ) : (
-                      <div className="detail-no-image text-center">
-                        <i className="fas fa-image fa-5x"></i>
-                      </div>
-                    )}
+                        <div className="detail-no-image text-center">
+                          <i className="fas fa-image fa-5x"></i>
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
@@ -101,8 +101,8 @@ const Detail = (props) => {
                       src={item.image[1]}
                     ></img>
                   ) : (
-                    <div className="thumbnail"></div>
-                  )}
+                      <div className="thumbnail"></div>
+                    )}
 
                   {item.image && item.image[2] ? (
                     <img
@@ -111,8 +111,8 @@ const Detail = (props) => {
                       src={item.image[2]}
                     ></img>
                   ) : (
-                    <div className="thumbnail-margin-top "></div>
-                  )}
+                      <div className="thumbnail-margin-top "></div>
+                    )}
 
                   {item.image && item.image[3] ? (
                     <img
@@ -121,8 +121,8 @@ const Detail = (props) => {
                       src={item.image[3]}
                     ></img>
                   ) : (
-                    <div className="thumbnail-margin-top "></div>
-                  )}
+                      <div className="thumbnail-margin-top "></div>
+                    )}
                 </div>
                 {/* display Update Image button only for logged in user's post */}
                 {parseInt(userId) === parseInt(itemUserId) ? (
@@ -172,37 +172,6 @@ const Detail = (props) => {
             <h6 className="posted-date">
               Posted &nbsp;<Moment format="MM/DD/YYYY">{item.createdAt}</Moment>
             </h6>
-
-            {/* modal for location */}
-            <p data-toggle="modal" data-target="#exampleModalCenter">
-              M4J 3L2
-            </p>
-
-            {/* Modal */}
-            <div
-              class="modal fade"
-              id="exampleModalCenter"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalCenterTitle"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body"></div>
-                </div>
-              </div>
-            </div>
 
             <UserInfoCard {...data} />
 
